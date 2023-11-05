@@ -34,6 +34,7 @@ in
     unzip
     ethtool
     rpi-imager
+    youtube-dl
   ] ++ [
     pkgs.gnome3.gnome-tweaks
     pkgs.gnomeExtensions.appindicator
