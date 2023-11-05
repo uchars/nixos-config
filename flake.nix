@@ -16,19 +16,28 @@
   outputs = { self, nixpkgs, home-manager, ... }:
   let 
     lib = nixpkgs.lib;
-    pkgs = nixpkgs.legacyPackages.${system};
     system = "x86_64-linux";
+
+    nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
+      name = "nixpkgs-patched";
+      src = nixpkgs;
+    };
+
+    pkgs = import nixpkgs-patched {
+      inherit system;
+      config = { allowUnfree = true; };
+    };
+
   in {
     nixosConfigurations = {
       saruei = lib.nixosSystem {
         inherit system;
-        configuration = [ ./configuration.nix ];
+        modules = [ ./configuration.nix ];
       };
     };
     homeConfigurations = {
       nils = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        inherit system;
         modules =  [ ./home.nix ];
       };
     };
