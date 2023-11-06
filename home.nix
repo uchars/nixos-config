@@ -4,6 +4,7 @@ let
     ll = "ls -l";
     ".." = "cd ..";
     l = "ls";
+    "nvim" = "steam-run nvim";
   };
 in
 {
@@ -17,7 +18,7 @@ in
     firefox
     obs-studio
     neovim
-    clang
+    gcc
     discord
     steam
     transmission-qt
@@ -35,6 +36,7 @@ in
     ethtool
     rpi-imager
     youtube-dl
+    steam-run
   ] ++ [
     pkgs.gnome3.gnome-tweaks
     pkgs.gnomeExtensions.appindicator
@@ -61,7 +63,7 @@ in
       blur = true;
       style-dialogs = 0;
     };
-   
+
     "org/gnome/shell/extensions/bluetooth-quick-connect" = {
       keep-menu-on-toggle = true;
       refresh-button-on = true;
@@ -79,8 +81,7 @@ in
     recursive = true;
     source = fetchGit {
       url = "https://github.com/uchars/nvim.git";
-      rev = "093595b1e3734d7ee88960fe4fb3c444056b6f21";
-      ref = "refs/remotes/origin/dev";
+      rev = "daa4e2cccaf214b337ec327988a66a4d9524480a";
     };
   };
 
@@ -96,26 +97,26 @@ in
     recursive = true;
     text = ''
       local wezterm = require 'wezterm'
-      
+
       local config = {}
-      
+
       if wezterm.config_builder then
         config = wezterm.config_builder()
       end
-      
+
       config.window_background_opacity = 0.6
       config.use_fancy_tab_bar = false
       config.window_decorations = "NONE"
       config.hide_tab_bar_if_only_one_tab = true
       config.warn_about_missing_glyphs = false
-      
+
       config.window_padding = {
         left = 0,
         right = 0,
         top = 0,
         bottom = 0,
       }
-      
+
       return config
     '';
   };

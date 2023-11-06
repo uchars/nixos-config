@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
     ];
 
@@ -33,6 +33,9 @@
 
   boot.initrd.luks.devices."luks-5efdaa8c-5be5-4142-8936-d3a24bce4eca".device = "/dev/disk/by-uuid/5efdaa8c-5be5-4142-8936-d3a24bce4eca";
   networking.hostName = "saruei";
+  networking.interfaces.enp42s0.wakeOnLan = {
+    enable = true;
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -104,7 +107,7 @@
     neofetch
   ];
 
-  system.stateVersion = "23.05"; 
+  system.stateVersion = "23.05";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
