@@ -14,9 +14,12 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
-  let 
+  let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
+    desktop = "gnome";
+    displayManager = "gdm";
+    profile = "work";
 
     nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
       name = "nixpkgs-patched";
@@ -32,13 +35,17 @@
     nixosConfigurations = {
       saruei = lib.nixosSystem {
         inherit system;
-        modules = [ ./configuration.nix ];
+        modules = [ ./systems/saruei/configuration.nix ];
+        specialArgs = {
+          inherit desktop;
+          inherit displayManager;
+        };
       };
     };
     homeConfigurations = {
       nils = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules =  [ ./home.nix ];
+        modules =  [ (./. + "/profiles" + ("/" + profile) + "/home.nix") ];
       };
     };
   };

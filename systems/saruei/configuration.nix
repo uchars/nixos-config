@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, desktop, displayManager, ... }:
 
 {
   imports =
@@ -62,8 +62,19 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.${displayManager}.enable = true;
+  services.xserver.desktopManager.${desktop}.enable = true;
+
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    gwenview
+    okular
+    oxygen
+    khelpcenter
+    konsole
+    plasma-browser-integration
+    print-manager
+  ];
 
   # Configure keymap in X11
   services.xserver = {
@@ -77,6 +88,8 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -97,7 +110,8 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    neovim
+    # neovim
+    via
     sct
     tmux
     git

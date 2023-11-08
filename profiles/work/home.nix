@@ -4,10 +4,14 @@ let
     ll = "ls -l";
     ".." = "cd ..";
     l = "ls";
-    "nvim" = "steam-run nvim";
+    # "nvim" = "steam-run nvim";
   };
 in
 {
+  programs.home-manager.enable = true;
+  imports = [
+    ../../programs/nvim.nix
+  ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
@@ -15,10 +19,14 @@ in
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
+    dconf
     firefox
     obs-studio
-    neovim
+    # neovim
     gcc
+    go
+    gopls
+    openblas
     discord
     steam
     transmission-qt
@@ -40,7 +48,7 @@ in
   ] ++ [
     pkgs.gnome3.gnome-tweaks
     pkgs.gnomeExtensions.appindicator
-    pkgs.gnomeExtensions.blur-my-shell
+    # pkgs.gnomeExtensions.blur-my-shell
     pkgs.gnomeExtensions.removable-drive-menu
     pkgs.gnomeExtensions.dash-to-panel
     pkgs.gnomeExtensions.tiling-assistant
@@ -77,13 +85,13 @@ in
     };
   };
 
-  home.file."./.config/nvim/" = {
-    recursive = true;
-    source = fetchGit {
-      url = "https://github.com/uchars/nvim.git";
-      rev = "daa4e2cccaf214b337ec327988a66a4d9524480a";
-    };
-  };
+  # home.file."./.config/nvim/" = {
+  #   recursive = true;
+  #   source = fetchGit {
+  #     url = "https://github.com/uchars/nvim.git";
+  #     rev = "0986d8b09508b50913dc3bb4fca04834733d2f82";
+  #   };
+  # };
 
   home.file."./.config/tmux/" = {
     recursive = true;
@@ -104,7 +112,7 @@ in
         config = wezterm.config_builder()
       end
 
-      config.window_background_opacity = 0.6
+      config.window_background_opacity = .6
       config.use_fancy_tab_bar = false
       config.window_decorations = "NONE"
       config.hide_tab_bar_if_only_one_tab = true
@@ -129,6 +137,4 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-
-  programs.home-manager.enable = true;
 }
