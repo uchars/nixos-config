@@ -4,13 +4,12 @@ let
     ll = "ls -l";
     ".." = "cd ..";
     l = "ls";
-    # "nvim" = "steam-run nvim";
   };
 in
 {
   programs.home-manager.enable = true;
   imports = [
-    ../../programs/nvim.nix
+    ../../programs/neovim/nvim.nix
   ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
