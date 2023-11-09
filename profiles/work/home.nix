@@ -38,8 +38,9 @@ in
     gnumake
     ripgrep
     virtualenv
-    rustup
     unzip
+    cargo
+    rustc
     ethtool
     rpi-imager
     youtube-dl
@@ -53,7 +54,26 @@ in
     pkgs.gnomeExtensions.tiling-assistant
     pkgs.gnomeExtensions.tray-icons-reloaded
     pkgs.gnomeExtensions.bluetooth-quick-connect
-  ];
+  ] ++ [
+    # Language Servers
+    pkgs.nil
+    pkgs.gopls
+    pkgs.rust-analyzer
+    pkgs.nodePackages.typescript-language-server
+    pkgs.clang-tools
+    pkgs.pyright
+    pkgs.cmake-language-server
+    pkgs.nodePackages.bash-language-server
+    pkgs.lua-language-server
+    pkgs.nodePackages.vscode-html-languageserver-bin
+  ] ++ [
+    # Formatters
+    pkgs.stylua
+    pkgs.nodePackages.prettier
+    pkgs.nodePackages.fixjson
+    pkgs.nodePackages.markdownlint-cli
+    pkgs.python310Packages.autopep8
+    ];
 
   dconf.settings = {
     "org/gnome/shell".disabled-extensions = [];
