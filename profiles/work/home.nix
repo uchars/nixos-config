@@ -70,6 +70,7 @@ in
   ] ++ [
     # Formatters
     pkgs.stylua
+    pkgs.nixfmt
     pkgs.nodePackages.prettier
     pkgs.nodePackages.fixjson
     pkgs.nodePackages.markdownlint-cli

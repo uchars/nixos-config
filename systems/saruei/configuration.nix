@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ./disks.nix
+      ./vfio.nix
     ];
 
   boot.supportedFilesystems = [ "ntfs" ];

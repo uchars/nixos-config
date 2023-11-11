@@ -14,39 +14,39 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
-  let
-    lib = nixpkgs.lib;
-    system = "x86_64-linux";
-    desktop = "gnome";
-    displayManager = "gdm";
-    profile = "work";
+    let
+      lib = nixpkgs.lib;
+      system = "x86_64-linux";
+      desktop = "gnome";
+      displayManager = "gdm";
+      profile = "work";
 
-    nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
-      name = "nixpkgs-patched";
-      src = nixpkgs;
-    };
+      nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
+        name = "nixpkgs-patched";
+        src = nixpkgs;
+      };
 
-    pkgs = import nixpkgs-patched {
-      inherit system;
-      config = { allowUnfree = true; };
-    };
-
-  in {
-    nixosConfigurations = {
-      saruei = lib.nixosSystem {
+      pkgs = import nixpkgs-patched {
         inherit system;
-        modules = [ ./systems/saruei/configuration.nix ];
-        specialArgs = {
-          inherit desktop;
-          inherit displayManager;
+        config = { allowUnfree = true; };
+      };
+
+    in {
+      nixosConfigurations = {
+        saruei = lib.nixosSystem {
+          inherit system;
+          modules = [ ./systems/saruei/configuration.nix ];
+          specialArgs = {
+            inherit desktop;
+            inherit displayManager;
+          };
+        };
+      };
+      homeConfigurations = {
+        nils = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ (./. + "/profiles" + ("/" + profile) + "/home.nix") ];
         };
       };
     };
-    homeConfigurations = {
-      nils = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules =  [ (./. + "/profiles" + ("/" + profile) + "/home.nix") ];
-      };
-    };
-  };
 }
