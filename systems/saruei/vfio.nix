@@ -1,5 +1,4 @@
-{ ... } :
-{
+{ ... }: {
   boot = {
     initrd.kernelModules = [
       "vfio_pci"
@@ -14,11 +13,8 @@
     ];
 
     # lib.optional enableVfio
-    kernelParams = [
-      "amd_iommu=on"
-    ];
+    kernelParams = [ "amd_iommu=on" ];
   };
-
 
   virtualisation.spiceUSBRedirection.enable = true;
 }

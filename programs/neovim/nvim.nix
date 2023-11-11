@@ -1,15 +1,15 @@
 { lib, pkgs, ... }:
 let
-  pluginGit = rev: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
-    version = rev;
-    src = builtins.fetchGit {
-      url = "https://github.com/${repo}.git";
-      rev = rev;
+  pluginGit = rev: repo:
+    pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "${lib.strings.sanitizeDerivationName repo}";
+      version = rev;
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        rev = rev;
+      };
     };
-  };
-in
-{
+in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -40,23 +40,26 @@ in
       telescope-fzf-native-nvim
       null-ls-nvim
       fidget-nvim
-      (pluginGit "3af6232c8d39d51062702e875ff6407c1eeb0391" "xiyaowong/transparent.nvim")
-      (pluginGit "9751fc0cb7041ba436c27a86f8faefc5ffe7f8bd" "octarect/telescope-menu.nvim")
+      (pluginGit "3af6232c8d39d51062702e875ff6407c1eeb0391"
+        "xiyaowong/transparent.nvim")
+      (pluginGit "9751fc0cb7041ba436c27a86f8faefc5ffe7f8bd"
+        "octarect/telescope-menu.nvim")
     ];
-    extraConfig = ''lua << EOF
-      vim.cmd[[colorscheme onedark]]
-      ${builtins.readFile config/essentials.lua}
-      ${builtins.readFile config/lsp.lua}
-      ${builtins.readFile config/cmp.lua}
-      ${builtins.readFile config/telescope.lua}
-      ${builtins.readFile config/transparent.lua}
-      ${builtins.readFile config/treesitter.lua}
-      ${builtins.readFile config/format.lua}
-      ${builtins.readFile config/tools.lua}
-      ${builtins.readFile config/ai.lua}
-      ${builtins.readFile config/oil.lua}
-      ${builtins.readFile config/rust.lua}
-      require('neodev').setup()
+    extraConfig = ''
+      lua << EOF
+            vim.cmd[[colorscheme onedark]]
+            ${builtins.readFile config/essentials.lua}
+            ${builtins.readFile config/lsp.lua}
+            ${builtins.readFile config/cmp.lua}
+            ${builtins.readFile config/telescope.lua}
+            ${builtins.readFile config/transparent.lua}
+            ${builtins.readFile config/treesitter.lua}
+            ${builtins.readFile config/format.lua}
+            ${builtins.readFile config/tools.lua}
+            ${builtins.readFile config/ai.lua}
+            ${builtins.readFile config/oil.lua}
+            ${builtins.readFile config/rust.lua}
+            require('neodev').setup()
     '';
   };
 }

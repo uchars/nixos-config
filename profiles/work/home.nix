@@ -5,89 +5,87 @@ let
     ".." = "cd ..";
     l = "ls";
   };
-in
-{
+in {
   programs.home-manager.enable = true;
-  imports = [
-    ../../programs/neovim/nvim.nix
-  ];
+  imports = [ ../../programs/neovim/nvim.nix ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
 
   home.stateVersion = "23.05";
 
-  home.packages = with pkgs; [
-    dconf
-    firefox
-    chromium
-    obs-studio
-    # neovim
-    gcc
-    go
-    gopls
-    openblas
-    discord
-    steam
-    transmission-qt
-    spotify
-    wezterm
-    nodejs
-    python3
-    python3.pkgs.pip
-    glibc
-    gnumake
-    ripgrep
-    virtualenv
-    unzip
-    cargo
-    rustc
-    ethtool
-    rpi-imager
-    youtube-dl
-    steam-run
-  ] ++ [
-    pkgs.gnome3.gnome-tweaks
-    pkgs.gnomeExtensions.appindicator
-    # pkgs.gnomeExtensions.blur-my-shell
-    pkgs.gnomeExtensions.removable-drive-menu
-    pkgs.gnomeExtensions.dash-to-panel
-    pkgs.gnomeExtensions.tiling-assistant
-    pkgs.gnomeExtensions.tray-icons-reloaded
-    pkgs.gnomeExtensions.bluetooth-quick-connect
-  ] ++ [
-    # Language Servers
-    pkgs.nil
-    pkgs.gopls
-    pkgs.rust-analyzer
-    pkgs.nodePackages.typescript-language-server
-    pkgs.clang-tools
-    pkgs.pyright
-    pkgs.cmake-language-server
-    pkgs.nodePackages.bash-language-server
-    pkgs.lua-language-server
-    pkgs.nodePackages.vscode-html-languageserver-bin
-  ] ++ [
-    # Formatters
-    pkgs.stylua
-    pkgs.nixfmt
-    pkgs.nodePackages.prettier
-    pkgs.nodePackages.fixjson
-    pkgs.nodePackages.markdownlint-cli
-    pkgs.python310Packages.autopep8
+  home.packages = with pkgs;
+    [
+      dconf
+      firefox
+      chromium
+      obs-studio
+      # neovim
+      gcc
+      go
+      gopls
+      openblas
+      discord
+      steam
+      transmission-qt
+      spotify
+      wezterm
+      nodejs
+      python3
+      python3.pkgs.pip
+      glibc
+      gnumake
+      ripgrep
+      virtualenv
+      unzip
+      cargo
+      rustc
+      ethtool
+      rpi-imager
+      youtube-dl
+      steam-run
+    ] ++ [
+      pkgs.gnome3.gnome-tweaks
+      pkgs.gnomeExtensions.appindicator
+      # pkgs.gnomeExtensions.blur-my-shell
+      pkgs.gnomeExtensions.removable-drive-menu
+      pkgs.gnomeExtensions.dash-to-panel
+      pkgs.gnomeExtensions.tiling-assistant
+      pkgs.gnomeExtensions.tray-icons-reloaded
+      pkgs.gnomeExtensions.bluetooth-quick-connect
+    ] ++ [
+      # Language Servers
+      pkgs.nil
+      pkgs.gopls
+      pkgs.rust-analyzer
+      pkgs.nodePackages.typescript-language-server
+      pkgs.clang-tools
+      pkgs.pyright
+      pkgs.cmake-language-server
+      pkgs.nodePackages.bash-language-server
+      pkgs.lua-language-server
+      pkgs.nodePackages.vscode-html-languageserver-bin
+    ] ++ [
+      # Formatters
+      pkgs.stylua
+      pkgs.nixfmt
+      pkgs.nodePackages.prettier
+      pkgs.nodePackages.fixjson
+      pkgs.nodePackages.markdownlint-cli
+      pkgs.python310Packages.autopep8
     ];
 
   dconf.settings = {
-    "org/gnome/shell".disabled-extensions = [];
+    "org/gnome/shell".disabled-extensions = [ ];
 
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
 
     # Configure blur-my-shell
     "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 0.60;
+      brightness = 0.6;
       dash-opacity = 0.25;
       sigma = 60; # Sigma means blur amount
       static-blur = true;
@@ -160,7 +158,5 @@ in
     shellAliases = shAliases;
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 }

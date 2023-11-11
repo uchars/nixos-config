@@ -1,12 +1,5 @@
-{ lib, config, pkgs, desktop, displayManager, ... }:
-
-{
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./disks.nix
-      ./vfio.nix
-    ];
+{ lib, config, pkgs, desktop, displayManager, ... }: {
+  imports = [ ./hardware-configuration.nix ./disks.nix ./vfio.nix ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
@@ -18,7 +11,7 @@
 
   services.fstrim.enable = lib.mkDefault true;
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -35,11 +28,10 @@
 
   virtualisation.libvirtd.enable = true;
 
-  boot.initrd.luks.devices."luks-5efdaa8c-5be5-4142-8936-d3a24bce4eca".device = "/dev/disk/by-uuid/5efdaa8c-5be5-4142-8936-d3a24bce4eca";
+  boot.initrd.luks.devices."luks-5efdaa8c-5be5-4142-8936-d3a24bce4eca".device =
+    "/dev/disk/by-uuid/5efdaa8c-5be5-4142-8936-d3a24bce4eca";
   networking.hostName = "saruei";
-  networking.interfaces.enp42s0.wakeOnLan = {
-    enable = true;
-  };
+  networking.interfaces.enp42s0.wakeOnLan = { enable = true; };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -112,9 +104,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  services.udev.packages = with pkgs; [
-    via
-  ];
+  services.udev.packages = with pkgs; [ via ];
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -135,4 +125,3 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
-
