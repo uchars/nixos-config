@@ -20,6 +20,7 @@ in
   home.packages = with pkgs; [
     dconf
     firefox
+    chromium
     obs-studio
     # neovim
     gcc
@@ -77,6 +78,11 @@ in
 
   dconf.settings = {
     "org/gnome/shell".disabled-extensions = [];
+
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
 
     # Configure blur-my-shell
     "org/gnome/shell/extensions/blur-my-shell" = {
