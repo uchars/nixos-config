@@ -16,26 +16,35 @@ in {
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
+      # lsp
+      cmp-nvim-lsp
       nvim-lspconfig
+      cmp-path
+      cmp-buffer
+      neodev-nvim
+      nvim-cmp
+
+      # helpful
+      copilot-vim
+      luasnip
+
+      # ui
       nvim-treesitter.withAllGrammars
       onedark-nvim
+      zen-mode-nvim
+      (pluginGit "29be0919b91fb59eca9e90690d76014233392bef"
+        "lukas-reineke/indent-blankline.nvim")
+
       fugitive
-      nvim-cmp
       git-blame-nvim
       plenary-nvim
       nvim-autopairs
       crates-nvim
       comment-nvim
-      cmp-nvim-lsp
       undotree
       surround
-      copilot-vim
-      luasnip
       oil-nvim
       harpoon
-      neodev-nvim
-      cmp-path
-      cmp-buffer
       telescope-nvim
       telescope-fzf-native-nvim
       null-ls-nvim
@@ -59,6 +68,7 @@ in {
             ${builtins.readFile config/ai.lua}
             ${builtins.readFile config/oil.lua}
             ${builtins.readFile config/rust.lua}
+            ${builtins.readFile config/indent-blankline.lua}
             require('neodev').setup()
     '';
   };

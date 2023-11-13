@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   shAliases = {
     ll = "ls -l";
@@ -7,7 +7,7 @@ let
   };
 in {
   programs.home-manager.enable = true;
-  imports = [ ../../programs/neovim/nvim.nix ];
+  imports = [ ../../programs/neovim/nvim.nix ./gnome.nix ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
@@ -16,15 +16,15 @@ in {
 
   home.packages = with pkgs;
     [
+      via
+      vial
       dconf
       firefox
       chromium
+      cmake
       obs-studio
-      # neovim
       gcc
       go
-      gopls
-      openblas
       discord
       steam
       transmission-qt
@@ -45,9 +45,10 @@ in {
       youtube-dl
       steam-run
     ] ++ [
+      # Gnome extensions
       pkgs.gnome3.gnome-tweaks
       pkgs.gnomeExtensions.appindicator
-      # pkgs.gnomeExtensions.blur-my-shell
+      pkgs.gnomeExtensions.blur-my-shell
       pkgs.gnomeExtensions.removable-drive-menu
       pkgs.gnomeExtensions.dash-to-panel
       pkgs.gnomeExtensions.tiling-assistant
@@ -76,46 +77,19 @@ in {
     ];
 
   dconf.settings = {
-    "org/gnome/shell".disabled-extensions = [ ];
-
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
 
-    # Configure blur-my-shell
-    "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 0.6;
-      dash-opacity = 0.25;
-      sigma = 60; # Sigma means blur amount
-      static-blur = true;
-    };
-    "org/gnome/shell/extensions/blur-my-shell/panel".blur = true;
-    "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
-      blur = true;
-      style-dialogs = 0;
-    };
-
-    "org/gnome/shell/extensions/bluetooth-quick-connect" = {
-      keep-menu-on-toggle = true;
-      refresh-button-on = true;
-      show-batter-icon-on = true;
-    };
-
-    "org/gnome/shell/extensions/dash-to-panel" = {
-      multi-monitors = true;
-      intellihide = false;
-      panel-lengths = 100;
-    };
+    # home.file."./.config/nvim/" = {
+    #   recursive = true;
+    #   source = fetchGit {
+    #     url = "https://github.com/uchars/nvim.git";
+    #     rev = "0986d8b09508b50913dc3bb4fca04834733d2f82";
+    #   };
+    # };
   };
-
-  # home.file."./.config/nvim/" = {
-  #   recursive = true;
-  #   source = fetchGit {
-  #     url = "https://github.com/uchars/nvim.git";
-  #     rev = "0986d8b09508b50913dc3bb4fca04834733d2f82";
-  #   };
-  # };
 
   home.file."./.config/tmux/" = {
     recursive = true;

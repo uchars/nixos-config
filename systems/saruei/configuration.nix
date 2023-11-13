@@ -104,13 +104,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  services.udev.packages = with pkgs; [ via ];
+  services.udev.packages = with pkgs; [ via vial ];
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     virt-manager
     sct
-    via
     tmux
     git
     wget
