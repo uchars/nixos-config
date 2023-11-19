@@ -16,6 +16,7 @@ in {
 
   home.packages = with pkgs;
     [
+      syncthing
       via
       vial
       dconf
@@ -30,6 +31,7 @@ in {
       transmission-qt
       spotify
       wezterm
+      vlc
       nodejs
       python3
       python3.pkgs.pip
