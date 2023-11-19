@@ -31,6 +31,8 @@ in {
       transmission-qt
       spotify
       wezterm
+      barrier
+      gimp
       vlc
       nodejs
       python3
