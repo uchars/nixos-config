@@ -1,4 +1,5 @@
-{ lib, system, agenix, config, pkgs, desktop, displayManager, ... }: {
+{ lib, system, agenix, config, pkgs, desktop, displayManager, gpuIDs, iommu, ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./disks.nix

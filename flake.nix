@@ -24,6 +24,14 @@
       desktop = "gnome";
       displayManager = "gdm";
       profile = "work";
+      # use scripts/iommugroups.sh & look for the graphics card (graphics and audio)
+      # NOTE: the card needs to be in its own group (i.e. no other PCI bridges and such)
+      #  if this is not the case, plug the card into another PCIE slot.
+      gpuIDs = [
+        "10de:1c82" # Graphics
+        "10de:0fb9" # Audio
+      ];
+      iommu = "amd_iommu"; # intel_iommu
 
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
         name = "nixpkgs-patched";
@@ -46,6 +54,8 @@
             inherit displayManager;
             inherit system;
             inherit agenix;
+            inherit gpuIDs;
+            inherit iommu;
           };
         };
       };
