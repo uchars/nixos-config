@@ -16,13 +16,15 @@ in {
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
-      # lsp
+      # lsp & formatting
       cmp-nvim-lsp
       nvim-lspconfig
       cmp-path
       cmp-buffer
       neodev-nvim
       nvim-cmp
+      null-ls-nvim
+      fidget-nvim
 
       # helpful
       copilot-vim
@@ -34,9 +36,14 @@ in {
       zen-mode-nvim
       (pluginGit "29be0919b91fb59eca9e90690d76014233392bef"
         "lukas-reineke/indent-blankline.nvim")
+      (pluginGit "3af6232c8d39d51062702e875ff6407c1eeb0391"
+        "xiyaowong/transparent.nvim")
 
+      # git
       fugitive
       git-blame-nvim
+      gitsigns-nvim
+
       plenary-nvim
       nvim-autopairs
       crates-nvim
@@ -47,10 +54,6 @@ in {
       harpoon
       telescope-nvim
       telescope-fzf-native-nvim
-      null-ls-nvim
-      fidget-nvim
-      (pluginGit "3af6232c8d39d51062702e875ff6407c1eeb0391"
-        "xiyaowong/transparent.nvim")
       (pluginGit "9751fc0cb7041ba436c27a86f8faefc5ffe7f8bd"
         "octarect/telescope-menu.nvim")
     ];
@@ -69,6 +72,8 @@ in {
             ${builtins.readFile config/oil.lua}
             ${builtins.readFile config/rust.lua}
             ${builtins.readFile config/indent-blankline.lua}
+            ${builtins.readFile config/git.lua}
+            ${builtins.readFile config/harpoon.lua}
             require('neodev').setup()
     '';
   };
