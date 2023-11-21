@@ -47,7 +47,6 @@ in {
       ethtool
       rpi-imager
       youtube-dl
-      steam-run
     ] ++ [
       # Gnome extensions
       pkgs.gnome3.gnome-tweaks
