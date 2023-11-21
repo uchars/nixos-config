@@ -29,6 +29,8 @@ in {
       # helpful
       copilot-vim
       luasnip
+      markdown-preview-nvim
+      nvim-web-devicons
 
       # ui
       nvim-treesitter.withAllGrammars
@@ -43,6 +45,7 @@ in {
       fugitive
       git-blame-nvim
       gitsigns-nvim
+      diffview-nvim
 
       plenary-nvim
       nvim-autopairs

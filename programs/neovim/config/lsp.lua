@@ -96,6 +96,11 @@ require('lspconfig').nil_ls.setup {
   on_attach = on_attach,
 }
 
+require('lspconfig').marksman.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 require('fidget').setup {
   window = { blend = 0 },
   text = { spinner = 'earth' },

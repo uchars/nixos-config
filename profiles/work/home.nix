@@ -65,6 +65,7 @@ in {
       pkgs.nodePackages.typescript-language-server
       pkgs.clang-tools
       pkgs.pyright
+      pkgs.marksman
       pkgs.cmake-language-server
       pkgs.nodePackages.bash-language-server
       pkgs.lua-language-server
