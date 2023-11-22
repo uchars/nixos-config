@@ -19,6 +19,7 @@ I.e.: ubuntu, fedora, etc.
 2. ```bash
    nix-channel --update
    ```
+   > Might have to log out before the next step
 3. ```bash
    nix-shell '<home-manager>' -A install
    ```
