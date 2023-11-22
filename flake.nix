@@ -24,6 +24,9 @@
       desktop = "gnome";
       displayManager = "gdm";
       profile = "work";
+      syncthingUser = "nils";
+      syncthingDir = "/home/${syncthingUser}";
+      networkInterface = "enp42s0";
       # use scripts/iommugroups.sh & look for the graphics card (graphics and audio)
       # NOTE: the card needs to be in its own group (i.e. no other PCI bridges and such)
       #  if this is not the case, plug the card into another PCIE slot.
@@ -47,8 +50,17 @@
       nixosConfigurations = {
         saruei = lib.nixosSystem {
           inherit system;
-          modules =
-            [ ./systems/saruei/configuration.nix agenix.nixosModules.default ];
+          modules = [
+            ./systems/saruei/configuration.nix
+            agenix.nixosModules.default
+            ./programs/vfio.nix
+            ./programs/syncthing.nix
+            ./programs/desktop.nix
+            ./programs/nvidia.nix
+            ./programs/wake_on_lan.nix
+            ./programs/users.nix
+            ./programs/essentials.nix
+          ];
           specialArgs = {
             inherit desktop;
             inherit displayManager;
@@ -56,7 +68,24 @@
             inherit agenix;
             inherit gpuIDs;
             inherit iommu;
+            inherit syncthingUser;
+            inherit syncthingDir;
+            inherit networkInterface;
           };
+        };
+      };
+      juniper = lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./systems/juniper/configuration.nix
+          ./programs/users.nix
+          ./programs/essentials.nix
+          ./programs/desktop.nix
+        ];
+        specialArgs = {
+          inherit desktop;
+          inherit displayManager;
+          inherit system;
         };
       };
       homeConfigurations = {

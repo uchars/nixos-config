@@ -1,21 +1,4 @@
-{ pkgs, config, displayManager, desktop, ... }: {
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
+{ pkgs, desktop, displayManager, ... }: {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
