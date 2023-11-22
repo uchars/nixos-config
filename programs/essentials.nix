@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, agenix, ... }: {
 
   services.udev.packages = with pkgs; [ via vial ];
 

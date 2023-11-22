@@ -73,8 +73,7 @@
             inherit networkInterface;
           };
         };
-      };
-      juniper = lib.nixosSystem {
+        juniper = lib.nixosSystem {
         inherit system;
         modules = [
           ./systems/juniper/configuration.nix
@@ -83,10 +82,12 @@
           ./programs/desktop.nix
         ];
         specialArgs = {
+          inherit agenix;
           inherit desktop;
           inherit displayManager;
           inherit system;
         };
+      };
       };
       homeConfigurations = {
         nils = home-manager.lib.homeManagerConfiguration {
