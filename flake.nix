@@ -55,6 +55,7 @@
             agenix.nixosModules.default
             ./programs/vfio.nix
             ./programs/syncthing.nix
+            ./programs/opengl.nix
             ./programs/desktop.nix
             ./programs/nvidia.nix
             ./programs/wake_on_lan.nix
@@ -74,20 +75,21 @@
           };
         };
         juniper = lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./systems/juniper/configuration.nix
-          ./programs/users.nix
-          ./programs/essentials.nix
-          ./programs/desktop.nix
-        ];
-        specialArgs = {
-          inherit agenix;
-          inherit desktop;
-          inherit displayManager;
           inherit system;
+          modules = [
+            ./systems/juniper/configuration.nix
+            ./programs/users.nix
+            ./programs/opengl.nix
+            ./programs/essentials.nix
+            ./programs/desktop.nix
+          ];
+          specialArgs = {
+            inherit agenix;
+            inherit desktop;
+            inherit displayManager;
+            inherit system;
+          };
         };
-      };
       };
       homeConfigurations = {
         nils = home-manager.lib.homeManagerConfiguration {
