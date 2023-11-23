@@ -7,10 +7,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
   boot.initrd.luks.devices."luks-1b361fde-8183-44e9-b084-1933a9a06cdc".device =
     "/dev/disk/by-uuid/1b361fde-8183-44e9-b084-1933a9a06cdc";
   networking.hostName = "juniper";
-  networking.wireless.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;

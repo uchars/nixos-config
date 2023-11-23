@@ -50,6 +50,7 @@
             ./systems/saruei/configuration.nix
             ./programs/vfio.nix
             ./programs/syncthing.nix
+            ./programs/opengl.nix
             ./programs/desktop.nix
             ./programs/nvidia.nix
             ./programs/wake_on_lan.nix
@@ -72,6 +73,7 @@
           modules = [
             ./systems/juniper/configuration.nix
             ./programs/users.nix
+            ./programs/opengl.nix
             ./programs/essentials.nix
             ./programs/desktop.nix
           ];
