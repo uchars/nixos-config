@@ -101,6 +101,11 @@ require('lspconfig').marksman.setup {
   on_attach = on_attach,
 }
 
+require('lspconfig').dartls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 require('fidget').setup {
   window = { blend = 0 },
   text = { spinner = 'earth' },
