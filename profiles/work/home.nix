@@ -7,8 +7,7 @@ let
   };
 in {
   programs.home-manager.enable = true;
-  imports =
-    [ ../../programs/neovim/nvim.nix ../../programs/alacritty.nix ./gnome.nix ];
+  imports = [ ../../programs/neovim/nvim.nix ./gnome.nix ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
@@ -145,4 +144,10 @@ in {
   };
 
   elira.vscode = { enable = true; };
+
+  programs.feh = {
+    enable = true;
+    wallpaper =
+      "../../minimalistic-scale-solar-system-reworked-dark-mode-1920-1080-v0-bnlqp8ywjvca1.png";
+  };
 }
