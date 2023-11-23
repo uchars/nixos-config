@@ -137,4 +137,11 @@ in {
   };
 
   home.sessionVariables = { EDITOR = "nvim"; };
+
+  elira.java = {
+    enable = true;
+    jdkVersions = [ pkgs.jdk19 ];
+  };
+
+  elira.vscode = { enable = true; };
 }

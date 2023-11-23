@@ -1,4 +1,4 @@
-{ pkgs, agenix, ... }: {
+{ pkgs, ... }: {
   services.syncthing = {
     enable = true;
     user = "nils";
