@@ -6,10 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +13,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -52,7 +48,6 @@
           inherit system;
           modules = [
             ./systems/saruei/configuration.nix
-            agenix.nixosModules.default
             ./programs/vfio.nix
             ./programs/syncthing.nix
             ./programs/opengl.nix
@@ -66,7 +61,6 @@
             inherit desktop;
             inherit displayManager;
             inherit system;
-            inherit agenix;
             inherit gpuIDs;
             inherit iommu;
             inherit syncthingUser;
@@ -84,7 +78,6 @@
             ./programs/desktop.nix
           ];
           specialArgs = {
-            inherit agenix;
             inherit desktop;
             inherit displayManager;
             inherit system;
@@ -94,7 +87,8 @@
       homeConfigurations = {
         nils = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ (./. + "/profiles" + ("/" + profile) + "/home.nix") ];
+          modules =
+            [ (./. + "/profiles" + ("/" + profile) + "/home.nix") ./modules ];
         };
       };
     };

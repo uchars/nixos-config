@@ -137,4 +137,17 @@ in {
   };
 
   home.sessionVariables = { EDITOR = "nvim"; };
+
+  elira.java = {
+    enable = true;
+    jdkVersions = [ pkgs.jdk19 ];
+  };
+
+  elira.vscode = { enable = true; };
+
+  programs.feh = {
+    enable = true;
+    wallpaper =
+      "../../minimalistic-scale-solar-system-reworked-dark-mode-1920-1080-v0-bnlqp8ywjvca1.png";
+  };
 }
