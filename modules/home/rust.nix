@@ -10,7 +10,6 @@
       cargo-generate
       trunk
       sass
-      rust-anayzer
       openssl
       pkgconfig
     ];
