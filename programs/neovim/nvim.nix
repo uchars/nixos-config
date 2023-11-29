@@ -77,6 +77,7 @@ in {
             ${builtins.readFile config/indent-blankline.lua}
             ${builtins.readFile config/git.lua}
             ${builtins.readFile config/harpoon.lua}
+            ${builtins.readFile config/tabstop.lua}
             require('neodev').setup()
     '';
   };
