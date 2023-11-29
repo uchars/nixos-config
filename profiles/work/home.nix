@@ -42,8 +42,6 @@ in {
       ripgrep
       virtualenv
       unzip
-      cargo
-      rustc
       ethtool
       rpi-imager
       youtube-dl
@@ -61,7 +59,6 @@ in {
       # Language Servers
       pkgs.nil
       pkgs.gopls
-      pkgs.rust-analyzer
       pkgs.nodePackages.typescript-language-server
       pkgs.clang-tools
       pkgs.pyright
@@ -85,14 +82,6 @@ in {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
-
-    # home.file."./.config/nvim/" = {
-    #   recursive = true;
-    #   source = fetchGit {
-    #     url = "https://github.com/uchars/nvim.git";
-    #     rev = "0986d8b09508b50913dc3bb4fca04834733d2f82";
-    #   };
-    # };
   };
 
   home.file."./.config/tmux/" = {
@@ -145,9 +134,5 @@ in {
 
   elira.vscode = { enable = true; };
 
-  programs.feh = {
-    enable = true;
-    wallpaper =
-      "../../minimalistic-scale-solar-system-reworked-dark-mode-1920-1080-v0-bnlqp8ywjvca1.png";
-  };
+  elira.rust = { enable = true; };
 }

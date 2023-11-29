@@ -58,4 +58,20 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  elira.vfio = {
+    enable = true;
+    iommu = "amd_iommu";
+    pci-ids = [
+      "10de:1c82" # Graphics
+      "10de:0fb9" # Audio
+    ];
+  };
+
+  elira.nvidia = { enable = true; };
+
+  elira.wol = {
+    enable = true;
+    interface = "enp42s0";
+  };
 }

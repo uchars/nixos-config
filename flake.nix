@@ -23,14 +23,6 @@
       syncthingUser = "nils";
       syncthingDir = "/home/${syncthingUser}";
       networkInterface = "enp42s0";
-      # use scripts/iommugroups.sh & look for the graphics card (graphics and audio)
-      # NOTE: the card needs to be in its own group (i.e. no other PCI bridges and such)
-      #  if this is not the case, plug the card into another PCIE slot.
-      gpuIDs = [
-        "10de:1c82" # Graphics
-        "10de:0fb9" # Audio
-      ];
-      iommu = "amd_iommu"; # intel_iommu
 
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
         name = "nixpkgs-patched";
@@ -48,21 +40,17 @@
           inherit system;
           modules = [
             ./systems/saruei/configuration.nix
-            ./programs/vfio.nix
             ./programs/syncthing.nix
             ./programs/opengl.nix
             ./programs/desktop.nix
-            ./programs/nvidia.nix
-            ./programs/wake_on_lan.nix
             ./programs/users.nix
             ./programs/essentials.nix
+            ./modules/system
           ];
           specialArgs = {
             inherit desktop;
             inherit displayManager;
             inherit system;
-            inherit gpuIDs;
-            inherit iommu;
             inherit syncthingUser;
             inherit syncthingDir;
             inherit networkInterface;
@@ -87,8 +75,10 @@
       homeConfigurations = {
         nils = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules =
-            [ (./. + "/profiles" + ("/" + profile) + "/home.nix") ./modules ];
+          modules = [
+            (./. + "/profiles" + ("/" + profile) + "/home.nix")
+            ./modules/home
+          ];
         };
       };
     };
