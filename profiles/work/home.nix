@@ -84,14 +84,6 @@ in {
     };
   };
 
-  home.file."./.config/tmux/" = {
-    recursive = true;
-    source = fetchGit {
-      url = "https://github.com/uchars/tmux.git";
-      rev = "a0eefc23d4b3c402daf38ac0f4c241b5b8b27127";
-    };
-  };
-
   home.file."./.config/wezterm/wezterm.lua" = {
     recursive = true;
     text = ''
@@ -117,6 +109,25 @@ in {
       }
 
       return config
+    '';
+  };
+
+  programs.tmux = {
+    enable = true;
+    shortcut = "a";
+    baseIndex = 1;
+    newSession = true;
+    escapeTime = 0;
+    secureSocket = false;
+    plugins = with pkgs; [ tmuxPlugins.catppuccin ];
+    extraConfig = ''
+      set -g default-terminal "xterm-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+      set-environment -g COLORTERM "truecolor"
+
+      bind h previous-window
+      bind l next-window
     '';
   };
 
