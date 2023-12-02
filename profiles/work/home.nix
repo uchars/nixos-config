@@ -67,6 +67,7 @@ in {
       pkgs.nodePackages.bash-language-server
       pkgs.lua-language-server
       pkgs.nodePackages.vscode-html-languageserver-bin
+      pkgs.nodePackages.vscode-langservers-extracted
     ] ++ [
       # Formatters
       pkgs.stylua
@@ -126,8 +127,12 @@ in {
       set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
       set-environment -g COLORTERM "truecolor"
 
+      set -g mouse on
+
       bind h previous-window
       bind l next-window
+      bind-key -n C-S-Left swap-window -t -1
+      bind-key -n C-S-Right swap-window -t +1
     '';
   };
 
