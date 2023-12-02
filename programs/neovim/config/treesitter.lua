@@ -16,6 +16,9 @@ require('nvim-treesitter.configs').setup {
       node_decremental = '<M-space>',
     },
   },
+  playground = {
+    enable = true,
+  },
   textobjects = {
     select = {
       enable = true,
@@ -61,4 +64,3 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
-

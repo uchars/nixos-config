@@ -6,6 +6,7 @@ null_ls.setup {
     null_ls.builtins.formatting.dart_format,
     null_ls.builtins.formatting.nixfmt,
     null_ls.builtins.formatting.rustfmt,
+    null_ls.builtins.formatting.ocamlformat,
     null_ls.builtins.formatting.clang_format,
   },
   on_attach = function(client, bufnr)
