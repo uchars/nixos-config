@@ -34,10 +34,8 @@ in {
       barrier
       gimp
       vlc
-      nodejs
       python3
       python3.pkgs.pip
-      glibc
       gnumake
       ripgrep
       virtualenv
@@ -55,27 +53,6 @@ in {
       pkgs.gnomeExtensions.tiling-assistant
       pkgs.gnomeExtensions.tray-icons-reloaded
       pkgs.gnomeExtensions.bluetooth-quick-connect
-    ] ++ [
-      # Language Servers
-      pkgs.nil
-      pkgs.gopls
-      pkgs.nodePackages.typescript-language-server
-      pkgs.clang-tools
-      pkgs.pyright
-      pkgs.marksman
-      pkgs.cmake-language-server
-      pkgs.nodePackages.bash-language-server
-      pkgs.lua-language-server
-      pkgs.nodePackages.vscode-html-languageserver-bin
-      pkgs.nodePackages.vscode-langservers-extracted
-    ] ++ [
-      # Formatters
-      pkgs.stylua
-      pkgs.nixfmt
-      pkgs.nodePackages.prettier
-      pkgs.nodePackages.fixjson
-      pkgs.nodePackages.markdownlint-cli
-      pkgs.python310Packages.autopep8
     ];
 
   dconf.settings = {

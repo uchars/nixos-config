@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     sct
+    postman
     tmux
     git
     wget

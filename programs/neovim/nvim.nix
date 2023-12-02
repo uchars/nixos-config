@@ -34,8 +34,11 @@ in {
 
       # ui
       nvim-treesitter.withAllGrammars
+      playground
       onedark-nvim
       zen-mode-nvim
+      (pluginGit "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6"
+        "norcalli/nvim-colorizer.lua")
       (pluginGit "29be0919b91fb59eca9e90690d76014233392bef"
         "lukas-reineke/indent-blankline.nvim")
       (pluginGit "3af6232c8d39d51062702e875ff6407c1eeb0391"
@@ -57,8 +60,6 @@ in {
       harpoon
       telescope-nvim
       telescope-fzf-native-nvim
-      (pluginGit "9751fc0cb7041ba436c27a86f8faefc5ffe7f8bd"
-        "octarect/telescope-menu.nvim")
     ];
     extraConfig = ''
       lua << EOF
@@ -78,6 +79,7 @@ in {
             ${builtins.readFile config/git.lua}
             ${builtins.readFile config/harpoon.lua}
             ${builtins.readFile config/tabstop.lua}
+            ${builtins.readFile config/colorizer.lua}
             require('neodev').setup()
     '';
   };
