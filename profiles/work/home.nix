@@ -7,36 +7,25 @@ let
   };
 in {
   programs.home-manager.enable = true;
-  imports = [ ./gnome.nix ];
+  imports = [ ./gnome.nix ./kde.nix ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
 
   home.stateVersion = "23.05";
 
-  home.packages = with pkgs;
-    [
-      syncthing
-      dconf
-      transmission-qt
-      spotify
-      wezterm
-      gimp
-      vlc
-      unzip
-      ethtool
-      youtube-dl
-    ] ++ [
-      # Gnome extensions
-      pkgs.gnome3.gnome-tweaks
-      pkgs.gnomeExtensions.appindicator
-      pkgs.gnomeExtensions.blur-my-shell
-      pkgs.gnomeExtensions.removable-drive-menu
-      pkgs.gnomeExtensions.dash-to-panel
-      pkgs.gnomeExtensions.tiling-assistant
-      pkgs.gnomeExtensions.tray-icons-reloaded
-      pkgs.gnomeExtensions.bluetooth-quick-connect
-    ];
+  home.packages = with pkgs; [
+    syncthing
+    dconf
+    transmission-qt
+    spotify
+    wezterm
+    gimp
+    vlc
+    unzip
+    ethtool
+    youtube-dl
+  ];
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {

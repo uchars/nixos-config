@@ -11,9 +11,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -78,6 +83,7 @@
           modules = [
             (./. + "/profiles" + ("/" + profile) + "/home.nix")
             ./modules/home
+            plasma-manager.homeManagerModules.plasma-manager
           ];
         };
       };
