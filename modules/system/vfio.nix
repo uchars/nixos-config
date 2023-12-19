@@ -18,14 +18,6 @@
   in lib.mkIf cfg.enable {
     home.packages = with pkgs; [ barrier ];
     hardware.opengl.enable = true;
-
-    dconf.settings = {
-      "org/virt-manager/virt-manager/connections" = {
-        autoconnect = [ "qemu:///system" ];
-        uris = [ "qemu:///system" ];
-      };
-    };
-
     boot = {
       kernelParams = [ "${cfg.iommu}=on" ]
         ++ lib.optional (builtins.length cfg.pci-ids > 0)
