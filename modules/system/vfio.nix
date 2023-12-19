@@ -16,7 +16,7 @@
 
   config = let cfg = config.elira.vfio;
   in lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ barrier ];
+    environment.systemPackages = with pkgs; [ barrier ];
     hardware.opengl.enable = true;
     boot = {
       kernelParams = [ "${cfg.iommu}=on" ]
