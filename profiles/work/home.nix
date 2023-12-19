@@ -7,7 +7,7 @@ let
   };
 in {
   programs.home-manager.enable = true;
-  imports = [ ../../programs/neovim/nvim.nix ./gnome.nix ];
+  imports = [ ./gnome.nix ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
