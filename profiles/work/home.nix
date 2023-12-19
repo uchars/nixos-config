@@ -17,31 +17,16 @@ in {
   home.packages = with pkgs;
     [
       syncthing
-      via
-      vial
       dconf
       firefox
       chromium
-      cmake
-      obs-studio
-      gcc
-      go
-      discord
-      steam
       transmission-qt
       spotify
       wezterm
-      barrier
       gimp
       vlc
-      python3
-      python3.pkgs.pip
-      gnumake
-      ripgrep
-      virtualenv
       unzip
       ethtool
-      rpi-imager
       youtube-dl
     ] ++ [
       # Gnome extensions
@@ -105,6 +90,7 @@ in {
       set-environment -g COLORTERM "truecolor"
 
       set -g mouse on
+      set-option -g renumber-windows on
 
       bind h previous-window
       bind l next-window
@@ -128,4 +114,8 @@ in {
   elira.vscode = { enable = true; };
 
   elira.rust = { enable = true; };
+
+  elira.keyboard = { enable = true; };
+
+  elira.gaming = { enable = true; };
 }

@@ -17,8 +17,8 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      desktop = "gnome";
-      displayManager = "gdm";
+      desktop = "plasma5";
+      displayManager = "sddm";
       profile = "work";
       syncthingUser = "nils";
       syncthingDir = "/home/${syncthingUser}";

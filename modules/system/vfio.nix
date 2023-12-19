@@ -1,4 +1,4 @@
-{ lib, config, ... }: {
+{ lib, pkgs, config, ... }: {
   options.elira.vfio = with lib; {
     enable = mkEnableOption "Enable VFIO";
     iommu = mkOption {
@@ -16,6 +16,7 @@
 
   config = let cfg = config.elira.vfio;
   in lib.mkIf cfg.enable {
+    home.packages = with pkgs; [ barrier ];
     hardware.opengl.enable = true;
     boot = {
       kernelParams = [ "${cfg.iommu}=on" ]
