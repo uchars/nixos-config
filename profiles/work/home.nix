@@ -18,8 +18,6 @@ in {
     [
       syncthing
       dconf
-      firefox
-      chromium
       transmission-qt
       spotify
       wezterm
@@ -58,7 +56,7 @@ in {
         config = wezterm.config_builder()
       end
 
-      config.window_background_opacity = .6
+      config.window_background_opacity = .8
       config.use_fancy_tab_bar = false
       config.window_decorations = "NONE"
       config.hide_tab_bar_if_only_one_tab = true
@@ -117,5 +115,15 @@ in {
 
   elira.keyboard = { enable = true; };
 
-  elira.gaming = { enable = true; };
+  elira.gaming = {
+    enable = true;
+    emulation = true;
+  };
+
+  elira.browser = {
+    enable = true;
+    firefox = true;
+    chromium = true;
+    tor = true;
+  };
 }
