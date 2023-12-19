@@ -1,4 +1,15 @@
-{ ... }: {
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    gnome3.gnome-tweaks
+    gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.removable-drive-menu
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.tiling-assistant
+    gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.bluetooth-quick-connect
+  ];
+
   dconf.settings = {
 
     "org/gnome/shell".disabled-extensions = [ ];
