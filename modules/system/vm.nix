@@ -3,7 +3,7 @@
     enable = mkEnableOption "Enable Type 1 Hypervisor";
     # TODO: Support adding multiple users to libvirtd group
     user = mkOption {
-      type = with types; listOf str;
+      type = types.str;
       description = "user to enable vm stuff";
     };
   };

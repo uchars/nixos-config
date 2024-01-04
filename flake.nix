@@ -25,8 +25,6 @@
       desktop = "plasma5";
       displayManager = "sddm";
       profile = "work";
-      syncthingUser = "nils";
-      syncthingDir = "/home/${syncthingUser}";
       networkInterface = "enp42s0";
 
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
@@ -45,7 +43,6 @@
           inherit system;
           modules = [
             ./systems/saruei/configuration.nix
-            ./programs/syncthing.nix
             ./programs/opengl.nix
             ./programs/desktop.nix
             ./programs/users.nix
@@ -56,8 +53,6 @@
             inherit desktop;
             inherit displayManager;
             inherit system;
-            inherit syncthingUser;
-            inherit syncthingDir;
             inherit networkInterface;
           };
         };

@@ -77,4 +77,21 @@
     enable = true;
     user = "nils";
   };
+
+  elira.syncthing = {
+    enable = true;
+    user = "nils";
+    dir = "/home/nils";
+    deviceConfig = {
+      "laptop" = {
+        id = "I4GZSU2-RCVRCDJ-NCBJKXN-3U6CNW4-APT4YJZ-B4BEQ5R-QMZULXI-O66IIAF";
+      };
+      "iPhoneNils" = {
+        id = "NBQRQT6-72YWCPW-7ZN6KBE-CSSNQWV-EUH4M6W-VGHSG6Z-ZZX556R-JMEZQQH";
+      };
+      "server" = {
+        id = "WMLEXHS-F5L7GWK-EPMLZYQ-3MOLA62-OVXRTDH-J3QAALU-HYEAC67-P52VZQ6";
+      };
+    };
+  };
 }
