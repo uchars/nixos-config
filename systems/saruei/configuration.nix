@@ -9,8 +9,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  virtualisation.libvirtd.enable = true;
-
   boot.initrd.luks.devices."luks-5efdaa8c-5be5-4142-8936-d3a24bce4eca".device =
     "/dev/disk/by-uuid/5efdaa8c-5be5-4142-8936-d3a24bce4eca";
   networking.hostName = "saruei";
@@ -73,5 +71,10 @@
   elira.wol = {
     enable = true;
     interface = "enp42s0";
+  };
+
+  elira.vm = {
+    enable = true;
+    user = "nils";
   };
 }

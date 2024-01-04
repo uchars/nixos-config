@@ -1,1 +1,1 @@
-inputs: { imports = [ ./vfio.nix ./wol.nix ./gpu.nix ]; }
+inputs: { imports = [ ./vfio.nix ./wol.nix ./gpu.nix ./vm.nix ]; }
