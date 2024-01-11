@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, emacs_dots, ... }:
 let
   shAliases = {
     ll = "ls -l";
@@ -114,5 +114,10 @@ in {
     firefox = true;
     chromium = true;
     tor = true;
+  };
+
+  elira.emacs = {
+    enable = true;
+    config_dir = "${emacs_dots}";
   };
 }

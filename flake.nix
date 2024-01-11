@@ -16,9 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    emacs-overlay.url =
+      "github:nix-community/emacs-overlay/da2f552d133497abd434006e0cae996c0a282394";
   };
-
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -26,6 +27,7 @@
       displayManager = "sddm";
       profile = "work";
       networkInterface = "enp42s0";
+      emacs_dots = ./emacs;
 
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
         name = "nixpkgs-patched";
@@ -38,6 +40,7 @@
       };
 
     in {
+      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
       nixosConfigurations = {
         saruei = lib.nixosSystem {
           inherit system;
@@ -78,8 +81,20 @@
           modules = [
             (./. + "/profiles" + ("/" + profile) + "/home.nix")
             ./modules/home
+            ({
+              nixpkgs.overlays = [
+                (import (builtins.fetchTarball {
+                  url =
+                    "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+                  sha256 =
+                    "1mxq3ba0r099i893a72kmac5ski4hq72zh5ly9xzddws107y9wgm";
+                }))
+
+              ];
+            })
             plasma-manager.homeManagerModules.plasma-manager
           ];
+          extraSpecialArgs = { inherit emacs_dots; };
         };
       };
     };

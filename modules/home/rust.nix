@@ -6,6 +6,7 @@
   config = let cfg = config.elira.rust;
   in lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      clang
       rustup
       cargo-generate
       trunk

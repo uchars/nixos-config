@@ -9,6 +9,7 @@
     tmux
     git
     wget
+    ripgrep
     pciutils
     neofetch
   ];

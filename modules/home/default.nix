@@ -7,5 +7,6 @@ inputs: {
     ./gaming.nix
     ./keyboard.nix
     ./browser.nix
+    ./emacs.nix
   ];
 }
