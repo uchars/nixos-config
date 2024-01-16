@@ -12,7 +12,7 @@
       trunk
       sass
       openssl
-      pkgconfig
+      pkg-config
     ];
   };
 }

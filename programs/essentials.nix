@@ -5,7 +5,6 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     sct
-    postman
     tmux
     git
     wget
