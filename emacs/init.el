@@ -13,6 +13,8 @@
 (set-face-attribute 'default nil :font "Hack" :height 120)
 (setq image-use-external-converter t)
 
+(setq tramp-default-method "ssh")
+
 (load-theme 'wombat)
 
 ;; Make ESC quit prompts
@@ -42,6 +44,19 @@
 (dolist (mode '(term-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (evil-emacs-state))))
+
+;; Use eglot lsp for the following modes
+(dolist (mode '(c-mode-hook
+		c++-mode-hook))
+  (add-hook mode (lambda ()
+		   (eglot-ensure)
+		   (company-mode)
+		   ; eglot lsp keybindings
+		   (general-define-key
+		    :states '(normal)
+		    :prefix "SPC"
+		    "cr" 'eglot-rename
+		    "ca" 'eglot-code-actions))))
 
 ;; Initialize package sources
 (require 'package)
@@ -201,11 +216,18 @@
 ;; lsp
 (defun nils/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (general-define-key
+   :states '(normal)
+   :prefix "SPC"
+   "ca" 'lsp-execute-code-action)
   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook (lsp-mode . nils/lsp-mode-setup)
+  :hook
+  (lsp-mode . nils/lsp-mode-setup)
+  (c-mode . lsp-deferred)
+  (c++-mode . lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l"))
 
@@ -239,7 +261,8 @@
 (use-package company
   :diminish
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook
+  (lsp-mode . company-mode)
   :bind
   (:map company-active-map
 	("<tab>" . company-select-next)
@@ -268,5 +291,4 @@
   "gd" 'magit-diff-unstaged
   "gf" 'magit-fetch
   "gF" 'magit-fetch-all
-  "ca" 'lsp-execute-code-action
   "gc" 'magit-branch-or-checkout)

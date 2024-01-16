@@ -16,6 +16,8 @@
       nodePackages.typescript
       nodePackages.typescript-language-server
       nodePackages.prettier
+      clang-tools
+      cmake
     ];
 
     programs.emacs = {
