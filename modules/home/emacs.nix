@@ -9,12 +9,20 @@
 
   config = let cfg = config.elira.emacs;
   in lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ ripgrep ];
+    home.packages = with pkgs; [
+      ripgrep
+      imagemagick
+      libgccjit
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+      nodePackages.prettier
+    ];
 
     programs.emacs = {
       enable = true;
       package = pkgs.emacsWithPackagesFromUsePackage {
         config = "${cfg.config_dir}/init.el";
+        package = pkgs.emacs29;
       };
     };
     services.emacs.enable = true;
