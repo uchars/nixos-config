@@ -3,14 +3,47 @@
 (setq frame-resize-pixelwise t)
 (setq warning-minimum-level :emergency)
 
+; disable some UI elements
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 10)        ; Give some breathing room
+(menu-bar-mode -1)          ; Disable the menu bar
 
-(menu-bar-mode -1)            ; Disable the menu bar
+(set-default-coding-systems 'utf-8)
+(setq indent-tabs-mode nil) ; spaces rule
 
-(set-face-attribute 'default nil :font "Hack" :height 120)
+;; scroll settings
+(setq scroll-margin 8)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq use-dialog-box nil) ;; Disable dialog boxes since they weren't working in Mac OSX
+
+;; disable symlink warnings
+(setq vc-follow-symlinks t)
+
+(defun nils/transparency-enable ()
+  "Enables Editor transparency."
+  (interactive)
+  (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+  (add-to-list 'default-frame-alist '(alpha . (90 . 90))))
+
+(defun nils/transparency-disable ()
+  "Disable Editor transparency."
+  (interactive)
+  (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+  (add-to-list 'default-frame-alist '(alpha . (100 . 100))))
+
+(defun nils/set-font ()
+  "Set the editor font."
+  (if (eq system-type 'windows-nt)
+      (set-face-attribute 'default nil :height 120)
+    (set-face-attribute 'default nil :font "Hack" :height 120)))
+
+(nils/set-font)
+
 (setq image-use-external-converter t)
 
 (setq tramp-default-method "ssh")
@@ -27,10 +60,12 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (defun nils/home-manager-rebuild ()
+  "Home Manager build."
   (interactive)
   (async-shell-command "home-manager switch --flake ~/.dotfiles/."))
 
 (defun nils/nixos-rebuild ()
+  "NixOS system build."
   (interactive)
   (async-shell-command "sudo nixos-rebuild switch --flake ~/.dotfiles/.#saruei"))
 
@@ -44,19 +79,6 @@
 (dolist (mode '(term-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (evil-emacs-state))))
-
-;; Use eglot lsp for the following modes
-(dolist (mode '(c-mode-hook
-		c++-mode-hook))
-  (add-hook mode (lambda ()
-		   (eglot-ensure)
-		   (company-mode)
-		   ; eglot lsp keybindings
-		   (general-define-key
-		    :states '(normal)
-		    :prefix "SPC"
-		    "cr" 'eglot-rename
-		    "ca" 'eglot-code-actions))))
 
 ;; Initialize package sources
 (require 'package)
@@ -84,13 +106,11 @@
 (use-package command-log-mode)
 
 (use-package tree-sitter
-  :ensure t
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs
-  :ensure t
   :after tree-sitter)
 
 (use-package swiper)
@@ -113,14 +133,6 @@
   (ivy-mode 1)
   :diminish)
 
-(use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history))
-  :config
-  (counsel-mode 1)
-  :diminish)
-
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -134,6 +146,20 @@
     :prefix "SPC"
     :global-prefix "C-SPC"))
 
+(use-package vundo)
+
+(defun nils/evil-scroll-up ()
+  "Emacs version of C-u zz."
+  (interactive)
+  (evil-scroll-up nil)
+  (evil-scroll-line-to-center nil))
+
+(defun nils/evil-scroll-down ()
+  "Emacs version of C-d zz."
+  (interactive)
+  (evil-scroll-down nil)
+  (evil-scroll-line-to-center nil))
+
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -142,11 +168,14 @@
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (evil-define-key 'normal 'global (kbd "C-u") 'nils/evil-scroll-up)
+  (evil-define-key 'normal 'global (kbd "C-d") 'nils/evil-scroll-down)
   (evil-set-undo-system 'undo-redo)
   (define-key evil-motion-state-map "K" nil)
+  (define-key evil-motion-state-map (kbd "C-f") nil)
   (define-key evil-normal-state-map "K" 'lsp-ui-doc-glance)
-  (define-key evil-normal-state-map (kbd "]e") 'flymake-goto-next-error)
-  (define-key evil-normal-state-map (kbd "[e") 'flymake-goto-prev-error)
+  (define-key evil-normal-state-map (kbd "]e") 'flycheck-next-error)
+  (define-key evil-normal-state-map (kbd "[e") 'flycheck-previous-error)
   :diminish)
 
 ;; line numbers
@@ -164,11 +193,25 @@
   :after evil)
 (evilnc-default-hotkeys)
 
+(use-package counsel
+  :bind (("C-M-j" . 'counsel-switch-buffer)
+	 ("C-f" . 'counsel-rg)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
+  :config
+  (counsel-mode 1)
+  :diminish)
+
 (use-package hydra
   :defer t)
 
 (use-package magit
   :commands magit-status)
+
+(use-package magit-todos
+  :defer t
+  :after magit
+  :config (magit-todos-mode 1))
 
 (use-package git-gutter
   :after magit
@@ -231,10 +274,20 @@
   :init
   (setq lsp-keymap-prefix "C-c l"))
 
+(use-package flycheck
+  :defer t
+  :hook
+  (lsp-mode . flycheck-mode)
+  (emacs-lisp-mode . flycheck-mode))
+
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-position 'at-point))
+
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
 
 (use-package typescript-mode
   :diminish
@@ -254,9 +307,14 @@
   :hook
   (rust-mode . rust-ts-mode)
   (rust-mode . lsp)
-  :mode "\\.rs\\'"
-  :config
-  (setq indent-tabs-mode nil))
+  :mode "\\.rs\\'")
+
+(use-package cargo
+  :straight t
+  :defer t)
+
+(use-package go-mode
+  :hook (go-mode . lsp-deferred))
 
 (use-package company
   :diminish
@@ -282,6 +340,22 @@
 ;; symbols (functions, variables) inside of the file
 (use-package lsp-treemacs
   :after lsp)
+
+(use-package markdown-mode
+  :straight t
+  :mode "\\.md\\'"
+  :config
+  (setq markdown-command "marked")
+  (defun dw/set-markdown-header-font-sizes ()
+    (dolist (face '((markdown-header-face-1 . 1.2)
+                    (markdown-header-face-2 . 1.1)
+                    (markdown-header-face-3 . 1.0)
+                    (markdown-header-face-4 . 1.0)
+                    (markdown-header-face-5 . 1.0)))
+      (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
+  (defun dw/markdown-mode-hook ()
+    (dw/set-markdown-header-font-sizes))
+  (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
 (nils/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text")
