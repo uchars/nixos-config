@@ -262,7 +262,8 @@
   (general-define-key
    :states '(normal)
    :prefix "SPC"
-   "ca" 'lsp-execute-code-action)
+   "ca" 'lsp-execute-code-action
+   "gr" 'lsp-find-references)
   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
@@ -289,6 +290,14 @@
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
 
+(use-package cmake-mode
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'")
+  :hook (cmake-mode . lsp-deferred))
+
+(use-package cmake-font-lock
+  :after cmake-mode
+  :config (cmake-font-lock-activate))
+
 (use-package typescript-mode
   :diminish
   :after tree-sitter
@@ -303,18 +312,32 @@
 
 (use-package rust-mode
   :diminish
-  :after tree-sitter
+  :after lsp-mode
   :hook
-  (rust-mode . rust-ts-mode)
   (rust-mode . lsp)
   :mode "\\.rs\\'")
 
 (use-package cargo
-  :straight t
   :defer t)
 
+(use-package lsp-nix
+  "Install 'nil' & 'nixpkgs-fmt'"
+  :ensure lsp-mode
+  :after lsp-mode
+  :custom
+  (lsp-nix-nil-formatter ["nixpkgs-fmt"]))
+
+(use-package nix-mode
+  :hook (nix-mode . lsp-deferred)
+  :mode "\\.nix\\'")
+
 (use-package go-mode
-  :hook (go-mode . lsp-deferred))
+  "Install 'gofmt' & 'gopls'"
+  :diminish
+  :after lsp-mode
+;  :hook (go-mode . lsp)
+  :mode "\\.go\\'")
+(add-hook 'go-mode-hook #'lsp)
 
 (use-package company
   :diminish
@@ -362,6 +385,7 @@
   "sf" 'find-file
   "SPC" 'counsel-switch-buffer
   "gs" 'magit-status
+  "fm" 'lsp-format-buffer
   "gd" 'magit-diff-unstaged
   "gf" 'magit-fetch
   "gF" 'magit-fetch-all
