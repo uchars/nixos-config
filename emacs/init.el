@@ -1,6 +1,6 @@
 (setq inhibit-startup-message t)
 
-(setq frame-resize-pixelwise t)
+
 (setq warning-minimum-level :emergency)
 
 ; disable some UI elements
@@ -40,7 +40,7 @@
   "Set the editor font."
   (if (eq system-type 'windows-nt)
       (set-face-attribute 'default nil :height 120)
-    (set-face-attribute 'default nil :font "Hack" :height 120)))
+    (set-face-attribute 'default nil :height 120)))
 
 (nils/set-font)
 
@@ -102,10 +102,69 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(defun efs/exwm-update-class ()
+  (exwm-workspace-rename-buffer exwm-class-name))
+
+(use-package exwm
+  :config
+  (setq exwm-workspace-number 5)
+  (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+
+  (require 'exwm-randr)
+  (exwm-randr-enable)
+
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
+
+  (setq exwm-input-prefix-keys
+	'(?\C-x
+	  ?\C-u
+	  ?\C-w
+	  ?\C-h
+	  ?\M-x
+	  ?\M-`
+	  ?\M-&
+	  ?\M-:
+	  ?\C-\M-j  ;; Buffer list
+	  ?\C-\ ))  ;; Ctrl+Space
+  (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+  (setq exwm-input-global-keys
+	`(
+	  ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
+	  ([?\s-r] . exwm-reset)
+
+          ;; Move between windows
+          ([?\s-h] . windmove-left)
+          ([?\s-l] . windmove-right)
+          ([?\s-k] . windmove-up)
+          ([?\s-j] . windmove-down)
+
+          ;; Launch applications via shell command
+          ([?\s-&] . (lambda (command)
+                       (interactive (list (read-shell-command "$ ")))
+                       (start-process-shell-command command nil command)))
+
+          ;; Switch workspace
+          ([?\s-w] . exwm-workspace-switch)
+          ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch-create 0)))
+
+          ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
+          ,@(mapcar (lambda (i)
+                      `(,(kbd (format "s-%d" i)) .
+                        (lambda ()
+                          (interactive)
+                          (exwm-workspace-switch-create ,i))))
+		    (number-sequence 0 9))))
+
+  (exwm-enable))
+
 (use-package diminish)
+(diminish 'eldoc-mode)
 (use-package command-log-mode)
 
 (use-package tree-sitter
+  :diminish
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
@@ -141,7 +200,7 @@
 (use-package general
   :after evil
   :config
-  (general-create-definer nils/leader-keys
+  (general-create-definer nils/spc-leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC"))
@@ -191,7 +250,6 @@
 
 (use-package evil-nerd-commenter
   :after evil)
-(evilnc-default-hotkeys)
 
 (use-package counsel
   :bind (("C-M-j" . 'counsel-switch-buffer)
@@ -214,12 +272,12 @@
   :config (magit-todos-mode 1))
 
 (use-package git-gutter
-  :after magit
-  :config
   :diminish
-  git-gutter-mode
-  global-git-gutter-mode)
-(global-git-gutter-mode +1)
+  :hook
+  ((text-mode . git-gutter-mode)
+   (prog-mode . git-gutter-mode))
+  :config
+  (setq git-gutter:update-interval 2))
 
 (use-package projectile
   :config (projectile-mode)
@@ -227,9 +285,13 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/src/")
-    (setq projectile-project-search-path '("~/src/" "~/.dotfiles/" "~/work/")))
+    (add-to-list projectile-project-search-path '("~/src/")))
+  (when (file-directory-p "~/.dotfiles/")
+    (add-to-list 'projectile-project-search-path "~/.dotfiles/"))
+  (when (file-directory-p "~/work/")
+    (add-to-list 'projectile-project-search-path "~/work/"))
+
   (setq projectile-switch-project-action #'projectile-dired)
   :diminish projectile-mode)
 
@@ -277,6 +339,7 @@
 
 (use-package flycheck
   :defer t
+  :diminish
   :hook
   (lsp-mode . flycheck-mode)
   (emacs-lisp-mode . flycheck-mode))
@@ -335,7 +398,7 @@
   "Install 'gofmt' & 'gopls'"
   :diminish
   :after lsp-mode
-;  :hook (go-mode . lsp)
+					;  :hook (go-mode . lsp)
   :mode "\\.go\\'")
 (add-hook 'go-mode-hook #'lsp)
 
@@ -380,13 +443,37 @@
     (dw/set-markdown-header-font-sizes))
   (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
-(nils/leader-keys
+(use-package bufler
+  :bind (("C-M-j" . bufler-switch-buffer)
+	 ("C-M-k" . bufler-workspace-frame-set))
+  :config
+  (evil-collection-define-key 'normal 'bufler-list-mode-map
+    (kbd "RET")   'bufler-list-buffer-switch
+    (kbd "M-RET") 'bufler-list-buffer-peek
+    "D"           'bufler-list-buffer-kill)
+  (setf bufler-groups
+	(bufler-defgroups
+	 (group (auto-workspace))
+	 (group (auto-projectile))
+	 (group
+	  (group-or "Browsers"
+		    (name-match "Firefox" (rx bos "Firefox"))
+		    (name-match "Chromium" (rx bos "Chromium")))))
+	(group
+	 (group-or "Help/Info"
+		   (mode-match "*Help*" (rx bos (or "help-" "helpful-")))
+		   (mode-match "*Info*" (rx bos "info-"))))
+	(auto-mode)))
+
+(nils/spc-leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text")
   "sf" 'find-file
   "SPC" 'counsel-switch-buffer
+  "C-SPC" 'counsel-switch-buffer
   "gs" 'magit-status
   "fm" 'lsp-format-buffer
   "gd" 'magit-diff-unstaged
   "gf" 'magit-fetch
   "gF" 'magit-fetch-all
-  "gc" 'magit-branch-or-checkout)
+  "gc" 'magit-branch-or-checkout
+  "/" 'evilnc-comment-or-uncomment-lines)

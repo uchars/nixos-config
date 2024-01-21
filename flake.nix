@@ -16,10 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    emacs-overlay.url =
-      "github:nix-community/emacs-overlay/da2f552d133497abd434006e0cae996c0a282394";
   };
-  outputs = { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, ... }:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
