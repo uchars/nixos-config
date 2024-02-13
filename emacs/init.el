@@ -102,6 +102,90 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(defun nils/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (auto-fill-mode 0)
+  (visual-line-mode 0)
+  (setq evil-auto-indent nil)
+  (diminish org-indent-mode))
+
+(use-package org
+  :defer t
+  :hook (org-mode . nils/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾"
+	org-hide-emphasis-markers t
+	org-src-fontify-natively t
+	org-fontify-quote-and-verse-blocks t
+	org-src-tab-acts-natively t
+	org-edit-src-content-indentation 2
+	org-hide-block-startup nil
+	org-src-preserve-indentation nil
+	org-startup-folded 'content
+	org-cycle-separator-lines 2)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
+  (use-package org-superstar
+    :after org
+    :hook (org-mode . org-superstar-mode)
+    :custom
+    (org-superstar-remove-leading-stars t)
+    (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (set-face-attribute 'org-document-title nil :weight 'bold :height 1.3)
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :weight 'medium :height (cdr face)))
+  (require 'org-indent)
+  (use-package evil-org
+    :after org
+    :hook ((org-mode . evil-org-mode)
+	   (org-agenda-mode . evil-org-mode)
+	   (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys)))
+
+(use-package org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Documents/notes")
+  (org-roam-completion-everywhere t)
+  (org-roam-capture-templates
+   '(("d" "default" plain "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+      :unnarrowed t)
+     ("b" "dienstreise" plain "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#+filetags: Dienstreise")
+      :unnarrowed t)))
+   :bind (("C-c n l" . org-roam-buffer-toggle)
+	 ("C-c n f" . org-roam-node-find)
+	 ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
+
+(use-package org-roam-ui
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+	org-roam-ui-follow t
+	org-roam-ui-update-on-save t))
+
+(use-package marginalia
+  :after vertico
+  :straight t
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
+
 (defun efs/exwm-update-class ()
   (exwm-workspace-rename-buffer exwm-class-name))
 
@@ -476,4 +560,14 @@
   "gf" 'magit-fetch
   "gF" 'magit-fetch-all
   "gc" 'magit-branch-or-checkout
-  "/" 'evilnc-comment-or-uncomment-lines)
+  "/" 'evilnc-comment-or-uncomment-lines
+  ;; org-mode bindings
+  "o"   '(:ignore t :which-key "org mode")
+  "oi"  '(:ignore t :which-key "insert")
+  "oil" '(org-insert-link :which-key "insert link")
+  "on"  '(org-toggle-narrow-to-subtree :which-key "toggle narrow")
+  "os"  '(dw/counsel-rg-org-files :which-key "search notes")
+  "oa"  '(org-agenda :which-key "status")
+  "ot"  '(org-todo-list :which-key "todos")
+  "oc"  '(org-capture t :which-key "capture")
+  "ox"  '(org-export-dispatch t :which-key "export"))

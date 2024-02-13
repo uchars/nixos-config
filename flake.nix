@@ -21,8 +21,8 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      desktop = "plasma5";
-      displayManager = "sddm";
+      desktop = "gnome";
+      displayManager = "gdm";
       profile = "work";
       networkInterface = "enp42s0";
       emacs_dots = ./emacs;

@@ -25,15 +25,17 @@
       configDir = "${cfg.dir}/sync/.config/syncthing";
       overrideDevices = true;
       overrideFolders = true;
-      devices = cfg.deviceConfig;
-      folders = {
-        "Documents" = {
-          path = "/home/${cfg.user}/Documents";
-          devices = [ "laptop" "iPhoneNils" ];
-        };
-        "Wallpapers" = {
-          path = "/home/${cfg.user}/Pictures/wallpapers";
-          devices = [ "laptop" ];
+      settings = {
+        devices = cfg.deviceConfig;
+        folders = {
+          "Documents" = {
+            path = "/home/${cfg.user}/Documents";
+            devices = [ "laptop" "iPhoneNils" ];
+          };
+          "Wallpapers" = {
+            path = "/home/${cfg.user}/Pictures/wallpapers";
+            devices = [ "laptop" ];
+          };
         };
       };
     };

@@ -3,16 +3,62 @@
     gnome3.gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.blur-my-shell
     gnomeExtensions.removable-drive-menu
     gnomeExtensions.dash-to-panel
     gnomeExtensions.tiling-assistant
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.bluetooth-quick-connect
+    gnomeExtensions.user-themes
+    orchis
+    nordic
   ];
 
-  dconf.settings = {
+  gtk = {
+    iconTheme = {
+      name = "Nordic-green";
+      package = pkgs.nordic;
+    };
 
-    "org/gnome/shell".disabled-extensions = [ ];
+    theme = {
+      name = "Nordic-darker";
+      package = pkgs.nordic;
+    };
+
+    cursorTheme = {
+      name = "Nordic-cursors";
+      package = pkgs.nordic;
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      enable-hot-corners = false;
+    };
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      disabled-extensions = [ ];
+      enabled-extensions = [
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "drive-menu@gnome-shell-extensions.gcampax.github.com"
+        "apps-menu@gnome-shell-extensions.gcampax.github.com"
+        "trayIconsReloaded@selfmade.pl"
+        "dash-to-panel@jderose9.github.com"
+        "bluetooth-quick-connect@bjarosze.gmail.com"
+        "tiling-assistant@leleat-on-github"
+        "blur-my-shell@aunetx"
+      ];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "org.wezfurlong.wezterm.desktop"
+        "firefox.desktop"
+        "discord.desktop"
+        "steam.desktop"
+      ];
+    };
+
+    "org/gnome/shell/extensions/user-theme" = { name = "Nordic-darker"; };
 
     # Configure blur-my-shell
     "org/gnome/shell/extensions/blur-my-shell" = {
@@ -36,25 +82,6 @@
       keep-menu-on-toggle = true;
       refresh-button-on = true;
       show-batter-icon-on = true;
-    };
-
-    "org/gnome/shell" = {
-      enabled-extensions = [
-        "drive-menu@gnome-shell-extensions.gcampax.github.com"
-        "apps-menu@gnome-shell-extensions.gcampax.github.com"
-        "trayIconsReloaded@selfmade.pl"
-        "dash-to-panel@jderose9.github.com"
-        "bluetooth-quick-connect@bjarosze.gmail.com"
-        "tiling-assistant@leleat-on-github"
-        "blur-my-shell@aunetx"
-      ];
-      favorite-apps = [
-        "org.gnome.Nautilus.desktop"
-        "org.wezfurlong.wezterm.desktop"
-        "firefox.desktop"
-        "discord.desktop"
-        "steam.desktop"
-      ];
     };
 
     "org/gnome/desktop/wm/preferences" = {

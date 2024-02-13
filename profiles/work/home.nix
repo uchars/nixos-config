@@ -113,11 +113,11 @@ in {
     enable = true;
     firefox = true;
     chromium = true;
-    tor = true;
+    google-chrome = true;
   };
 
-  elira.emacs = {
-    enable = true;
-    config_dir = "${emacs_dots}";
-  };
+  # elira.emacs = {
+  #   enable = false;
+  #   config_dir = "${emacs_dots}";
+  # };
 }
