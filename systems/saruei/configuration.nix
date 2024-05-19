@@ -9,8 +9,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-5efdaa8c-5be5-4142-8936-d3a24bce4eca".device =
-    "/dev/disk/by-uuid/5efdaa8c-5be5-4142-8936-d3a24bce4eca";
+  boot.initrd.luks.devices."luks-7ddbb096-92e7-43c0-960e-a2927f4e95a8".device =
+    "/dev/disk/by-uuid/7ddbb096-92e7-43c0-960e-a2927f4e95a8";
+
   networking.hostName = "saruei";
 
   # Enable networking
@@ -42,7 +43,7 @@
 
   programs.dconf.enable = true;
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -58,7 +59,7 @@
   };
 
   elira.vfio = {
-    enable = true;
+    enable = false;
     iommu = "amd_iommu";
     pci-ids = [
       "10de:1c82" # Graphics

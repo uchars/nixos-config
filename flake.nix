@@ -16,8 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    nixvim.url = "github:uchars/nixvim";
   };
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }:
+  outputs =
+    { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, nixvim, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -38,7 +41,8 @@
       };
 
     in {
-      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
+      nixpkgs.overlays =
+        [ (import self.inputs.emacs-overlay) nixvim.overlays.default ];
       nixosConfigurations = {
         saruei = lib.nixosSystem {
           inherit system;
@@ -80,15 +84,8 @@
             (./. + "/profiles" + ("/" + profile) + "/home.nix")
             ./modules/home
             ({
-              nixpkgs.overlays = [
-                (import (builtins.fetchTarball {
-                  url =
-                    "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-                  sha256 =
-                    "1mxq3ba0r099i893a72kmac5ski4hq72zh5ly9xzddws107y9wgm";
-                }))
-
-              ];
+              nixpkgs.overlays =
+                [ emacs-overlay.overlays.default nixvim.overlays.default ];
             })
             plasma-manager.homeManagerModules.plasma-manager
           ];

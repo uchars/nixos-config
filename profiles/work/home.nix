@@ -25,6 +25,7 @@ in {
     unzip
     ethtool
     youtube-dl
+    nvim-pkg
   ];
 
   dconf.settings = {
@@ -114,10 +115,11 @@ in {
     firefox = true;
     chromium = true;
     google-chrome = true;
+    tor = true;
   };
 
-  # elira.emacs = {
-  #   enable = false;
-  #   config_dir = "${emacs_dots}";
-  # };
+  elira.emacs = {
+    enable = true;
+    config_dir = "${emacs_dots}";
+  };
 }
