@@ -64,16 +64,20 @@
         juniper = lib.nixosSystem {
           inherit system;
           modules = [
-            ./systems/juniper/configuration.nix
+            ./modules/zfs-root
+            ./modules/networking
+
+            ./modules/docker/immich
+            ./modules/docker/vaultwarden
+
             ./programs/users.nix
-            ./programs/opengl.nix
             ./programs/essentials.nix
-            ./programs/desktop.nix
           ];
           specialArgs = {
             inherit desktop;
             inherit displayManager;
             inherit system;
+            vars = import ./systems/vars.nix;
           };
         };
       };

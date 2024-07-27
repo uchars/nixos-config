@@ -1,8 +1,13 @@
 # Juniper
 
-My Laptop
+Home server
 
-| Component | Name                | Note |
-| --------- | ------------------- | ---- |
-| GPU       | AMD Radeon Graphics |      |
-| CPU       | AMD Ryzen 5         |      |
+| Component   | Name                  | Note           |
+| ----------- | --------------------- | -------------- |
+| Motherboard | ASRock J5040-ITX      |                |
+| CPU         | AMD Ryzen 5           |                |
+| PiKVM       | BliKVM                |                |
+| HDD         | 2TB Seagate Barracuda | RAIDZ2 (rpool) |
+| HDD         | 2TB Seagate Barracuda | RAIDZ2 (rpool) |
+| HDD         | 2TB Seagate Barracuda | RAIDZ2 (rpool) |
+| HDD         | 2TB Seagate Barracuda | RAIDZ2 (rpool) |
