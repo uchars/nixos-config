@@ -31,16 +31,16 @@
       default = true;
     };
   };
-  config = let cfg = config.system.networking;
-  in lib.mkif cfg.enable {
-    networking.interfaces."${cfg.interface}" = {
-      wakeOnLan = { enable = cfg.wol; };
-    };
+  config = let cfg = config.nils.networking;
+  in lib.mkIf cfg.enable {
+    # networking.interfaces."${cfg.interface}" = {
+    #   wakeOnLan = { enable = cfg.wol; };
+    # };
     time.timeZone = cfg.timeZone;
     networking = {
       firewall.enable = cfg.firewall;
       hostName = cfg.hostName;
-      useDhcp = cfg.dhcp;
+      useDHCP = cfg.dhcp;
     };
   };
 }

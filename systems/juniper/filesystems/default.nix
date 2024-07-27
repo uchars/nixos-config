@@ -1,6 +1,6 @@
 { inputs, config, lib, vars, pkgs, ... }: {
 
-  imports = [ ./snapraid.nix ];
+  # imports = [ ./snapraid.nix ];
 
   services.zfs = { autoScrub.enable = true; };
 
@@ -10,7 +10,7 @@
     gptfdisk
     xfsprogs
     parted
-    snapraid
+    #snapraid
     mergerfs
     mergerfs-tools
   ];

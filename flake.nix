@@ -72,6 +72,8 @@
 
             ./programs/users.nix
             ./programs/essentials.nix
+
+            ./systems/juniper
           ];
           specialArgs = {
             inherit desktop;

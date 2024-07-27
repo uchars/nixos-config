@@ -66,9 +66,9 @@ in {
   config = mkIf (cfg.enable) (mkMerge [
     {
       zfs-root.fileSystems.datasets = {
-        "zpool/nixos/home" = mkDefault "/home";
-        "zpool/nixos/var/lib" = mkDefault "/var/lib";
-        "zpool/nixos/var/log" = mkDefault "/var/log";
+        "rpool/nixos/home" = mkDefault "/home";
+        "rpool/nixos/var/lib" = mkDefault "/var/lib";
+        "rpool/nixos/var/log" = mkDefault "/var/log";
         "bpool/nixos/root" = "/boot";
       };
     }

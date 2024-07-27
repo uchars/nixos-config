@@ -1,14 +1,13 @@
-{ inputs, networksLocal, lib, config, vars, pkgs, ... }: {
+{ lib, vars, pkgs, ... }: {
   boot.kernelModules = [ "coretemp" "jc42" "lm78" ];
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   boot.zfs.forceImportRoot = true;
-  motd.networkInterfaces = lib.lists.singleton "eno1";
   zfs-root = {
     boot = {
-      devNodes = "/dev/disk/by-id";
+      devNodes = "/dev/disk/by-id/";
       bootDevices = [ "ata-ST2000DM008-2UB102_ZFL6LYYY" ];
       immutable = false;
       availableKernelModules =
@@ -23,14 +22,15 @@
       };
     };
   };
-  nils.networking = {
-    enable = true;
-    interface = "eno1";
-    wol = true;
-    hostname = "juniper";
-    timezone = "Europe/Berlin";
-    firewall = true;
-  };
+
+  # nils.networking = {
+  #   enable = true;
+  #   interface = "eno1";
+  #   wol = true;
+  #   hostname = "juniper";
+  #   timezone = "Europe/Berlin";
+  #   firewall = true;
+  # };
 
   imports = [ ./filesystems ];
 

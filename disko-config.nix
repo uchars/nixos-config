@@ -21,7 +21,7 @@
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "rpool";
+                pool = "bpool";
               };
             };
           };
@@ -80,6 +80,36 @@
       };
     };
     zpool = {
+      bpool = {
+        type = "zpool";
+        options = {
+          ashift = "12";
+          autotrim = "on";
+          compatibility = "grub2";
+        };
+        rootFsOptions = {
+          acltype = "posixacl";
+          canmount = "off";
+          compression = "lz4";
+          devices = "off";
+          normalization = "formD";
+          relatime = "on";
+          xattr = "sa";
+          "com.sun:auto-snapshot" = "false";
+        };
+        mountpoint = "/boot";
+        datasets = {
+          nixos = {
+            type = "zfs_fs";
+            options.mountpoint = "none";
+          };
+          "nixos/root" = {
+            type = "zfs_fs";
+            options.mountpoint = "legacy";
+            mountpoint = "/boot";
+          };
+        };
+      };
       rpool = {
         type = "zpool";
         mode = "raidz2";
