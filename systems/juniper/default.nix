@@ -51,7 +51,7 @@
 
   system.autoUpgrade.enable = true;
 
-  mover = {
+  elira.mover = {
     cacheArray = vars.cacheArray;
     backingArray = vars.slowArray;
     percentageFree = 60;

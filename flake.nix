@@ -24,7 +24,7 @@
     nixvim.url = "github:uchars/nixvim";
   };
   outputs = { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, nixvim
-    , agenix, ... }:
+    , agenix, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -82,7 +82,7 @@
             agenix.nixosModules.default
           ];
           specialArgs = {
-            inherit system;
+            inherit system inputs;
             vars = import ./systems/vars.nix;
           };
         };

@@ -1,14 +1,5 @@
 { inputs, config, lib, vars, pkgs, ... }: {
 
-imports = [
-    ./snapraid.nix
-  ];
-
-  services.zfs = {
-    autoScrub.enable = true;
-  };
-
-  programs.fuse.userAllowOther = true;
 
   environment.systemPackages = with pkgs; [
     gptfdisk
@@ -18,6 +9,17 @@ imports = [
     mergerfs
     mergerfs-tools
   ];
+
+
+imports = [
+    ./snapraid.nix
+  ];
+
+  services.zfs = {
+    autoScrub.enable = true;
+  };
+
+  programs.fuse.userAllowOther = true;
 
   # This fixes the weird mergerfs permissions issue
   boot.initrd.systemd.enable = true;
