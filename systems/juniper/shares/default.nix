@@ -1,36 +1,5 @@
-{ users, pkgs, vars, config, lib, ... }:
-let
-
-  smb = {
-    share_list = {
-      Backups = { path = "/mnt/user/Backups"; };
-      Documents = { path = "/mnt/cache/Documents"; };
-      Media = { path = "/mnt/user/Media"; };
-      Misc = { path = "/mnt/user/Misc"; };
-      TimeMachine = {
-        path = "/mnt/cache/TimeMachine";
-        "fruit:time machine" = "yes";
-      };
-      YoutubeArchive = { path = "/mnt/user/YoutubeArchive"; };
-      YoutubeCurrent = { path = "/mnt/cache/YoutubeCurrent"; };
-    };
-    share_params = {
-      "browseable" = "yes";
-      "writeable" = "yes";
-      "read only" = "no";
-      "guest ok" = "no";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-      "valid users" = "share";
-      "fruit:aapl" = "yes";
-      "vfs objects" = "catia fruit streams_xattr";
-    };
-  };
-  smb_shares =
-    builtins.mapAttrs (name: value: value // smb.share_params) smb.share_list;
-in {
-  services.samba-wsdd.enable =
-    true; # make shares visible for windows 10 clients
+{ config, ... }: {
+  services.samba-wsdd.enable = true;
 
   users = {
     groups.share = { gid = 993; };
@@ -43,42 +12,62 @@ in {
 
   environment.systemPackages = [ config.services.samba.package ];
 
-  users.users."${vars.userName}".extraGroups = [ "share" ];
+  users.users.nils.extraGroups = [ "share" ];
 
-  systemd.tmpfiles.rules =
-    map (x: "d ${x.path} 0775 share share - -") (lib.attrValues smb.share_list)
-    ++ [ "d /mnt 0775 share share - -" ];
+  systemd.tmpfiles.rules = [
+    "d /mnt/user/pictures 0775 share share - -"
+    "d /mnt/user/documents 0775 share share - -"
+  ];
 
   system.activationScripts.samba_user_create = ''
-    smb_password=$(cat "${config.age.secrets.sambaPassword.path}")
+    smb_password=$(cat ${config.age.secrets.smbPassword.path})
     echo -e "$smb_password\n$smb_password\n" | /run/current-system/sw/bin/smbpasswd -a -s share
   '';
-
-  networking.firewall = {
-    allowedTCPPorts = [ 5357 ];
-    allowedUDPPorts = [ 3702 ];
-  };
 
   services.samba = {
     enable = true;
     openFirewall = true;
-    invalidUsers = [ "root" ];
+    # invalidUsers = [ "root" ];
     securityType = "user";
     extraConfig = ''
       workgroup = WORKGROUP
       server string = juniper
       netbios name = juniper
       security = user
-      hosts allow = 192.168.2.0/24 192.168.3.135/32 14.0.0.0/24 100.0.0.0/8
+      hosts allow = 10.42.42.0/24 localhost
       guest account = nobody
       map to guest = bad user
       passdb backend = tdbsam
     '';
-    shares = smb_shares;
+    shares = {
+      pictures = {
+        path = "/mnt/user/pictures";
+        public = "yes";
+        browseable = "yes";
+        "guest ok" = "no";
+        writable = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "nils";
+        "force group" = "share";
+      };
+      documents = {
+        path = "/mnt/user/documents";
+        public = "yes";
+        browseable = "yes";
+        "guest ok" = "no";
+        writable = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "nils";
+        "force group" = "share";
+      };
+    };
   };
+
   services.avahi = {
     enable = true;
-    nssmdns4 = true;
+    nssmdns = true;
     publish = {
       enable = true;
       addresses = true;

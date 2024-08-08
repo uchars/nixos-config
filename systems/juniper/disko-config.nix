@@ -3,25 +3,24 @@
     disk = {
       sda = {
         type = "disk";
-        #device = "%DATA_DISK_0%";
-        device = "/dev/disk/by-id/ata-ST2000DM008-2UB102_ZFL6LYYY";
+        device = "/dev/disk/by-id/ata-ST2000DM008-2UB102_ZK20GN1K";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              size = "1G";
+              size = "64M";
               type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot/esp";
+                mountpoint = "/boot";
               };
             };
             zfs = {
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "bpool";
+                pool = "zroot";
               };
             };
           };
@@ -29,7 +28,6 @@
       };
       sdb = {
         type = "disk";
-        #device = "%DATA_DISK_1%";
         device = "/dev/disk/by-id/ata-ST2000DM008-2UB102_ZFL6LZBE";
         content = {
           type = "gpt";
@@ -38,7 +36,7 @@
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "rpool";
+                pool = "zroot";
               };
             };
           };
@@ -46,7 +44,22 @@
       };
       sdc = {
         type = "disk";
-        #device = "%DATA_DISK_2%";
+        device = "/dev/disk/by-id/ata-ST2000DM008-2UB102_ZFL6LYYY";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zroot";
+              };
+            };
+          };
+        };
+      };
+      sdd = {
+        type = "disk";
         device = "/dev/disk/by-id/ata-ST2000DM008-2UB102_ZFL6MPWR";
         content = {
           type = "gpt";
@@ -55,24 +68,7 @@
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "rpool";
-              };
-            };
-          };
-        };
-      };
-      sdd = {
-        type = "disk";
-        #device = "%DATA_DISK_2%";
-        device = "/dev/disk/by-id/ata-ST2000DM008-2UB102_ZK20GN1K";
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "rpool";
+                pool = "zroot";
               };
             };
           };
@@ -80,47 +76,16 @@
       };
     };
     zpool = {
-      bpool = {
-        type = "zpool";
-        options = {
-          ashift = "12";
-          autotrim = "on";
-          compatibility = "grub2";
-        };
-        rootFsOptions = {
-          acltype = "posixacl";
-          canmount = "off";
-          compression = "lz4";
-          devices = "off";
-          normalization = "formD";
-          relatime = "on";
-          xattr = "sa";
-          "com.sun:auto-snapshot" = "false";
-        };
-        mountpoint = "/boot";
-        datasets = {
-          nixos = {
-            type = "zfs_fs";
-            options.mountpoint = "none";
-          };
-          "nixos/root" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            mountpoint = "/boot";
-          };
-        };
-      };
-      rpool = {
+      zroot = {
         type = "zpool";
         mode = "raidz2";
-        options = {
-          autotrim = "on";
-          ashift = "12";
-        };
         rootFsOptions = {
           compression = "zstd";
           "com.sun:auto-snapshot" = "false";
         };
+        mountpoint = "/";
+        postCreateHook =
+          "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
 
         datasets = {
           nixos = {
@@ -133,38 +98,38 @@
           };
           "nixos/empty" = {
             type = "zfs_fs";
-            mountpoint = "/";
             options.mountpoint = "legacy";
-            postCreateHook = "zfs snapshot rpool/nixos/empty@start";
+            mountpoint = "/";
+            postCreateHook = "zfs snapshot zroot/nixos/empty@start";
           };
           "nixos/home" = {
             type = "zfs_fs";
-            mountpoint = "/home";
             options.mountpoint = "legacy";
+            mountpoint = "/home";
           };
           "nixos/var/log" = {
             type = "zfs_fs";
-            mountpoint = "/var/log";
             options.mountpoint = "legacy";
+            mountpoint = "/var/log";
           };
           "nixos/var/lib" = {
             type = "zfs_fs";
-            options.mountpoint = "legacy";
+            options.mountpoint = "none";
           };
           "nixos/config" = {
             type = "zfs_fs";
-            mountpoint = "/etc/nixos";
             options.mountpoint = "legacy";
+            mountpoint = "/etc/nixos";
           };
           "nixos/persist" = {
             type = "zfs_fs";
-            mountpoint = "/persist";
             options.mountpoint = "legacy";
+            mountpoint = "/persist";
           };
           "nixos/nix" = {
             type = "zfs_fs";
-            mountpoint = "/nix";
             options.mountpoint = "legacy";
+            mountpoint = "/nix";
           };
           docker = {
             type = "zfs_volume";

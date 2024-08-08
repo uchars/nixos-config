@@ -6,8 +6,6 @@ let
     "${vars.serviceConfigRoot}/immich/postgresql/data"
     "${vars.serviceConfigRoot}/immich/config"
     "${vars.serviceConfigRoot}/immich/machine-learning"
-    "${vars.mainArray}/Photos"
-    "${vars.mainArray}/Photos/Immich"
   ];
 in {
   systemd.tmpfiles.rules = map (x: "d ${x} 0775 share share - -") directories;
@@ -34,7 +32,7 @@ in {
         "${vars.mainArray}/Photos/S10m:/import:ro"
         "${vars.serviceConfigRoot}/immich/machine-learning:/config/machine-learning"
       ];
-      environmentFiles = [ config.age.secrets.ariaImmichDatabase.path ];
+      # environmentFiles = [ config.age.secrets.ariaImmichDatabase.path ];
       environment = {
         PUID = "994";
         PGID = "993";
@@ -65,7 +63,7 @@ in {
       volumes = [
         "${vars.serviceConfigRoot}/immich/postgresql/data:/var/lib/postgresql/data"
       ];
-      environmentFiles = [ config.age.secrets.ariaImmichDatabase.path ];
+      # environmentFiles = [ config.age.secrets.ariaImmichDatabase.path ];
       environment = {
         POSTGRES_USER = "immich";
         POSTGRES_DB = "immich";

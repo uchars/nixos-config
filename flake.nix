@@ -6,6 +6,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,8 +23,8 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixvim.url = "github:uchars/nixvim";
   };
-  outputs =
-    { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, nixvim, ... }:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, nixvim
+    , agenix, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -64,20 +68,20 @@
         juniper = lib.nixosSystem {
           inherit system;
           modules = [
-            ./modules/zfs-root
-            ./modules/networking
-
-            ./modules/docker/immich
+            ./modules/docker/traefik
             ./modules/docker/vaultwarden
+            ./modules/docker/timetagger
+            ./modules/docker/grafana
 
+            ./modules/system
+
+            ./systems/juniper/configuration.nix
             ./programs/users.nix
-            ./programs/essentials.nix
 
-            ./systems/juniper
+            ./vault
+            agenix.nixosModules.default
           ];
           specialArgs = {
-            inherit desktop;
-            inherit displayManager;
             inherit system;
             vars = import ./systems/vars.nix;
           };
