@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./boot.nix ./fileSystems.nix ]; }
+{ ... }: { imports = [ ./boot.nix ./fileSystems.nix ./networking.nix ]; }
