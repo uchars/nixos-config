@@ -75,7 +75,7 @@
 
             ./modules/system
 
-            ./systems/juniper/configuration.nix
+            ./systems/juniper
             ./programs/users.nix
 
             ./vault
