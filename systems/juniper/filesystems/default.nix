@@ -91,8 +91,9 @@ imports = [
   };
 
   fileSystems.${vars.cacheArray} =
-  { device = "cache";
-    fsType = "zfs";
+  { device = "/dev/disk/by-label/Cache";
+    fsType = "xfs";
+    neededForBoot = true;
   };
 
   fileSystems."/mnt/data1" =
