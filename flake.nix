@@ -74,6 +74,7 @@
             ./modules/docker/grafana
 
             ./modules/system
+            ./modules/zfs-root
 
             ./systems/juniper
             ./programs/users.nix

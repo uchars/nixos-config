@@ -1,5 +1,5 @@
 { inputs, config, pkgs, lib, ... }: {
-  services.snapraid = {
+  snapraid = {
     enable = true;
     parityFiles = [ "/mnt/parity1/snapraid.parity" ];
     contentFiles =

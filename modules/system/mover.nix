@@ -5,7 +5,7 @@ let
   mergerfs-uncache = pkgs.writeScriptBin "mergerfs-uncache" (readFile ./mergerfs-uncache.py);
 in
 {
-options.elira.mover = {
+options.mover = {
     cacheArray = mkOption {
       description = "The drive aray to move the data from";
       type = types.str;

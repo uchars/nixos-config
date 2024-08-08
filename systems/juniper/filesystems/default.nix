@@ -156,13 +156,7 @@ imports = [
     defaults.autodetected =
       "-a -o on -S on -s (S/../.././02|L/../../6/03) -n standby,q";
     notifications = {
-      wall = { enable = true; };
-      mail = {
-        enable = true;
-        sender = config.email.fromAddress;
-        recipient = config.email.toAddress;
-      };
-    };
+      wall = { enable = true; };    };
   };
 
 }

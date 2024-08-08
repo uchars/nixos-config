@@ -1,4 +1,4 @@
-{ config, lib, vars, pkgs, ... }: {
+{ inputs, networksLocal, lib, config, vars, pkgs, ... }: {
   boot.kernelModules = [ "coretemp" "jc42" "lm78" ];
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
@@ -51,14 +51,12 @@
 
   system.autoUpgrade.enable = true;
 
-  elira.mover = {
+  mover = {
     cacheArray = vars.cacheArray;
     backingArray = vars.slowArray;
     percentageFree = 60;
     excludedPaths = [
-      "YoutubeCurrent"
       "Downloads.tmp"
-      "Media/Kiwix"
       "Documents"
       "TimeMachine"
       ".DS_Store"
@@ -92,11 +90,6 @@
   networking.firewall.enable = false;
   time.timeZone = "Europe/Berlin";
   networking.hostName = "juniper";
-
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
