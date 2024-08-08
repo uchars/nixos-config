@@ -10,16 +10,23 @@
       devNodes = "/dev/disk/by-id/";
       bootDevices = [ "ata-ST2000DM008-2FR102_WK30A95M" ];
       immutable = false;
-      availableKernelModules =
-        [ "uhci_hcd" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
-      removableEfi = true;
+      availableKernelModules = [ "uhci_hcd" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
 
-      kernelParams =
-        [ "pcie_aspm=force" "consoleblank=60" "acpi_enforce_resources=lax" ];
+      removableEfi = true;
+      kernelParams = [
+        "pcie_aspm=force"
+        "consoleblank=60"
+        "acpi_enforce_resources=lax"
+      ];
       sshUnlock = {
         enable = false;
         authorizedKeys = [ ];
       };
+    };
+    networking = {
+      hostName = "juniper";
+      timeZone = "Europe/Berlin";
+      hostId = "8425e349";
     };
   };
 
@@ -64,6 +71,43 @@
     ];
   };
 
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  networking = {
+    useDHCP = true;
+    networkmanager.enable = false;
+    firewall = {
+      allowPing = true;
+      trustedInterfaces = [ "eno1" ];
+    };
+  };
+
+  elira.wol = {
+    enable = true;
+    interface = "eno1";
+  };
+
+  services.openssh = {
+    enable = true;
+    settings = { PasswordAuthentication = true; };
+  };
+
+  security.sudo = {
+    enable = true;
+    extraConfig = ''
+      Defaults env_keep += "EDITOR=nano"
+    '';
+  };
+
+  system.stateVersion = "22.11"; # Did you read the comment?
   environment.systemPackages = with pkgs; [
     pciutils
     glances
@@ -86,37 +130,4 @@
     intel-gpu-tools
   ];
 
-  networking.hostId = "8425e349";
-  networking.firewall.enable = false;
-  time.timeZone = "Europe/Berlin";
-  networking.hostName = "juniper";
-
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  elira.wol = {
-    enable = true;
-    interface = "eno1";
-  };
-
-  services.openssh = {
-    enable = true;
-    settings = { PasswordAuthentication = true; };
-  };
-
-  security.sudo = {
-    enable = true;
-    extraConfig = ''
-      Defaults env_keep += "EDITOR=nano"
-    '';
-  };
-
-  system.stateVersion = "22.11"; # Did you read the comment?
 }
