@@ -1,5 +1,5 @@
 { config, ... }: {
-  age.identityPaths = [ "/home/nils/.ssh/id_ed25519" ];
+  age.identityPaths = [ "/home/nixos/.ssh/id_ed25519" ];
 
   users.users.nils = {
     isNormalUser = true;

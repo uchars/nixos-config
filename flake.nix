@@ -68,18 +68,9 @@
         juniper = lib.nixosSystem {
           inherit system;
           modules = [
-            ./modules/docker/traefik
-            ./modules/docker/vaultwarden
-            ./modules/docker/timetagger
-            ./modules/docker/grafana
-
             ./modules/system
-            ./modules/zfs-root
-
             ./systems/juniper
-            ./programs/users.nix
-
-            ./vault
+            #./vault
             agenix.nixosModules.default
           ];
           specialArgs = {
