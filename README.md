@@ -1,14 +1,26 @@
 # Full Install
 
 1. Install NixOS-minimal
-2. nix-shell -p git
-3. git clone https://github.com/uchars/nixos-config.git /tmp/nixos
-4. cd /tmp/nixos
-5. sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko systems/juniper/disko-config.nix
-6. sudo nixos-generate-config --root /mnt
-   cp the hardware-configuration.nix into systems/juniper/hardware-configuration.nix
+2. ```
+   nix-shell -p git
+   ```
+3. ```
+   git clone https://github.com/uchars/nixos-config.git /tmp/nixos
+   ```
+4. ```
+   cd /tmp/nixos
+   ```
+5. ```
+   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko systems/juniper/disko-config.nix
+   ```
+6. ```
+   sudo nixos-generate-config --root /mnt
+   ```
+   cp the `hardware-configuration.nix` into `systems/juniper/hardware-configuration.nix`
    update the /dev/device/by-uuid to the /dev/device/by-id 
-7. sudo nixos-install --flake .#juniper
+7. ```
+   sudo nixos-install --flake .#juniper
+   ```
 8. reboot
 
 If the pool is not imported run the following command 
