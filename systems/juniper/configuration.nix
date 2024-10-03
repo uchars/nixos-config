@@ -10,7 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["zfs"];
-  
+
   networking.hostName = "juniper";
   networking.hostId = "007f0200";
 
@@ -41,7 +41,7 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     zfs
-    vim 
+    vim
     wget
     pciutils
     glances
@@ -68,10 +68,14 @@
     enable = true;
     settings = { PasswordAuthentication = true; };
   };
-  
+
+  environment.sessionVariables = {
+	  EDITOR = "vim";
+  };
+
   boot.zfs.extraPools = [ "BUG" ];
-  
+
   services.zfs.autoScrub.enable = true;
 
-  system.stateVersion = "24.05"; 
+  system.stateVersion = "24.05";
 }

@@ -1,33 +1,83 @@
-# Full Install
+# Server Install
 
-1. Install NixOS-minimal
-2. ```
-   nix-shell -p git
-   ```
-3. ```
-   git clone https://github.com/uchars/nixos-config.git /tmp/nixos
-   ```
-4. ```
-   cd /tmp/nixos
-   ```
-5. ```
-   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko systems/juniper/disko-config.nix
-   ```
-6. ```
-   sudo nixos-generate-config --root /mnt
-   ```
-   cp the `hardware-configuration.nix` into `systems/juniper/hardware-configuration.nix`
-   update the /dev/device/by-uuid to the /dev/device/by-id 
-7. ```
-   sudo nixos-install --flake .#juniper
-   ```
-8. reboot
+## First steps
 
-If the pool is not imported run the following command 
+Install NixOS minimal from https://nixos.org/download/#nixos-iso.
+Old releases can be downloaded from https://releases.nixos.org/?prefix=nixos/24.05-small/
+
+After you booted into the OS you can set a password for the `nixos` user, in case you are using ssh.
+
+```sh
+passwd nixos
+```
+
+Then you can clone this repo using
+
+```sh
+nix-shell -p git
+```
+
+```sh
+git clone https://github.com/uchars/nixos-config.git /tmp/nixos && cd /tmp/nixos
+```
+
+## Creating the RAID
+
+⚠️ This only needs to be done once, it will wipe all data from the selected disks ⚠️.
+
+The raid is set up using [disko](https://github.com/nix-community/disko).
+
+First you should identify the disks you want to use for the RAID.
+
+> It is assumed, that you are using a different disk for the OS installation.
+
+```sh
+ls -l /dev/disk/by-id
+```
+
+Replace / Add / Remove disks from `/tmp/nixos/systems/juniper/disko-raidz2.nix` to fit your setup.
+
+Once you're finished run
+
+```sh
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko systems/juniper/disko-raidz2.nix
+```
+
+## Setting up the System
+
+If you renamed the pool name you have to change
+
+```nix
+boot.zfs.extraPools = [ "BUG" ];
+```
+
+To your pool name(s).
+
+Create a `hardware-configuration.nix` for your system using.
+
+```sh
+sudo nixos-generate-config --root /mnt
+```
+
+```sh
+cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nixos/systems/juniper/.
+```
+
+Optional: Replace the `/dev/disk/by-uuid` with the `/dev/disk/by-id`.
+
+```
+sudo nixos-install --flake .#juniper
+```
+
+reboot
+
+If the pool is not imported run the following command
+
 ```
 zpool import POOL_NAME -f
 ```
-reboot 
+
+reboot
 
 # User Install
 

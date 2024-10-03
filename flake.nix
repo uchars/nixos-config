@@ -70,7 +70,8 @@
           modules = [
             ./modules/system
             ./systems/juniper
-            #./vault
+            ./programs/users.nix
+            ./vault
             agenix.nixosModules.default
           ];
           specialArgs = {
