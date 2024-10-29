@@ -24,10 +24,10 @@
   };
 
 
-  fileSystems."/raid" =
-    { device = "BUG";
-      fsType = "zfs";
-    };
+  # fileSystems."/raid" =
+  #   { device = "BUG";
+  #     fsType = "zfs";
+  #   };
 
   fileSystems."/raid/crypt/appdata" =
     { device = "BUG/crypt/appdata";
@@ -100,7 +100,7 @@
     };
 
   swapDevices = [
-{ device = "/dev/disk/by-uuid/9f7058dd-46f9-48ee-b349-00feb40cdb69"; }
+{ device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part3"; }
  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
