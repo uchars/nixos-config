@@ -8,25 +8,100 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part2";
-      fsType = "ext4";
+  fileSystems."/" = { device = "ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part2";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part1";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
+
+
+  fileSystems."/raid" =
+    { device = "BUG";
+      fsType = "zfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part1";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+  fileSystems."/raid/crypt/appdata" =
+    { device = "BUG/crypt/appdata";
+      fsType = "zfs";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part3"; }
-    ];
+  fileSystems."/raid/crypt/appdata/immich" =
+    { device = "BUG/crypt/appdata/immich";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/appdata/jellyfin" =
+    { device = "BUG/crypt/appdata/jellyfin";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/appdata/netboot" =
+    { device = "BUG/crypt/appdata/netboot";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/appdata/paperless" =
+    { device = "BUG/crypt/appdata/paperless";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/appdata/sharry" =
+    { device = "BUG/crypt/appdata/sharry";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/appdata/vaultwarden" =
+    { device = "BUG/crypt/appdata/vaultwarden";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/media" =
+    { device = "BUG/crypt/media";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/media/movies" =
+    { device = "BUG/crypt/media/movies";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/media/pictures" =
+    { device = "BUG/crypt/media/pictures";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/media/vods" =
+    { device = "BUG/crypt/media/vods";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/media/wallpapers" =
+    { device = "BUG/crypt/media/wallpapers";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/misc" =
+    { device = "BUG/crypt/misc";
+      fsType = "zfs";
+    };
+
+  fileSystems."/raid/crypt/misc/iso" =
+    { device = "BUG/crypt/misc/iso";
+      fsType = "zfs";
+    };
+
+  swapDevices = [
+{ device = "/dev/disk/by-uuid/9f7058dd-46f9-48ee-b349-00feb40cdb69"; }
+ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

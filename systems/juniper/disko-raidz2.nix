@@ -147,6 +147,11 @@
 	    mountpoint = "/raid/crypt/appdata/immich";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
+	  "crypt/appdata/sharry" = {
+	    type = "zfs_fs";
+	    mountpoint = "/raid/crypt/appdata/sharry";
+	    options."com.sun:auto-snapshot" = "true";
+	  };
 	  "crypt/appdata/vaultwarden" = {
 	    type = "zfs_fs";
 	    mountpoint = "/raid/crypt/appdata/vaultwarden";
