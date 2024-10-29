@@ -13,12 +13,12 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = { device = "ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part2";
+  fileSystems."/" = { device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part2";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part1";
+    device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N-part1";
     fsType = "vfat";
     options = [ "fmask=0022" "dmask=0022" ];
   };

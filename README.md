@@ -21,6 +21,18 @@ nix-shell -p git
 git clone https://github.com/uchars/nixos-config.git /tmp/nixos && cd /tmp/nixos
 ```
 
+Optional: Add a github token to avoid the rate limit error 
+
+Settings -> Developer Settings -> Fine-grained tokens (https://github.com/settings/tokens?type=beta)
+
+Only need the public access token.
+
+Create the file `~/.config/nix/nix.conf`
+
+```sh
+access-tokens = github.com=<ACCESS-TOKEN>
+```
+
 ## Creating the RAID
 
 ⚠️ This only needs to be done once, it will wipe all data from the selected disks ⚠️.
