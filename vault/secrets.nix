@@ -1,7 +1,6 @@
 let
   juniperSsh =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhi82VXcNEdJocGs1/zr9hGgtrqmUmBuIqAyGnU0aTG root@juniper";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMtnEN6D2bB10YnLqIpIXoVI6H7e6/atvLkLDW9j4ja+ root@nixos";
 in {
   "initialUserPassword.age".publicKeys = [ juniperSsh ];
-  "initialUserPassword2.age".publicKeys = [ juniperSsh ];
 }
