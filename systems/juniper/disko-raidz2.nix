@@ -1,6 +1,41 @@
 {
   disko.devices = {
     disk = {
+			main = {
+				device = "/dev/disk/by-id/ata-OCZ-AGILITY3_OCZ-278M04GIX384TV4N";
+				type = "disk";
+				content = {
+					type = "gpt";
+					partitions = {
+						ESP = {
+							type = "EF00";
+							size = "500M";
+							content = {
+								type = "filesystem";
+								format = "vfat";
+								mountpoint = "/boot";
+								mountOptions = [ "umask=0077" ];
+							};
+						};
+						root = {
+							end = "-16G";
+							content = {
+								type = "filesystem";
+								format = "ext4";
+								mountpoint = "/";
+							};
+						};
+						plainSwap = {
+							size = "100%";
+							content = {
+								type = "swap";
+								discardPolicy = "both";
+								resumeDevice = true;
+							};
+						};
+					};
+				};
+			};
       zdisk1 = {
 	type = "disk";
 	device = "/dev/disk/by-id/ata-ST2000DM008-2FR102_WK30A95M";
@@ -105,8 +140,8 @@
 	rootFsOptions = {
 	  compression = "zstd";
 	  "com.sun:auto-snapshot" = "false";
+	  mountpoint = "none";
 	};
-	mountpoint = "/raid";
 	datasets = {
 	  crypt = {
 	    type = "zfs_fs";
@@ -121,70 +156,70 @@
 	  };
 	  "crypt/misc" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/misc";
+	    options.mountpoint = "legacy";
 	  };
 	  "crypt/misc/iso" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/misc/iso";
+	    options.mountpoint = "legacy";
 	  };
 	  "crypt/appdata" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "false";
 	  };
 	  "crypt/appdata/paperless" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata/paperless";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/appdata/jellyfin" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata/jellyfin";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/appdata/immich" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata/immich";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/appdata/sharry" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata/sharry";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/appdata/vaultwarden" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata/vaultwarden";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/appdata/netboot" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/appdata/netboot";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/media" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/media";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "false";
 	  };
 	  "crypt/media/vods" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/media/vods";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/media/movies" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/media/movies";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/media/pictures" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/media/pictures";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	  "crypt/media/wallpapers" = {
 	    type = "zfs_fs";
-	    mountpoint = "/raid/crypt/media/wallpapers";
+	    options.mountpoint = "legacy";
 	    options."com.sun:auto-snapshot" = "true";
 	  };
 	};
