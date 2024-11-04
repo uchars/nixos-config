@@ -4,6 +4,7 @@
 
   environment.systemPackages = with pkgs; [
     sct
+    vim
     tmux
     git
     wget

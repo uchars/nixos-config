@@ -1,12 +1,13 @@
 inputs: {
   imports = [
-    ./java.nix
-    ./vscode.nix
-    ./rust.nix
-    ./android.nix
+    ./fonts.nix
+    ./waybar.nix
+    ./editors.nix
+    ./terminal.nix
+    ./hyprland.nix
+    ./programming.nix
     ./gaming.nix
     ./keyboard.nix
     ./browser.nix
-    ./emacs.nix
   ];
 }

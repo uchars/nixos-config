@@ -1,6 +1,17 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   options.elira.browser = with lib; {
     enable = mkEnableOption "Install Browsers";
+    brave = mkOption {
+      description = "Install Brave browser";
+      default = false;
+      type = types.bool;
+    };
     firefox = mkOption {
       description = "Install firefox browser";
       default = false;
@@ -23,12 +34,17 @@
     };
   };
 
-  config = let cfg = config.elira.browser;
-  in lib.mkIf cfg.enable {
-    home.packages = with pkgs;
-      (if cfg.firefox then [ firefox ] else [ ])
-      ++ (if cfg.chromium then [ chromium ] else [ ])
-      ++ (if cfg.google-chrome then [ google-chrome ] else [ ])
-      ++ (if cfg.tor then [ tor-browser-bundle-bin ] else [ ]);
-  };
+  config =
+    let
+      cfg = config.elira.browser;
+    in
+    lib.mkIf cfg.enable {
+      home.packages =
+        with pkgs;
+        (if cfg.firefox then [ firefox ] else [ ])
+        ++ (if cfg.chromium then [ chromium ] else [ ])
+        ++ (if cfg.google-chrome then [ google-chrome ] else [ ])
+        ++ (if cfg.brave then [ brave ] else [ ])
+        ++ (if cfg.tor then [ tor-browser-bundle-bin ] else [ ]);
+    };
 }

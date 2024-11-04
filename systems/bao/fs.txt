@@ -1,0 +1,17 @@
+total 0
+lrwxrwxrwx 1 root root 13 Oct 30 18:20 nvme-eui.001b444a46055c0b -> ../../nvme0n1
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-eui.001b444a46055c0b-part1 -> ../../nvme0n1p1
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-eui.001b444a46055c0b-part2 -> ../../nvme0n1p2
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-eui.001b444a46055c0b-part3 -> ../../nvme0n1p3
+lrwxrwxrwx 1 root root 13 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801 -> ../../nvme0n1
+lrwxrwxrwx 1 root root 13 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801_1 -> ../../nvme0n1
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801_1-part1 -> ../../nvme0n1p1
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801_1-part2 -> ../../nvme0n1p2
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801_1-part3 -> ../../nvme0n1p3
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801-part1 -> ../../nvme0n1p1
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801-part2 -> ../../nvme0n1p2
+lrwxrwxrwx 1 root root 15 Oct 30 18:20 nvme-WDC_PC_SN530_SDBPMPZ-512G-1101_2108A0474801-part3 -> ../../nvme0n1p3
+lrwxrwxrwx 1 root root  9 Oct 30 18:23 usb-MXT-USB_Storage_Device_150101v01-0:0 -> ../../sdb
+lrwxrwxrwx 1 root root 10 Oct 30 18:23 usb-MXT-USB_Storage_Device_150101v01-0:0-part1 -> ../../sdb1
+lrwxrwxrwx 1 root root  9 Oct 30 18:21 usb-USB_SanDisk_3.2Gen1_0401d94a439ebb2cfa8070a30c612a92991d32234edfda63d20f0498af2f6550832700000000000000000000ed7739d0ff98551891558107ad2ecc24-0:0 -> ../../sda
+lrwxrwxrwx 1 root root 10 Oct 30 18:21 usb-USB_SanDisk_3.2Gen1_0401d94a439ebb2cfa8070a30c612a92991d32234edfda63d20f0498af2f6550832700000000000000000000ed7739d0ff98551891558107ad2ecc24-0:0-part1 -> ../../sda1

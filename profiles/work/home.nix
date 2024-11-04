@@ -4,10 +4,36 @@ let
     ll = "ls -l";
     ".." = "cd ..";
     l = "ls";
+    v = "nvim";
+    nv = "nvim";
+    p = "ps aux | grep -i ";
+    gs = "git status";
+    gf = "git fetch --all";
+    gwip = "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m '[WIP]: $(date)'";
+    gundo = "git reset HEAD~";
+    gcm = "git-credential-manager";
+    gl = "git log";
+    stitle = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | sed -n '/title/{n;p}' | cut -d '\"' -f 2";
+    snext = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null && stitle";
+    sstate = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | grep -oE '(Playing|Paused)'";
+    sn = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null && stitle";
+    spause = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause > /dev/null";
+    stoggle = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause > /dev/null";
+    splay = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play > /dev/null";
+    srep = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Repeat > /dev/null && echo 'repeating stitle'";
+    sprev = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous > /dev/null && stitle";
+    sp = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous > /dev/null && stitle";
+    yt = "mpv --ytdl-raw-options='cookies=$HOME/Downloads/yt_cookies.txt'";
+    o = "xdg-open";
+    ts = "~/.local/bin/tmux-sessionizer.sh";
   };
-in {
+in
+{
   programs.home-manager.enable = true;
-  imports = [ ./gnome.nix ./kde.nix ];
+  imports = [
+    ./gnome.nix
+    ./kde.nix
+  ];
   nixpkgs.config.allowUnfree = true;
   home.username = "nils";
   home.homeDirectory = "/home/nils";
@@ -15,17 +41,22 @@ in {
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
+    fzf
+    htop
+    stack
+    zathura
     syncthing
+    texinfo
+    autoconf
+    gnumake
     dconf
     transmission-qt
     spotify
-    wezterm
     gimp
     vlc
     unzip
     ethtool
-    youtube-dl
-    nvim-pkg
+    yt-dlp
   ];
 
   dconf.settings = {
@@ -35,75 +66,39 @@ in {
     };
   };
 
-  home.file."./.config/wezterm/wezterm.lua" = {
-    recursive = true;
-    text = ''
-      local wezterm = require 'wezterm'
-
-      local config = {}
-
-      if wezterm.config_builder then
-        config = wezterm.config_builder()
-      end
-
-      config.window_background_opacity = .8
-      config.use_fancy_tab_bar = false
-      config.window_decorations = "NONE"
-      config.hide_tab_bar_if_only_one_tab = true
-      config.warn_about_missing_glyphs = false
-
-      config.window_padding = {
-        left = 0,
-        right = 0,
-        top = 0,
-        bottom = 0,
-      }
-
-      return config
-    '';
-  };
-
-  programs.tmux = {
-    enable = true;
-    shortcut = "a";
-    baseIndex = 1;
-    newSession = true;
-    escapeTime = 0;
-    secureSocket = false;
-    plugins = with pkgs; [ tmuxPlugins.catppuccin ];
-    extraConfig = ''
-      set -g default-terminal "xterm-256color"
-      set -ga terminal-overrides ",*256col*:Tc"
-      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-      set-environment -g COLORTERM "truecolor"
-
-      set -g mouse on
-      set-option -g renumber-windows on
-
-      bind h previous-window
-      bind l next-window
-      bind-key -n C-S-Left swap-window -t -1
-      bind-key -n C-S-Right swap-window -t +1
-    '';
-  };
-
   programs.bash = {
     enable = true;
     shellAliases = shAliases;
+    bashrcExtra = ''
+      export PATH="$PATH:~/.local/bin";
+    '';
   };
 
-  home.sessionVariables = { EDITOR = "nvim"; };
-
-  elira.java = {
+  elira.editors = {
     enable = true;
+    vscode = true;
+    emacs = {
+      enable = true;
+      config_dir = "${emacs_dots}";
+    };
+  };
+
+  elira.programming = {
+    enable = true;
+    rust = true;
+    android = false;
+    java = true;
     jdkVersions = [ pkgs.jdk19 ];
   };
 
-  elira.vscode = { enable = true; };
+  elira.keyboard = {
+    enable = true;
+  };
 
-  elira.rust = { enable = true; };
-
-  elira.keyboard = { enable = true; };
+  elira.terminal = {
+    enable = true;
+    tmux = true;
+  };
 
   elira.gaming = {
     enable = true;
@@ -112,14 +107,23 @@ in {
 
   elira.browser = {
     enable = true;
+    brave = true;
     firefox = true;
-    chromium = true;
-    google-chrome = true;
     tor = true;
   };
 
-  elira.emacs = {
+  elira.waybar = {
     enable = true;
-    config_dir = "${emacs_dots}";
+    systemd = true;
+    monitors = [
+      "DP-4"
+      "eDP-1"
+    ];
+  };
+
+  elira.hyprland = {
+    enable = true;
+    terminal = "kitty";
+    filebrowser = "dolphin";
   };
 }

@@ -2,8 +2,8 @@
   description = "Flake of Nils";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
     agenix = {
@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
@@ -21,10 +21,17 @@
       inputs.home-manager.follows = "home-manager";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nixvim.url = "github:uchars/nixvim";
   };
-  outputs = { self, nixpkgs, home-manager, plasma-manager, emacs-overlay, nixvim
-    , agenix, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      plasma-manager,
+      emacs-overlay,
+      agenix,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -41,12 +48,14 @@
 
       pkgs = import nixpkgs-patched {
         inherit system;
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
       };
 
-    in {
-      nixpkgs.overlays =
-        [ (import self.inputs.emacs-overlay) nixvim.overlays.default ];
+    in
+    {
+      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
       nixosConfigurations = {
         saruei = lib.nixosSystem {
           inherit system;
@@ -63,6 +72,21 @@
             inherit displayManager;
             inherit system;
             inherit networkInterface;
+          };
+        };
+        bao = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./systems/bao/configuration.nix
+            ./programs/users.nix
+            ./programs/displaymanager.nix
+            ./programs/hyprland.nix
+            ./programs/essentials.nix
+            ./modules/system
+          ];
+          specialArgs = {
+            inherit displayManager;
+            inherit system;
           };
         };
         juniper = lib.nixosSystem {
@@ -87,12 +111,13 @@
             (./. + "/profiles" + ("/" + profile) + "/home.nix")
             ./modules/home
             ({
-              nixpkgs.overlays =
-                [ emacs-overlay.overlays.default nixvim.overlays.default ];
+              nixpkgs.overlays = [ emacs-overlay.overlays.default ];
             })
             plasma-manager.homeManagerModules.plasma-manager
           ];
-          extraSpecialArgs = { inherit emacs_dots; };
+          extraSpecialArgs = {
+            inherit emacs_dots;
+          };
         };
       };
     };

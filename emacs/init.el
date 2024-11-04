@@ -1,6 +1,5 @@
 (setq inhibit-startup-message t)
 
-
 (setq warning-minimum-level :emergency)
 
 ; disable some UI elements
