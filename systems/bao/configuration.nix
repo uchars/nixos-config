@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = [ ./hardware-configuration.nix ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -53,5 +54,16 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  elira.dwm = {
+    enable = true;
+    dwmUrl = "https://github.com/uchars/dwm.git";
+    rev = "c42b066d1aa40adfdeaa1408a8198b11c9760eb3";
+  };
+
+  elira.displayManager = {
+    enable = true;
+    name = "gdm";
   };
 }

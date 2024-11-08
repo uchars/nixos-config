@@ -35,9 +35,8 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      desktop = "gnome";
+      desktop = "dwm";
       displayManager = "gdm";
-      profile = "work";
       networkInterface = "enp42s0";
       emacs_dots = ./emacs;
 
@@ -79,13 +78,10 @@
           modules = [
             ./systems/bao/configuration.nix
             ./programs/users.nix
-            ./programs/displaymanager.nix
-            ./programs/hyprland.nix
             ./programs/essentials.nix
             ./modules/system
           ];
           specialArgs = {
-            inherit displayManager;
             inherit system;
           };
         };
@@ -108,11 +104,11 @@
         nils = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            (./. + "/profiles" + ("/" + profile) + "/home.nix")
+            (./. + "/profiles/nils/home.nix")
             ./modules/home
-            ({
+            {
               nixpkgs.overlays = [ emacs-overlay.overlays.default ];
-            })
+            }
             plasma-manager.homeManagerModules.plasma-manager
           ];
           extraSpecialArgs = {

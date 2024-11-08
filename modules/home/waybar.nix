@@ -25,10 +25,11 @@
       cfg = config.elira.waybar;
     in
     lib.mkIf cfg.enable {
-      home.packages = with pkgs;[
-          light
-          waybar
-          pavucontrol
+      home.packages = with pkgs; [
+        light
+        nerdfonts
+        waybar
+        pavucontrol
       ];
       programs.waybar = {
         enable = true;
@@ -36,7 +37,7 @@
         settings = {
           mainBar = {
             layer = "bottom";
-            position = "top";
+            position = "bottom";
             height = 20;
             output = cfg.monitors;
             modules-left = [
@@ -46,13 +47,10 @@
               "hyprland/workspaces"
             ];
             modules-right = [
-              "idle_inhibitor"
-              "hyprland/language"
               "cpu"
               "memory"
               "pulseaudio"
               "network"
-              "temperature"
               "backlight"
               "battery"
               "clock"
@@ -156,28 +154,6 @@
             };
           };
         };
-
-        style = ''
-          #pulseaudio-slider slider {
-              min-height: 0px;
-              min-width: 0px;
-              opacity: 0;
-              background-image: none;
-              border: none;
-              box-shadow: none;
-          }
-          #pulseaudio-slider trough {
-              min-height: 5px;
-              min-width: 80px;
-              border-radius: 5px;
-              background-color: black;
-          }
-          #pulseaudio-slider highlight {
-              min-width: 10px;
-              border-radius: 5px;
-              background-color: green;
-          }
-        '';
       };
     };
 }

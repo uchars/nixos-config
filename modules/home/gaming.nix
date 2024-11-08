@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   options.elira.gaming = with lib; {
     enable = mkEnableOption "General Software for Gaming";
     emulation = mkOption {
@@ -8,21 +14,32 @@
     };
   };
 
-  config = let cfg = config.elira.gaming;
-  in lib.mkIf cfg.enable {
-    home.packages = with pkgs;
-      [ steam discord obs-studio ] ++ (if cfg.emulation then
+  config =
+    let
+      cfg = config.elira.gaming;
+    in
+    lib.mkIf cfg.enable {
+      home.packages =
+        with pkgs;
         [
-          (retroarch.override {
-            cores = with libretro; [
-              genesis-plus-gx
-              snes9x
-              beetle-psx-hw
-              parallel-n64
-            ];
-          })
+          steam
+          discord
+          obs-studio
         ]
-      else
-        [ ]);
-  };
+        ++ (
+          if cfg.emulation then
+            [
+              (retroarch.override {
+                cores = with libretro; [
+                  genesis-plus-gx
+                  snes9x
+                  beetle-psx-hw
+                  parallel-n64
+                ];
+              })
+            ]
+          else
+            [ ]
+        );
+    };
 }

@@ -15,6 +15,19 @@
       type = types.str;
       default = "dolphin";
     };
+    wallpaper = {
+      daemon = mkOption {
+        type = types.str;
+        default = "swww-daemon";
+      };
+      cmd = mkOption {
+        type = types.str;
+        default = "swww img --no-resize";
+      };
+      path = mkOption {
+        type = types.str;
+      };
+    };
   };
 
   config =
@@ -32,6 +45,7 @@
         $lock = hyprlock
         $menu = rofi -show run
 
+        exec-once = ${cfg.wallpaper.daemon} & sleep 0.5 && ${cfg.wallpaper.cmd} ${cfg.wallpaper.path} 
         exec-once = $terminal
         exec-once = nm-applet &
         exec-once = blueman-applet &
@@ -202,11 +216,18 @@
 
         # Example windowrule v1
         # windowrule = float, ^(kitty)$
+        windowrule = float, ^(Extension:)
+        windowrule = float, ^(Extension)
+        windowrule = float, ^(extension:)
+        windowrule = float, ^(extension)
+        windowrule = float, ^(bitwarden)
+        windowrule = float, ^(Bitwarden)
 
         # Example windowrule v2
         # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-        windowrulev2 = float,title:^(Volume Control)$
-        windowrulev2 = float,class:^(blueman-manager-wrapped)$,title:^(blueman-manager-wrapped)$
+        windowrulev2 = float,title:^(Volume Control)
+        windowrulev2 = float,class:^(Extension:),title:^(Extension:)
+        windowrulev2 = float,class:^(blueman-manager-wrapped),title:^(blueman-manager-wrapped)
         windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
         env = XCURSOR_SIZE,32

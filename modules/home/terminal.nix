@@ -41,6 +41,7 @@
           bind-key C-a send-prefix
           set -g base-index 1
           set -g status-style 'bg=#333333 fg=#5eacd3'
+          set-option -g renumber-windows on
 
           set-window-option -g mode-keys vi
           bind -T copy-mode-vi v send-keys -X begin-selection

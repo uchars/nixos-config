@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   users.users.nils = {
     isNormalUser = true;

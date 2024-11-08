@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
-  services.udev.packages = with pkgs; [ via vial ];
+  services.udev.packages = with pkgs; [
+    via
+    vial
+  ];
 
   environment.systemPackages = with pkgs; [
     sct
@@ -13,5 +17,8 @@
     neofetch
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }

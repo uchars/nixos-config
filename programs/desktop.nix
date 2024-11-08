@@ -1,10 +1,20 @@
-{ pkgs, desktop, displayManager, ... }: {
+{
+  pkgs,
+  desktop,
+  displayManager,
+  ...
+}:
+{
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  environment.systemPackages = with pkgs; [
+    dmenu
+    st
+  ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.${displayManager}.enable = true;
-  services.xserver.desktopManager.${desktop}.enable = true;
+  services.xserver.windowManager.${desktop}.enable = true;
 
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     elisa
@@ -17,7 +27,11 @@
     print-manager
   ];
 
-  environment.gnome.excludePackages = (with pkgs; [ gnome-photos gnome-tour ])
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ])
     ++ (with pkgs.gnome; [
       gnome-music
       gnome-terminal
