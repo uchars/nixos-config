@@ -130,8 +130,8 @@ in
   home.file.".local/bin/dwmstatus.sh" = {
     executable = true;
     text = ''
-            #!/bin/bash
-      source $HOME/.config/alias.sh
+      #!/bin/bash
+      [ -f "$HOME/.config/alias.sh" ] && . "$HOME/.config/alias.sh"
 
       get_ram_usage() {
           total=$(grep MemTotal /proc/meminfo | awk '{print $2}')

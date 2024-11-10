@@ -25,6 +25,7 @@
       services.xserver.enable = true;
       environment.systemPackages = with pkgs; [
         dmenu
+        betterlockscreen
         st
       ];
       services.xserver.windowManager.dwm = {
