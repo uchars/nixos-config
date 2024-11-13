@@ -29,6 +29,7 @@ let
     vol = "amixer set Master --quiet";
     mute = "amixer set Master 1+ toggle --quiet";
     mirror = "xrandr --output eDP-1 --auto --same-as DP-4";
+    lock = "betterlockscreen -l";
   };
 in
 {
@@ -62,7 +63,9 @@ in
     mpv
     unzip
     ethtool
+    networkmanager
     yt-dlp
+    dbus
   ];
 
   dconf.settings = {

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -59,11 +59,16 @@
   elira.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "c42b066d1aa40adfdeaa1408a8198b11c9760eb3";
+    rev = "b10b4567737f5feedd6d3e6deef1db3e92df5a44";
   };
 
   elira.displayManager = {
     enable = true;
     name = "gdm";
   };
+
+  environment.systemPackages = with pkgs; [
+    python312Packages.dbus-python
+  ];
+
 }
