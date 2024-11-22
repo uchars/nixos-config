@@ -158,21 +158,12 @@
             type = "zfs_fs";
             options.mountpoint = "legacy";
           };
-          "crypt/misc/iso" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-          };
           "crypt/appdata" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "false";
           };
           "crypt/appdata/jellyfin" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "crypt/appdata/immich" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
