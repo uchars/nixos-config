@@ -167,11 +167,6 @@
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "false";
           };
-          "crypt/appdata/paperless" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
           "crypt/appdata/jellyfin" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
@@ -192,11 +187,6 @@
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
-          "crypt/appdata/netboot" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
           "crypt/media" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
@@ -208,16 +198,6 @@
             options."com.sun:auto-snapshot" = "true";
           };
           "crypt/media/movies" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "crypt/media/pictures" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "crypt/media/wallpapers" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";

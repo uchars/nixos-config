@@ -40,6 +40,10 @@
       networkInterface = "enp42s0";
       emacs_dots = ./emacs;
 
+      nextcloudUrl = "TODO";
+      nextcloudAdmin = "TODO";
+      acmeMail = "TODO";
+
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
         name = "nixpkgs-patched";
         src = nixpkgs;
@@ -95,7 +99,13 @@
             agenix.nixosModules.default
           ];
           specialArgs = {
-            inherit system inputs;
+            inherit
+              system
+              inputs
+              nextcloudUrl
+              nextcloudAdmin
+              acmeMail
+              ;
             vars = import ./systems/vars.nix;
           };
         };
