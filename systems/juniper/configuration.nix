@@ -1,15 +1,18 @@
-{inputs, networksLocal, lib, config, vars, pkgs, ...}:
+{
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
 
   networking.hostName = "juniper";
   networking.hostId = "007f0200";
@@ -23,7 +26,7 @@
     pulse.enable = true;
   };
 
- networking = {
+  networking = {
     useDHCP = true;
     networkmanager.enable = false;
     firewall = {
@@ -32,11 +35,10 @@
     };
   };
 
- elira.wol = {
-	 enable = true;
-	 interface = "eno1";
- };
-
+  elira.wol = {
+    enable = true;
+    interface = "eno1";
+  };
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -66,11 +68,13 @@
 
   services.openssh = {
     enable = true;
-    settings = { PasswordAuthentication = true; };
+    settings = {
+      PasswordAuthentication = true;
+    };
   };
 
   environment.sessionVariables = {
-	  EDITOR = "vim";
+    EDITOR = "vim";
   };
 
   boot.zfs.extraPools = [ "BUG" ];
@@ -78,4 +82,16 @@
   services.zfs.autoScrub.enable = true;
 
   system.stateVersion = "24.05";
+
+  users.users.sterz_n = {
+    isNormalUser = true;
+    description = "Nils Sterz";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "users"
+    ];
+    uid = 1000;
+  };
 }

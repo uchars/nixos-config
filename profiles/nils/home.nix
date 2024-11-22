@@ -30,6 +30,9 @@ let
     mute = "amixer set Master 1+ toggle --quiet";
     mirror = "xrandr --output eDP-1 --auto --same-as DP-4";
     lock = "betterlockscreen -l";
+    vpn = "openconnect --protocol=anyconnect vpn.uni-bremen.de";
+    kus = "setxkbmap us";
+    kger = "setxkbmap de";
   };
 in
 {
@@ -66,7 +69,18 @@ in
     networkmanager
     yt-dlp
     dbus
+    feh
+    pavucontrol
   ];
+
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        showHelp = false;
+      };
+    };
+  };
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
@@ -133,9 +147,6 @@ in
   home.file.".local/bin/dwmstatus.sh" = {
     executable = true;
     text = ''
-      #!/bin/bash
-      [ -f "$HOME/.config/alias.sh" ] && . "$HOME/.config/alias.sh"
-
       get_ram_usage() {
           total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
           available=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
@@ -146,6 +157,7 @@ in
       }
 
       while true; do
+          KEYBOARD_LAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
           BAT_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
           BAT_STATUS=$(cat /sys/class/power_supply/BAT1/status)
           SOUND_VOLUME=$(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }')
@@ -162,7 +174,7 @@ in
           else
               SOUND_MUTED=""
           fi
-          xsetroot -name "$SPOTIFY_STR VOL: $SOUND_VOLUME$SOUND_MUTED | RAM: $(get_ram_usage) | BAT: $BAT_CAPACITY% ($BAT_STATUS) | $(date)"
+          xsetroot -name "$SPOTIFY_STR VOL: $SOUND_VOLUME$SOUND_MUTED | LAYOUT: $KEYBOARD_LAYOUT | RAM: $(get_ram_usage) | BAT: $BAT_CAPACITY% ($BAT_STATUS) | $(date)"
           sleep 1
       done
     '';

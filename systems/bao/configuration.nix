@@ -10,8 +10,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "bao";
-
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -58,8 +56,9 @@
 
   elira.dwm = {
     enable = true;
-    dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "b10b4567737f5feedd6d3e6deef1db3e92df5a44";
+    conf = ./config.def.h;
+    # dwmUrl = "https://github.com/uchars/dwm.git";
+    # rev = "c342c58798b4fcfd9c2b5e7326a4b43f2a309339";
   };
 
   elira.displayManager = {
@@ -69,6 +68,19 @@
 
   environment.systemPackages = with pkgs; [
     python312Packages.dbus-python
+    pandoc
+    openconnect
   ];
 
+  users.users.nils = {
+    isNormalUser = true;
+    description = "Nils Sterz";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "users"
+    ];
+    uid = 1000;
+  };
 }
