@@ -33,6 +33,7 @@ let
     vpn = "openconnect --protocol=anyconnect vpn.uni-bremen.de";
     kus = "setxkbmap us";
     kger = "setxkbmap de";
+    brightness = "xrandr --output eDP-1 --brightness";
   };
 in
 {
@@ -70,7 +71,10 @@ in
     yt-dlp
     dbus
     feh
+    networkmanagerapplet
     pavucontrol
+    mattermost-desktop
+    inkscape
   ];
 
   services.flameshot = {
@@ -80,6 +84,13 @@ in
         showHelp = false;
       };
     };
+  };
+
+  services.picom.enable = true;
+
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
   };
 
   dconf.settings = {

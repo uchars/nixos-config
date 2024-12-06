@@ -54,11 +54,11 @@
     pulse.enable = true;
   };
 
+  programs.steam.enable = true;
   elira.dwm = {
     enable = true;
-    conf = ./config.def.h;
-    # dwmUrl = "https://github.com/uchars/dwm.git";
-    # rev = "c342c58798b4fcfd9c2b5e7326a4b43f2a309339";
+    dwmUrl = "https://github.com/uchars/dwm.git";
+    rev = "b26ed0c94ee4ebed9d0f1f3185e555d74cb7f187";
   };
 
   elira.displayManager = {
@@ -70,6 +70,27 @@
     python312Packages.dbus-python
     pandoc
     openconnect
+  ];
+
+  elira.syncthing = {
+    enable = true;
+    user = "nils";
+    dir = "/home/nils/Documents";
+    sharedFolders = {
+      "Uni_Documents" = {
+        path = "/home/nils/Nextcloud/Documents/Uni";
+        devices = [ "boox" ];
+      };
+    };
+    deviceConfig = {
+      boox = {
+        id = "VHC5QDC-IDELDHV-OZ4I5LO-LPX7JVY-D554HCL-NUAFXAU-NKVCPDO-533ZEAV";
+      };
+    };
+  };
+
+  fonts.packages = with pkgs; [
+    lato
   ];
 
   users.users.nils = {

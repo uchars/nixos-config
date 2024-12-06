@@ -71,7 +71,7 @@
           if [[ $# -eq 1 ]]; then
               selected=$1
           else
-              selected=$(find ~/.files ~/work ~/Documents/edu ~/Documents/notes ~/Documents/src -mindepth 0 -maxdepth 2 -type d | fzf)
+              selected=$(find ~/src ~/.files ~/work ~/Documents/edu ~/Documents/notes ~/Documents/src -mindepth 0 -maxdepth 2 -type d | fzf)
           fi
 
           if [[ -z $selected ]]; then
@@ -110,6 +110,7 @@
           config.default_workspace = "home"
           config.window_decorations = "TITLE"
           config.scrollback_lines = 3000
+          config.window_background_opacity = 0.8
           config.window_padding = {
             left = 0,
             right = 0,
