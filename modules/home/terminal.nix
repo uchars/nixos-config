@@ -110,7 +110,7 @@
           config.default_workspace = "home"
           config.window_decorations = "TITLE"
           config.scrollback_lines = 3000
-          config.window_background_opacity = 0.8
+          config.window_background_opacity = 0.6
           config.window_padding = {
             left = 0,
             right = 0,

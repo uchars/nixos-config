@@ -35,9 +35,6 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      desktop = "dwm";
-      displayManager = "gdm";
-      networkInterface = "enp42s0";
       emacs_dots = ./emacs;
 
       nextcloudUrl = "TODO";
@@ -66,22 +63,19 @@
             ./systems/saruei/configuration.nix
             ./programs/opengl.nix
             ./programs/desktop.nix
-            ./programs/users.nix
             ./programs/essentials.nix
             ./modules/system
           ];
           specialArgs = {
-            inherit desktop;
-            inherit displayManager;
+            desktop = "gnome";
+            displayManager = "gdm";
             inherit system;
-            inherit networkInterface;
           };
         };
         bao = lib.nixosSystem {
           inherit system;
           modules = [
             ./systems/bao/configuration.nix
-            ./programs/users.nix
             ./programs/essentials.nix
             ./modules/system
           ];
@@ -94,7 +88,6 @@
           modules = [
             ./modules/system
             ./systems/juniper
-            ./programs/users.nix
             ./vault
             agenix.nixosModules.default
           ];

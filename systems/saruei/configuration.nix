@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = [ ./hardware-configuration.nix ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -9,8 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-7ddbb096-92e7-43c0-960e-a2927f4e95a8".device =
-    "/dev/disk/by-uuid/7ddbb096-92e7-43c0-960e-a2927f4e95a8";
+  boot.initrd.luks.devices."luks-7ddbb096-92e7-43c0-960e-a2927f4e95a8".device = "/dev/disk/by-uuid/7ddbb096-92e7-43c0-960e-a2927f4e95a8";
 
   networking.hostName = "saruei";
 
@@ -67,7 +67,9 @@
     ];
   };
 
-  elira.nvidia = { enable = true; };
+  elira.nvidia = {
+    enable = true;
+  };
 
   elira.wol = {
     enable = true;
@@ -79,20 +81,15 @@
     user = "nils";
   };
 
-  elira.syncthing = {
-    enable = true;
-    user = "nils";
-    dir = "/home/nils";
-    deviceConfig = {
-      "laptop" = {
-        id = "I4GZSU2-RCVRCDJ-NCBJKXN-3U6CNW4-APT4YJZ-B4BEQ5R-QMZULXI-O66IIAF";
-      };
-      "iPhoneNils" = {
-        id = "NBQRQT6-72YWCPW-7ZN6KBE-CSSNQWV-EUH4M6W-VGHSG6Z-ZZX556R-JMEZQQH";
-      };
-      "server" = {
-        id = "WMLEXHS-F5L7GWK-EPMLZYQ-3MOLA62-OVXRTDH-J3QAALU-HYEAC67-P52VZQ6";
-      };
-    };
+  users.users.sterz_n = {
+    isNormalUser = true;
+    description = "Nils Sterz";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "users"
+    ];
+    uid = 1000;
   };
 }
