@@ -1,4 +1,4 @@
-# Saruei
+# Lumi
 
 Gaming Desktop
 

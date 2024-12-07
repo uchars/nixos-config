@@ -57,10 +57,10 @@
     {
       nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
       nixosConfigurations = {
-        saruei = lib.nixosSystem {
+        lumi = lib.nixosSystem {
           inherit system;
           modules = [
-            ./systems/saruei/configuration.nix
+            ./systems/lumi/configuration.nix
             ./programs/opengl.nix
             ./programs/desktop.nix
             ./programs/essentials.nix

@@ -66,7 +66,7 @@
 (defun nils/nixos-rebuild ()
   "NixOS system build."
   (interactive)
-  (async-shell-command "sudo nixos-rebuild switch --flake ~/.dotfiles/.#saruei"))
+  (async-shell-command "sudo nixos-rebuild switch --flake ~/.dotfiles/.#lumi"))
 
 (dolist (mode '(org-mode-hook
 		image-mode-hook

@@ -1,18 +1,38 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
-  boot.supportedFilesystems = [ "ntfs" ];
-
   services.fstrim.enable = lib.mkDefault true;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    supportedFilesystems = [ "ntfs" ];
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
 
-  boot.initrd.luks.devices."luks-7ddbb096-92e7-43c0-960e-a2927f4e95a8".device = "/dev/disk/by-uuid/7ddbb096-92e7-43c0-960e-a2927f4e95a8";
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "saruei";
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+    ];
+  };
+
+  networking.hostName = "lumi";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -78,7 +98,7 @@
 
   elira.vm = {
     enable = true;
-    user = "nils";
+    user = "sterz_n";
   };
 
   users.users.sterz_n = {
