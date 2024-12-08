@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     gnome3.gnome-tweaks
     gnomeExtensions.appindicator
@@ -15,26 +16,26 @@
   ];
 
   gtk = {
-    iconTheme = {
-      name = "Nordic-green";
-      package = pkgs.nordic;
-    };
+    #iconTheme = {
+    #  name = "Nordic-green";
+    #  package = pkgs.nordic;
+    #};
 
-    theme = {
-      name = "Nordic-darker";
-      package = pkgs.nordic;
-    };
+    #theme = {
+    #  name = "Nordic-darker";
+    #  package = pkgs.nordic;
+    #};
 
-    cursorTheme = {
-      name = "Nordic-cursors";
-      package = pkgs.nordic;
-    };
+    #cursorTheme = {
+    #  name = "Nordic-cursors";
+    #  package = pkgs.nordic;
+    #};
   };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      enable-hot-corners = false;
+      enable-hot-corners = true;
     };
     "org/gnome/shell" = {
       disable-user-extensions = false;
@@ -42,23 +43,25 @@
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "drive-menu@gnome-shell-extensions.gcampax.github.com"
-        "apps-menu@gnome-shell-extensions.gcampax.github.com"
-        "trayIconsReloaded@selfmade.pl"
-        "dash-to-panel@jderose9.github.com"
+        #"apps-menu@gnome-shell-extensions.gcampax.github.com"
+        #"trayIconsReloaded@selfmade.pl"
+        #"dash-to-panel@jderose9.github.com"
         "bluetooth-quick-connect@bjarosze.gmail.com"
-        "tiling-assistant@leleat-on-github"
-        "blur-my-shell@aunetx"
+        #"tiling-assistant@leleat-on-github"
+        #"blur-my-shell@aunetx"
       ];
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "org.wezfurlong.wezterm.desktop"
+        "org.gnome.Console.desktop"
         "firefox.desktop"
         "discord.desktop"
         "steam.desktop"
       ];
     };
 
-    "org/gnome/shell/extensions/user-theme" = { name = "Nordic-darker"; };
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Nordic-darker";
+    };
 
     # Configure blur-my-shell
     "org/gnome/shell/extensions/blur-my-shell" = {
@@ -88,16 +91,18 @@
       button-layout = "appmenu:minimize,maximize,close";
     };
 
-    "org/gnome/tweaks" = { show-extensions-notice = false; };
+    "org/gnome/tweaks" = {
+      show-extensions-notice = false;
+    };
 
     "org/gnome/shell/extensions/dash-to-panel" = {
-      multi-monitors = true;
+      multi-monitors = false;
       intellihide = false;
       panel-lengths = 100;
       trans-use-custom-bg = false;
-      trans-use-custom-opacity = true;
-      trans-use-dynamic-opacity = true;
-      trans-panel-opacity = 0.0;
+      # trans-use-custom-opacity = true;
+      # trans-use-dynamic-opacity = true;
+      # trans-panel-opacity = 0.0;
     };
   };
 }

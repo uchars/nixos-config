@@ -1,4 +1,9 @@
-{ pkgs, emacs_dots, ... }:
+{
+  pkgs,
+  emacs_dots,
+  username,
+  ...
+}:
 let
   shAliases = {
     ll = "ls -l";
@@ -43,15 +48,14 @@ in
     ./kde.nix
   ];
   nixpkgs.config.allowUnfree = true;
-  home.username = "nils";
-  home.homeDirectory = "/home/nils";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
 
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
     fzf
     lxde.lxrandr
-    blueman
     htop
     stack
     zathura
@@ -75,6 +79,7 @@ in
     pavucontrol
     mattermost-desktop
     inkscape
+    bitwarden-desktop
   ];
 
   services.flameshot = {
@@ -164,15 +169,35 @@ in
           used=$((total - available))
           total_mb=$((total / 1024))
           used_mb=$((used / 1024))
-          echo "$used_mb/$total_mb MB"
+          echo "|  $used_mb/$total_mb MB"
+      }
+
+      battery() {
+          if [ -e "/sys/class/power_supply/BAT1/capacity" ]; then
+            BAT_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+            BAT_STATUS=$(cat /sys/class/power_supply/BAT1/status)
+            echo "| 󰂁 $BAT_CAPACITY% ($BAT_STATUS)"
+          else
+            echo ""
+          fi
+      }
+
+      layout() {
+          KEYBOARD_LAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
+          echo "|  $KEYBOARD_LAYOUT"
+      }
+
+      volume() {
+          SOUND_VOLUME=$(amixer get Master | grep -oP '\d+%' | head -n 1)
+          SOUND_MUTED=$(amixer get Master | grep -oP '\[.*\]' | head -n 1)
+          if [[ "$SOUND_MUTED" == *"[off]"* ]]; then
+              echo " $SOUND_VOLUME"
+          else
+              echo "󰕾 $SOUND_VOLUME"
+          fi
       }
 
       while true; do
-          KEYBOARD_LAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
-          BAT_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
-          BAT_STATUS=$(cat /sys/class/power_supply/BAT1/status)
-          SOUND_VOLUME=$(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }')
-          SOUND_MUTED=$(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $4 }')
           SPOTIFY_STR=""
           SERVICE="org.mpris.MediaPlayer2.spotify"
           if dbus-send --print-reply --type=method_call --dest=$SERVICE /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2 string:Identity >/dev/null 2>/dev/null; then
@@ -180,12 +205,7 @@ in
               SPOTIFY_TITLE=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | sed -n '/title/{n;p}' | cut -d \" -f 2)
               SPOTIFY_STR="($SPOTIFY_STATE) $SPOTIFY_TITLE |"
           fi
-          if [ "$SOUND_MUTED" = "off" ]; then
-              SOUND_MUTED="(muted)"
-          else
-              SOUND_MUTED=""
-          fi
-          xsetroot -name "$SPOTIFY_STR VOL: $SOUND_VOLUME$SOUND_MUTED | LAYOUT: $KEYBOARD_LAYOUT | RAM: $(get_ram_usage) | BAT: $BAT_CAPACITY% ($BAT_STATUS) | $(date)"
+          xsetroot -name "$SPOTIFY_STR $(volume) $(layout) $(get_ram_usage) $(battery) | $(date)"
           sleep 1
       done
     '';

@@ -22,7 +22,6 @@
       home.packages =
         with pkgs;
         [
-          steam
           discord
           obs-studio
         ]

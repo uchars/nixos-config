@@ -62,13 +62,10 @@
           modules = [
             ./systems/lumi/configuration.nix
             ./programs/opengl.nix
-            ./programs/desktop.nix
             ./programs/essentials.nix
             ./modules/system
           ];
           specialArgs = {
-            desktop = "gnome";
-            displayManager = "gdm";
             inherit system;
           };
         };
@@ -99,11 +96,25 @@
               nextcloudAdmin
               acmeMail
               ;
-            vars = import ./systems/vars.nix;
           };
         };
       };
       homeConfigurations = {
+        sterz_n = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            (./. + "/profiles/nils/home.nix")
+            ./modules/home
+            {
+              nixpkgs.overlays = [ emacs-overlay.overlays.default ];
+            }
+            plasma-manager.homeManagerModules.plasma-manager
+          ];
+          extraSpecialArgs = {
+            inherit emacs_dots;
+            username = "sterz_n";
+          };
+        };
         nils = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
@@ -116,6 +127,7 @@
           ];
           extraSpecialArgs = {
             inherit emacs_dots;
+            username = "nils";
           };
         };
       };

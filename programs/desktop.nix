@@ -14,7 +14,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.${displayManager}.enable = true;
-  services.xserver.windowManager.${desktop}.enable = true;
+  services.xserver.desktopManager.${desktop}.enable = true;
 
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     elisa
