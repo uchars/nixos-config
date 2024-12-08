@@ -2,8 +2,8 @@
   description = "Flake of Nils";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
     agenix = {
@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
@@ -35,11 +35,10 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
+      desktop = "dwm";
+      displayManager = "gdm";
+      networkInterface = "enp42s0";
       emacs_dots = ./emacs;
-
-      nextcloudUrl = "TODO";
-      nextcloudAdmin = "TODO";
-      acmeMail = "TODO";
 
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
         name = "nixpkgs-patched";
@@ -92,10 +91,17 @@
             inherit
               system
               inputs
-              nextcloudUrl
-              nextcloudAdmin
-              acmeMail
               ;
+            domain = "TODO.xyz";
+            nextcloudSubdomain = "TODO";
+            nextcloudAdmin = "TODO";
+            vaultwardenSubdomain = "TODO";
+            vaultwardenPort = "TODO";
+            dashboardPort = "TODO";
+            pasteSubdomain = "TODO";
+            vaultwardenEnv = /tmp/vaultwarden.env;
+            acmeMail = "TODO@mail";
+            vars = import ./systems/vars.nix;
           };
         };
       };
