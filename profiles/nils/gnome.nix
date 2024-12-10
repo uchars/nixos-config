@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    gnome3.gnome-tweaks
+    gnome.gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     gnomeExtensions.blur-my-shell
@@ -11,7 +11,7 @@
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.bluetooth-quick-connect
     gnomeExtensions.user-themes
-    orchis
+    orchis-theme
     nordic
   ];
 

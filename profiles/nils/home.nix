@@ -73,6 +73,7 @@ in
     ethtool
     networkmanager
     yt-dlp
+    openconnect
     dbus
     feh
     networkmanagerapplet
@@ -127,7 +128,7 @@ in
     rust = true;
     android = false;
     java = true;
-    jdkVersions = [ pkgs.jdk19 ];
+    jdkVersions = [ pkgs.jdk23 ];
   };
 
   elira.keyboard = {
@@ -137,6 +138,7 @@ in
   elira.terminal = {
     enable = true;
     wezterm = true;
+    alacritty = true;
     tmux = true;
   };
 
@@ -158,57 +160,6 @@ in
     brave = true;
     firefox = true;
     tor = true;
-  };
-
-  home.file.".local/bin/dwmstatus.sh" = {
-    executable = true;
-    text = ''
-      get_ram_usage() {
-          total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-          available=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
-          used=$((total - available))
-          total_mb=$((total / 1024))
-          used_mb=$((used / 1024))
-          echo "|  $used_mb/$total_mb MB"
-      }
-
-      battery() {
-          if [ -e "/sys/class/power_supply/BAT1/capacity" ]; then
-            BAT_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
-            BAT_STATUS=$(cat /sys/class/power_supply/BAT1/status)
-            echo "| 󰂁 $BAT_CAPACITY% ($BAT_STATUS)"
-          else
-            echo ""
-          fi
-      }
-
-      layout() {
-          KEYBOARD_LAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
-          echo "|  $KEYBOARD_LAYOUT"
-      }
-
-      volume() {
-          SOUND_VOLUME=$(amixer get Master | grep -oP '\d+%' | head -n 1)
-          SOUND_MUTED=$(amixer get Master | grep -oP '\[.*\]' | head -n 1)
-          if [[ "$SOUND_MUTED" == *"[off]"* ]]; then
-              echo " $SOUND_VOLUME"
-          else
-              echo "󰕾 $SOUND_VOLUME"
-          fi
-      }
-
-      while true; do
-          SPOTIFY_STR=""
-          SERVICE="org.mpris.MediaPlayer2.spotify"
-          if dbus-send --print-reply --type=method_call --dest=$SERVICE /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2 string:Identity >/dev/null 2>/dev/null; then
-              SPOTIFY_STATE=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | grep -oE '(Playing|Paused)')
-              SPOTIFY_TITLE=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | sed -n '/title/{n;p}' | cut -d \" -f 2)
-              SPOTIFY_STR="($SPOTIFY_STATE) $SPOTIFY_TITLE |"
-          fi
-          xsetroot -name "$SPOTIFY_STR $(volume) $(layout) $(get_ram_usage) $(battery) | $(date)"
-          sleep 1
-      done
-    '';
   };
 
   elira.waybar = {

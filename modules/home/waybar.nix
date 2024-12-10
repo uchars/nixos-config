@@ -28,11 +28,10 @@
       home.packages = with pkgs; [
         light
         nerdfonts
-        waybar
         pavucontrol
       ];
       programs.waybar = {
-        enable = true;
+        enable = false;
         systemd.enable = true;
         settings = {
           mainBar = {

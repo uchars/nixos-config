@@ -7,28 +7,11 @@
   boot = {
     initrd.systemd.enable = true;
     supportedFilesystems = [ "ntfs" ];
-    plymouth = {
-      enable = true;
-      theme = "glitch";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "glitch" ];
-        })
-      ];
-    };
 
-    consoleLogLevel = 0;
-    initrd.verbose = false;
     kernelParams = [
-      "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
       "video=3440x1440"
     ];
+
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -71,7 +54,6 @@
   system.stateVersion = "24.05";
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -109,7 +91,8 @@
   elira.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "d1a2b5e18cce9f32723cfc99896292342aa1ea58";
+    rev = "3e8882b9c25c13e295d60b0c042b0f02dd264792";
+    wallpaper = ./wallpaper.png;
   };
 
   elira.displayManager = {

@@ -45,7 +45,7 @@
         $lock = hyprlock
         $menu = rofi -show run
 
-        exec-once = ${cfg.wallpaper.daemon} & sleep 0.5 && ${cfg.wallpaper.cmd} ${cfg.wallpaper.path} 
+        exec-once = ${cfg.wallpaper.daemon} & sleep 0.5 && ${cfg.wallpaper.cmd} ${cfg.wallpaper.path}
         exec-once = $terminal
         exec-once = nm-applet &
         exec-once = blueman-applet &
@@ -60,7 +60,7 @@
         env = HYPRCURSOR_SIZE,32
 
         # https://wiki.hyprland.org/Configuring/Variables/#general
-        general { 
+        general {
             gaps_in = 5
             gaps_out = 10
 
@@ -71,7 +71,7 @@
             col.inactive_border = rgba(595959aa)
 
             # Set to true enable resizing windows by clicking and dragging on borders and gaps
-            resize_on_border = false 
+            resize_on_border = false
 
             # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
             allow_tearing = false
@@ -130,7 +130,7 @@
         }
 
         # https://wiki.hyprland.org/Configuring/Variables/#misc
-        misc { 
+        misc {
             force_default_wallpaper = 0 # Set to 0 or 1 to disable the anime mascot wallpapers
             disable_hyprland_logo = true # If true disables the random hyprland logo / anime girl background. :(
         }

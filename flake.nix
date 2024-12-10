@@ -35,9 +35,6 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      desktop = "dwm";
-      displayManager = "gdm";
-      networkInterface = "enp42s0";
       emacs_dots = ./emacs;
 
       nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
@@ -60,8 +57,7 @@
           inherit system;
           modules = [
             ./systems/lumi/configuration.nix
-            ./programs/opengl.nix
-            ./programs/essentials.nix
+            ./modules/system/essentials.nix
             ./modules/system
           ];
           specialArgs = {
