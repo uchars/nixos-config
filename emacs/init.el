@@ -185,63 +185,6 @@
   :init
   (marginalia-mode))
 
-(defun efs/exwm-update-class ()
-  (exwm-workspace-rename-buffer exwm-class-name))
-
-(use-package exwm
-  :config
-  (setq exwm-workspace-number 5)
-  (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
-
-  (require 'exwm-randr)
-  (exwm-randr-enable)
-
-  (require 'exwm-systemtray)
-  (exwm-systemtray-enable)
-
-  (setq exwm-input-prefix-keys
-	'(?\C-x
-	  ?\C-u
-	  ?\C-w
-	  ?\C-h
-	  ?\M-x
-	  ?\M-`
-	  ?\M-&
-	  ?\M-:
-	  ?\C-\M-j  ;; Buffer list
-	  ?\C-\ ))  ;; Ctrl+Space
-  (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
-
-  (setq exwm-input-global-keys
-	`(
-	  ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
-	  ([?\s-r] . exwm-reset)
-
-          ;; Move between windows
-          ([?\s-h] . windmove-left)
-          ([?\s-l] . windmove-right)
-          ([?\s-k] . windmove-up)
-          ([?\s-j] . windmove-down)
-
-          ;; Launch applications via shell command
-          ([?\s-&] . (lambda (command)
-                       (interactive (list (read-shell-command "$ ")))
-                       (start-process-shell-command command nil command)))
-
-          ;; Switch workspace
-          ([?\s-w] . exwm-workspace-switch)
-          ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch-create 0)))
-
-          ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
-          ,@(mapcar (lambda (i)
-                      `(,(kbd (format "s-%d" i)) .
-                        (lambda ()
-                          (interactive)
-                          (exwm-workspace-switch-create ,i))))
-		    (number-sequence 0 9))))
-
-  (exwm-enable))
-
 (use-package diminish)
 (diminish 'eldoc-mode)
 (use-package command-log-mode)
@@ -368,6 +311,8 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
+  (when (file-directory-p "~/Documents/src/")
+    (add-to-list projectile-project-search-path '("~/Documents/src/")))
   (when (file-directory-p "~/src/")
     (add-to-list projectile-project-search-path '("~/src/")))
   (when (file-directory-p "~/.dotfiles/")

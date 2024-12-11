@@ -64,7 +64,7 @@ in
     autoconf
     gnumake
     dconf
-    transmission-qt
+    transmission_4
     spotify
     gimp
     vlc
@@ -147,10 +147,6 @@ in
     emulation = true;
   };
 
-  elira.wallpaper = {
-    swww = true;
-  };
-
   elira.fonts = {
     enable = true;
   };
@@ -170,6 +166,10 @@ in
       "DP-5"
       "eDP-1"
     ];
+  };
+
+  home.file.".background-image" = {
+    source = ./wallpaper.png;
   };
 
   elira.hyprland = {

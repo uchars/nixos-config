@@ -27,7 +27,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6415-5226";
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0W489720D_1-part1";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -36,14 +36,14 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ce94d0b7-1cef-4a45-b69f-f831ca50b35f";
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0W489720D-part2";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/e44c3ec7-274e-41e6-92a9-feb9b6661b64";
+  boot.initrd.luks.devices."crypted".device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0W489720D-part2";
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/caefc4b9-58c6-48c6-89f6-74867c1f84b5"; }
+    { device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0W489720D_1-part3"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

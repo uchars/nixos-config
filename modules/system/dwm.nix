@@ -95,24 +95,23 @@
         chmod +x /etc/scripts/kbdswitch.sh
       '';
 
-      services.xserver.displayManager.setupCommands = ''
-        dwmstatus.sh&
-        feh --scale-bg /home/sterz_n/Documents/src/nixos-config/systems/lumi/wallpaper.png
-      '';
-
       environment.variables = {
         PATH = "/etc/scripts/:$PATH";
       };
 
       services.xserver.enable = true;
       environment.systemPackages = with pkgs; [
-        dmenu
         blueman
         betterlockscreen
         rofi
         alsa-utils
         st
       ];
+
+      services.xserver.desktopManager.wallpaper = {
+        mode = "scale";
+        combineScreens = false;
+      };
 
       services.xserver.windowManager.dwm = {
         enable = true;

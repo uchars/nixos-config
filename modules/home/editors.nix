@@ -50,7 +50,6 @@
               gopls
               godef
               cmake-language-server
-              texliveFull
               graphviz
             ]
           else

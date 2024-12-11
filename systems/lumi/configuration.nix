@@ -20,7 +20,17 @@
   };
 
   programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+
   networking.hostName = "lumi";
+
+  environment.systemPackages = with pkgs; [
+    mangohud
+    texliveFull
+    pandoc
+  ];
+
+  programs.gamemode.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -91,7 +101,7 @@
   elira.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "3e8882b9c25c13e295d60b0c042b0f02dd264792";
+    rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
     wallpaper = ./wallpaper.png;
   };
 
