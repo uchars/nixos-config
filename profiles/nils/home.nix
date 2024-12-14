@@ -51,7 +51,7 @@ in
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
 
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
     fzf
@@ -153,7 +153,7 @@ in
 
   elira.browser = {
     enable = true;
-    brave = true;
+    brave = false;
     firefox = true;
     tor = true;
   };
