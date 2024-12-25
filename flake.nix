@@ -97,7 +97,6 @@
             pasteSubdomain = "TODO";
             vaultwardenEnv = /tmp/vaultwarden.env;
             acmeMail = "TODO@mail";
-            vars = import ./systems/vars.nix;
           };
         };
       };

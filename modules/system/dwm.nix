@@ -95,6 +95,14 @@
         chmod +x /etc/scripts/kbdswitch.sh
       '';
 
+      home.file.".xinitrc".text = ''
+        if ! [[ $(/bin/pgrep -f "dwmstatus.sh") ]]; then
+        	if [ -x "$(command -v dwmstatus.sh)" ]; then
+        		dwmstatus.sh &
+        	fi
+        fi
+      '';
+
       environment.variables = {
         PATH = "/etc/scripts/:$PATH";
       };

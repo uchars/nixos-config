@@ -11,10 +11,6 @@
       default = false;
       type = types.bool;
     };
-    wezterm = mkOption {
-      default = false;
-      type = types.bool;
-    };
     tmux = mkOption {
       default = false;
       type = types.bool;
@@ -26,9 +22,7 @@
       cfg = config.elira.terminal;
     in
     lib.mkIf cfg.enable {
-      home.packages =
-        with pkgs;
-        (if cfg.wezterm then [ wezterm ] else [ ]) ++ (if cfg.alacritty then [ alacritty ] else [ ]);
+      home.packages = with pkgs; (if cfg.alacritty then [ alacritty ] else [ ]);
 
       programs.tmux = {
         enable = cfg.tmux;
@@ -106,33 +100,6 @@
           [window]
           decorations = "None"
           opacity = 0.8
-        '';
-      };
-
-      home.file."./.config/wezterm/wezterm.lua" = {
-        recursive = true;
-        text = ''
-          local wezterm = require("wezterm")
-          local config = wezterm.config_builder()
-          local launch_menu = {}
-
-          config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-          config.enable_tab_bar = true
-          config.use_fancy_tab_bar = false
-          config.tab_bar_style = {}
-          config.audible_bell = "Disabled"
-          config.window_close_confirmation = "AlwaysPrompt"
-          config.default_workspace = "home"
-          config.window_decorations = "TITLE"
-          config.scrollback_lines = 3000
-          config.window_padding = {
-            left = 0,
-            right = 0,
-            top = 0,
-            bottom = 0,
-          }
-
-          return config
         '';
       };
     };

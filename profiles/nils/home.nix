@@ -81,6 +81,7 @@ in
     mattermost-desktop
     inkscape
     bitwarden-desktop
+    audacity
   ];
 
   services.flameshot = {
@@ -137,7 +138,6 @@ in
 
   elira.terminal = {
     enable = true;
-    wezterm = true;
     alacritty = true;
     tmux = true;
   };

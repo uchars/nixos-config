@@ -22,6 +22,12 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
+  programs.weylus = {
+    enable = true;
+    users = [ "sterz_n" ];
+    openFirewall = true;
+  };
+
   networking.hostName = "lumi";
 
   environment.systemPackages = with pkgs; [
