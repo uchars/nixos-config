@@ -7,7 +7,7 @@ juniper:
     paperless:
         adminPass: ENC[AES256_GCM,data:ZTY4a7o7EjnN57rd,iv:BrA1qeJ68EJQnSTmkiWuE7qPZorUEUGUuospO/ZZQm8=,tag:wsa6XSHINrdKOI2IGZ/D4Q==,type:str]
     ddnspassword: ENC[AES256_GCM,data:CwUJJKRSRzpANi2tgRPat4nGRopT8C9UbH3Hk82UTeU=,iv:oV3XXEksne6a4BXERvNPc+cRxnLYDYQrqHrZwFKZ7sU=,tag:HL5nV/W0JVgXYwwt31GRnw==,type:str]
-    vaultwarden: ENC[AES256_GCM,data:N0sc8KYBV1EcUU2hF6HLqTqhMDGCprgqXwy6GiiN4hetBaEb9fseU9ZsBffJ8LJJhaH/iygHVdK4OEh0ARhEhRTXW7riMMuhwiSM/yOIKMkj0mQHDodl5OskQwtoEQySuIXokIBY1PLTPoBxpwg/0plItN1SjD9H67zquFpek7KJcucUc2/9hAfG1HEjBQpyy1/+5KA=,iv:qtBTwvu7aahqigk+PcrOI4vKFB5RPS0qEpE/TylufeI=,tag:zoC+g4cPiHYDPVRB99oipA==,type:str]
+    vaultwarden: ENC[AES256_GCM,data:ql4t8IerGkEkK65nIjo62B3LHXvxyYgiPAuNmQg9q8HoBdb2PhJB/9ywGT8x4vDPbHDLKSG99956hqOmkLdFCcSqr8Io1sRDEqYP41IOTQu6X5WC82QMTTQJKdH9/aDLQc+y/nTASZfWIgqrxrjnThU76s8paDGxctF0cN7vp+f7hcz1EtfmHooT8fkUq6ebZlIvw+Y=,iv:gVRm8OW/qHkxS2iRw+FEZ1c4BxuBJkNUvSs8n8x10oU=,tag:KN+mEW718anB+hQJVzkPqg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,8 +23,8 @@ sops:
             bmN2dDl1RnYzdGRsUnZPTW5ocThYUm8KdHyKQzESm2j/qwNkcDdpQcGTtDe+PpMP
             V4D5s1th2F1wfGZOH9c15A4De7GvfM4QdVa7RW1gm97qowvEEFvmGQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-12-26T16:42:20Z"
-    mac: ENC[AES256_GCM,data:Gag+TTCMy03L2OmagzlhPdy7zrVPFKFr8ZG1Qq40GhDkIoqA4yQ1kAJA+JYaMukIyols7db7lc34OmUIHJ8rm4Fl6CcwgqRMEV71jucV9I4kj+NZAmTxJhEjxgu/LPzm7mjCRiXsUojKBrTGKYCrTnqnhf4YLXu3xBspdIhlRvk=,iv:acGi4Yn41/6zanOs0wctinXPbwiIzhmSRviF6uBL30c=,tag:enl44+9ken5aLVEQu3UNSw==,type:str]
+    lastmodified: "2024-12-26T19:43:18Z"
+    mac: ENC[AES256_GCM,data:UUhGE5fXDLZ+bQ6QTy6S8fnPq1Woqv4+Ob3hSoFeNGXUQJJxPGIKGFSH70BhRLCBZf3fapdxeVUY2/RKR7gqSrEwDng5UjuWwlDs/g462vSFFZI4RbLNu64aFUw7BWeeEuFr9R5eH5DlixMzixW9JwUuL784ZVx6ibh+wsO0XtQ=,iv:mb1Bg3iqFSS/5uviCIOfuTNcuBX+wSR5H0Twrv7FZ94=,tag:Ei+Ow5+fdXG2RLz4TUET2g==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.9.1

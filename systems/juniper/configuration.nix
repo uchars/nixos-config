@@ -87,16 +87,16 @@ in
     wantedBy = [ "multi-user.target" ];
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
-    environment = {
-      DATADIR = "%S/ddns-updater";
-    };
     unitConfig = {
       Description = "DDNS-updater service";
     };
+    environment = {
+	    DATADIR = "%S/ddns-updater";
+    };
     script = ''
-      CONFIG={"settings":[{"provider":"namecheap","domain":"${domain},${nextcloudSubdomain}.${domain},${vaultwardenSubdomain}.${domain},${pasteSubdomain}.${domain},www.${domain}","password":"$(cat ${
-        config.sops.secrets."juniper/ddnspassword".path
-      })"}]} ${pkgs.ddns-updater}
+export CONFIG="{\"settings\":[ {\"provider\":\"namecheap\",\"host\":\"@,cloud,pass,paste,www\",\"domain\":\"${domain}\",\"password\":\"$(cat ${config.sops.secrets."juniper/ddnspassword".path})\"}]}"
+echo $CONFIG
+     ${pkgs.ddns-updater}/bin/ddns-updater
     '';
     serviceConfig = {
       TimeoutSec = "5min";
@@ -213,7 +213,7 @@ in
     configureRedis = true;
     maxUploadSize = "16G";
     https = true;
-    home = "/raid/crypt/appdata/nextcloud/";
+    home = "/raid/crypt/appdata/nextcloud";
     settings = {
       overwriteprotocol = "https";
     };
