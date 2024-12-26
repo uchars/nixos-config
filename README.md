@@ -69,12 +69,12 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
 ### Creating new secrets
 
 ```bash
-nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
+nix --extra-experimental-features 'nix-command flakes' shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
 ```
 
 Copy the following output after the `&primary` in `.sops.yaml`
 ```bash
-nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
+nix --extra-experimental-features 'nix-command flakes' shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
 ```
 
 You can use the following template.
@@ -83,7 +83,7 @@ cp vault/vault.example.yaml vault/vault.yaml
 ```
 
 ```bash
-EDITOR=vim nix shell nixpkgs#sops -c sops vault/vault.yaml
+EDITOR=vim nix --extra-experimental-features 'nix-command flakes' shell nixpkgs#sops -c sops vault/vault.yaml
 ```
 
 ## Setting up the System

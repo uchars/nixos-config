@@ -90,8 +90,9 @@
             nextcloudAdmin = "TODO";
             vaultwardenSubdomain = "TODO";
             vaultwardenPort = "TODO";
-            dashboardPort = "TODO";
             pasteSubdomain = "TODO";
+            dashboardPort = "TODO";
+            acmeMail = "TODO@TODO";
             sopsFile = ./vault/vault.yaml;
             sopsKeyFile = "/home/sterz_n/.config/sops/age/keys.txt";
           };

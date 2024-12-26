@@ -14,10 +14,6 @@
   ...
 }:
 let
-  nextcloudAdminPass = config.sops.secrets."juniper/nextcloud/adminPass".path;
-  userPasswordFile = config.sops.secrets."juniper/userpassword".path;
-  vaultwardenEnv = config.sops.secrets."juniper/vaultwarden/env".path;
-  paperlessPass = config.sops.secrets."juniper/paperless/adminPass".path;
 in
 {
   imports = [
@@ -83,6 +79,9 @@ in
     ripgrep
   ];
 
+  sops.secrets."juniper/ddnspassword" = {
+    owner = "ddns-updater";
+  };
   systemd.services.ddns-updater = {
     wantedBy = [ "multi-user.target" ];
     wants = [ "network-online.target" ];
@@ -200,6 +199,9 @@ in
     ];
   };
 
+  sops.secrets."juniper/nextcloud/adminPass" = {
+    owner = "nextcloud";
+  };
   services.nextcloud = {
     enable = true;
     hostName = "${nextcloudSubdomain}.${domain}";
@@ -214,12 +216,13 @@ in
     };
     config = {
       adminuser = "${nextcloudAdmin}";
-      adminpassFile = nextcloudAdminPass;
+      adminpassFile = config.sops.secrets."juniper/nextcloud/adminPass".path;
       dbtype = "pgsql";
       dbhost = "/run/postgresql";
     };
   };
 
+  sops.secrets."juniper/vaultwarden" = { };
   services.vaultwarden = {
     enable = true;
     dbBackend = "sqlite";
@@ -227,7 +230,7 @@ in
     config = {
       ROCKET_PORT = vaultwardenPort;
     };
-    environmentFile = vaultwardenEnv;
+    environmentFile = config.sops.secrets."juniper/vaultwarden".path;
   };
 
   services.glance = {
@@ -308,12 +311,13 @@ in
     virtualHost = "${pasteSubdomain}.${domain}";
   };
 
+  sops.secrets."paperless/adminPass" = { };
   services.paperless = {
     enable = true;
     port = 2033;
     dataDir = "/raid/crypt/appdata/paperless/data";
     mediaDir = "/raid/crypt/appdata/paperless/media";
-    passwordFile = paperlessPass;
+    passwordFile = config.sops.secrets."juniper/paperless/adminPass".path;
     address = "10.42.42.10";
   };
 
@@ -337,6 +341,6 @@ in
       "users"
     ];
     uid = 1000;
-    hashedPasswordFile = userPasswordFile;
+    hashedPasswordFile = config.sops.secrets."juniper/userpassword".path;
   };
 }
