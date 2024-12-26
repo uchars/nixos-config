@@ -1,20 +1,35 @@
 {
+  config,
   pkgs,
   nextcloudSubdomain,
   domain,
   vaultwardenSubdomain,
-  vaultwardenEnv,
   vaultwardenPort,
   nextcloudAdmin,
   pasteSubdomain,
   acmeMail,
+  inputs,
+  sopsFile,
+  sopsKeyFile,
   ...
 }:
+let
+  nextcloudAdminPass = config.sops.secrets."juniper/nextcloud/adminPass".path;
+  userPasswordFile = config.sops.secrets."juniper/userpassword".path;
+  vaultwardenEnv = config.sops.secrets."juniper/vaultwarden/env".path;
+  paperlessPass = config.sops.secrets."juniper/paperless/adminPass".path;
+in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
   ];
+
+  sops.defaultSopsFile = sopsFile;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = sopsKeyFile;
+  sops.secrets."juniper/userpassword".neededForUsers = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -37,12 +52,15 @@
     useDHCP = true;
     networkmanager.enable = false;
     firewall = {
+      enable = true;
       allowPing = true;
       trustedInterfaces = [ "eno1" ];
       allowedTCPPorts = [
+        2033
         443
       ];
       allowedUDPPorts = [
+        2033
         443
       ];
     };
@@ -57,34 +75,35 @@
   environment.systemPackages = with pkgs; [
     zfs
     vaultwarden
-    ddns-go
     dashy-ui
+    hd-idle
     vim
     wget
     git
     ripgrep
   ];
 
-  systemd.services.ddns-go = {
-    description = "DDNS-Go Dynamic DNS Service";
-    after = [ "network.target" ];
+  systemd.services.ddns-updater = {
     wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.ddns-go}/bin/ddns-go -l :9876";
-      Restart = "always";
-      RestartSec = 5;
-      User = "ddns-go";
-      Group = "ddns-go";
-      WorkingDirectory = "/var/lib/ddns-go";
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    environment = {
+      DATADIR = "%S/ddns-updater";
+      CONFIG = ''{"settings":[{"provider":"namecheap","domain":"${domain},${nextcloudSubdomain}.${domain},${vaultwardenSubdomain}.${domain},${pasteSubdomain}.${domain},www.${domain}","password": "${
+        builtins.readfile config.sops.secrets."juniper/ddnspassword".path
+      }" } ] }'';
     };
-  };
-
-  users.groups.ddns-go = { };
-
-  users.users.ddns-go = {
-    isSystemUser = true;
-    home = "/var/lib/ddns-go";
-    group = "ddns-go";
+    unitConfig = {
+      Description = "DDNS-updater service";
+    };
+    serviceConfig = {
+      TimeoutSec = "5min";
+      ExecStart = pkgs.ddns-updater;
+      RestartSec = 30;
+      DynamicUser = true;
+      StateDirectory = "ddns-updater";
+      Restart = "on-failure";
+    };
   };
 
   services.openssh = {
@@ -165,8 +184,15 @@
 
   services.postgresql = {
     enable = true;
-    ensureDatabases = [ "nextcloud" ];
+    ensureDatabases = [
+      "nextcloud"
+      "dnote"
+    ];
     ensureUsers = [
+      {
+        name = "dnote";
+        ensureDBOwnership = true;
+      }
       {
         name = "nextcloud";
         ensureDBOwnership = true;
@@ -187,7 +213,7 @@
     };
     config = {
       adminuser = "${nextcloudAdmin}";
-      adminpassFile = "/tmp/pass.txt";
+      adminpassFile = nextcloudAdminPass;
       dbtype = "pgsql";
       dbhost = "/run/postgresql";
     };
@@ -198,9 +224,7 @@
     dbBackend = "sqlite";
     backupDir = "/raid/crypt/appdata/vaultwarden";
     config = {
-      SIGNUPS_ALLOWED = false;
       ROCKET_PORT = vaultwardenPort;
-      ADMIN_TOKEN = "";
     };
     environmentFile = vaultwardenEnv;
   };
@@ -258,18 +282,13 @@
                   }
                   {
                     title = "Vaultwarden";
-                    url = "https://${nextcloudSubdomain}.${domain}";
+                    url = "https://${vaultwardenSubdomain}.${domain}";
                     icon = "si:vaultwarden";
                   }
                   {
                     title = "PrivateBin";
                     url = "https://${pasteSubdomain}.${domain}";
                     icon = "si:pastebin";
-                  }
-                  {
-                    title = "Homeassistant";
-                    url = "https://nilsimusmaximus.duckdns.org:8321";
-                    icon = "si:homeassistant";
                   }
                 ];
                 type = "monitor";
@@ -288,9 +307,28 @@
     virtualHost = "${pasteSubdomain}.${domain}";
   };
 
+  services.paperless = {
+    enable = true;
+    port = 2033;
+    dataDir = "/raid/crypt/appdata/paperless/data";
+    mediaDir = "/raid/crypt/appdata/paperless/media";
+    passwordFile = paperlessPass;
+    address = "10.42.42.10";
+  };
+
+  systemd.services.hd-idle = {
+    description = "Spin down idle disks";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      # Type = "forking";
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a sda -i 900 -a sdb -i 900 -a sdc -i 900 -a sde -i 900 -a sdh -i 900";
+    };
+  };
+
   users.users.sterz_n = {
     isNormalUser = true;
     description = "Nils Sterz";
+    createHome = true;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -298,5 +336,6 @@
       "users"
     ];
     uid = 1000;
+    hashedPasswordFile = userPasswordFile;
   };
 }

@@ -1,0 +1,10 @@
+juniper:
+  userpassword: YOUR_PASSWORD
+  nextcloud:
+    adminPass: NEXTCLOUD_ADMIN_PASS
+  paperless:
+    adminPass: PAPERLESS_ADMIN_PASS
+  vaultwarden:
+    env:
+      - ADMIN_TOKEN='$$argon_TOKEN'
+      - SIGNUPS_ALLOWED=true

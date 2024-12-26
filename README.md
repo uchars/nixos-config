@@ -21,7 +21,7 @@ nix-shell -p git
 git clone https://github.com/uchars/nixos-config.git /tmp/nixos && cd /tmp/nixos
 ```
 
-Optional: Add a github token to avoid the rate limit error 
+Optional: Add a github token to avoid the rate limit error
 
 Settings -> Developer Settings -> Fine-grained tokens (https://github.com/settings/tokens?type=beta)
 
@@ -53,6 +53,37 @@ Once you're finished run
 
 ```sh
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko systems/juniper/disko-raidz2.nix
+```
+
+## Using existing or creating new secrets
+
+> [!WARNING]
+> It is recommended to change the password to more complex ones after setting up your services.
+
+### Using existing secrets
+
+0. Update the `sopsKeyFile` location in `flake.nix`
+1. Locate your private key `keys.txt`
+2. Copy the `keys.txt` to the location defined in `flake.nix`
+
+### Creating new secrets
+
+```bash
+nix shell nixpkgs#age -c age-keygen -o ~/.config/sops/age/keys.txt
+```
+
+Copy the following output after the `&primary` in `.sops.yaml`
+```bash
+nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
+```
+
+You can use the following template.
+```bash
+cp vault/vault.example.yaml vault/vault.yaml
+```
+
+```bash
+EDITOR=vim nix shell nixpkgs#sops -c sops vault/vault.yaml
 ```
 
 ## Setting up the System

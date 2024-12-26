@@ -10,6 +10,7 @@
     vim
     tmux
     git
+    age
     wget
     ripgrep
     pciutils

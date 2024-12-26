@@ -1,0 +1,7 @@
+keys:
+  - &primary age1ultc4hmercdkfzux25dn62vw2yyl93alnr29xc9q9dzq4uhydyjs4vdgh6
+creation_rules:
+  - path_regex: vault/vault.yaml$
+    key_groups:
+      - age:
+          - *primary

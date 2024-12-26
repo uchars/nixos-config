@@ -6,14 +6,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
     flake-utils.url = "github:numtide/flake-utils";
     plasma-manager = {
       url = "github:pjones/plasma-manager";
@@ -29,7 +26,7 @@
       home-manager,
       plasma-manager,
       emacs-overlay,
-      agenix,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -59,6 +56,7 @@
             ./systems/lumi/configuration.nix
             ./modules/system/essentials.nix
             ./modules/system
+            sops-nix.nixosModules.sops
           ];
           specialArgs = {
             inherit system;
@@ -80,8 +78,7 @@
           modules = [
             ./modules/system
             ./systems/juniper
-            ./vault
-            agenix.nixosModules.default
+            sops-nix.nixosModules.sops
           ];
           specialArgs = {
             inherit
@@ -95,8 +92,8 @@
             vaultwardenPort = "TODO";
             dashboardPort = "TODO";
             pasteSubdomain = "TODO";
-            vaultwardenEnv = /tmp/vaultwarden.env;
-            acmeMail = "TODO@mail";
+            sopsFile = ./vault/vault.yaml;
+            sopsKeyFile = "/home/sterz_n/.config/sops/age/keys.txt";
           };
         };
       };

@@ -115,6 +115,10 @@ in
     '';
   };
 
+  home.sessionVariables = {
+    EDITOR = "vim";
+  };
+
   elira.editors = {
     enable = true;
     vscode = true;
@@ -170,6 +174,14 @@ in
 
   home.file.".background-image" = {
     source = ./wallpaper.png;
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
+    };
   };
 
   elira.hyprland = {
