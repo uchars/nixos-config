@@ -194,13 +194,8 @@ in
     enable = true;
     ensureDatabases = [
       "nextcloud"
-      "dnote"
     ];
     ensureUsers = [
-      {
-        name = "dnote";
-        ensureDBOwnership = true;
-      }
       {
         name = "nextcloud";
         ensureDBOwnership = true;
