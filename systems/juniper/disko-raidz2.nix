@@ -178,32 +178,12 @@
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
-          "crypt/appdata/paperless/media" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "crypt/appdata/paperless/data" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
           "crypt/appdata/privatebin" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
           "crypt/appdata/nextcloud" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "crypt/appdata/nextcloud/home" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
-          "crypt/appdata/nextcloud/data" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";

@@ -54,16 +54,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/raid/crypt/appdata/paperless/media" = {
-    device = "BUG/crypt/appdata/paperless/media";
-    fsType = "zfs";
-  };
-
-  fileSystems."/raid/crypt/appdata/paperless/data" = {
-    device = "BUG/crypt/appdata/paperless/data";
-    fsType = "zfs";
-  };
-
   fileSystems."/raid/crypt/appdata/vaultwarden" = {
     device = "BUG/crypt/appdata/vaultwarden";
     fsType = "zfs";
@@ -76,16 +66,6 @@
 
   fileSystems."/raid/crypt/appdata/nextcloud" = {
     device = "BUG/crypt/appdata/nextcloud";
-    fsType = "zfs";
-  };
-
-  fileSystems."/raid/crypt/appdata/nextcloud/data" = {
-    device = "BUG/crypt/appdata/nextcloud/data";
-    fsType = "zfs";
-  };
-
-  fileSystems."/raid/crypt/appdata/nextcloud/home" = {
-    device = "BUG/crypt/appdata/nextcloud/home";
     fsType = "zfs";
   };
 
