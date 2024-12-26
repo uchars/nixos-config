@@ -207,7 +207,8 @@ in
     configureRedis = true;
     maxUploadSize = "16G";
     https = true;
-    home = "/raid/crypt/appdata/nextcloud/";
+    home = "/raid/crypt/appdata/nextcloud/home/";
+    datadir = "/raid/crypt/appdata/nextcloud/data/";
     settings = {
       overwriteprotocol = "https";
     };

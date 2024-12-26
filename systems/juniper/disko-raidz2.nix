@@ -168,27 +168,32 @@
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
-          "crypt/appdata/sharry" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "true";
-          };
           "crypt/appdata/vaultwarden" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
-          "crypt/media" = {
-            type = "zfs_fs";
-            options.mountpoint = "legacy";
-            options."com.sun:auto-snapshot" = "false";
-          };
-          "crypt/media/vods" = {
+          "crypt/appdata/paperless" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
-          "crypt/media/movies" = {
+          "crypt/appdata/privatebin" = {
+            type = "zfs_fs";
+            options.mountpoint = "legacy";
+            options."com.sun:auto-snapshot" = "true";
+          };
+          "crypt/appdata/nextcloud" = {
+            type = "zfs_fs";
+            options.mountpoint = "legacy";
+            options."com.sun:auto-snapshot" = "true";
+          };
+          "crypt/appdata/nextcloud/home" = {
+            type = "zfs_fs";
+            options.mountpoint = "legacy";
+            options."com.sun:auto-snapshot" = "true";
+          };
+          "crypt/appdata/nextcloud/data" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";

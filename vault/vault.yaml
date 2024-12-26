@@ -10,7 +10,7 @@ juniper:
     vaultwarden:
         env:
             - ENC[AES256_GCM,data:s67FqrIH7wwxlydBs4f0/s3ma7bLKhQAGFQS3IeBjRSDEStf1cEf/ClLYcZA1EJZjPQkmZRwLh4ygEvk+f3fG59QAp0uCAys+O4afvusmiX9jsn310xupaRcQGm48eQGI1sEf3dHodlB6myhFsUL0zuX7cYwBkEJBrRdpKVqo4wk4o0aFxDYsMmYj5N3YfR9rPTVpjLTwrSb,iv:zAvBDHFZY+z17luekItdZflsCrZRV7+0BA4hk+hAhwk=,tag:Pn0BrKrSiB+Xhsjfx/KT0g==,type:str]
-            - ENC[AES256_GCM,data:CI1IxawIOl1tgbR8h/Tno/kqqHk=,iv:irLTxPFugiAQwd2de5CMlRzr523numqrWzL8k92aK1k=,tag:84Mz4Jokf0/qhUTumwoDTQ==,type:str]
+            - ENC[AES256_GCM,data:qbnQ3rWDK4LOc/rKNRw5O2vJBq04,iv:OAh2hZRLXERlhGx9hlAEBmiqfA1AkpAO2A9MFLtezsU=,tag:ndqK4eblexwfTqq+lQk1Qg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -26,8 +26,8 @@ sops:
             bmN2dDl1RnYzdGRsUnZPTW5ocThYUm8KdHyKQzESm2j/qwNkcDdpQcGTtDe+PpMP
             V4D5s1th2F1wfGZOH9c15A4De7GvfM4QdVa7RW1gm97qowvEEFvmGQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-12-26T09:40:10Z"
-    mac: ENC[AES256_GCM,data:nUnmUCdIOxx9gj5TzEPgDOJz1vZ+WN/S0BCaRmUFWirHwEmoTOZOawlF0PdkouMd5kujWKuSbFW4zjqekmAJEfne1wKKYBRJsGHSWACJsD156mcqR58hYj7OvzEB9Ec0kiUt2akLT9PQ0MXG3WJ0/OFv7xlLvoIoNzXlWrfc8HM=,iv:SQNuhfcGw9jbttFNIBJ/3HK/J+/g62qd+77CczL7w8s=,tag:uc+CBkJOha7F8bnWB4hCOA==,type:str]
+    lastmodified: "2024-12-26T12:33:40Z"
+    mac: ENC[AES256_GCM,data:TfznMo0VwaC2FcwdJXd4QBJqgTdtzup++CU3TnmNWGsgVg1/fVBiPDBksWrH3Orw2GxE67XHA+oEaSmEOxE7LUFXKvmnnkQKFd3or74mWQ4b4m5/lCn0z61dCRSyw8TbUgHxknn5oyxB8ylTAYrg4vVolqze6EMErKDRrmT/cbs=,iv:6oB+K+LOoJ50MuSRVtSG2YEhULR5I3kOaA0Zod3r9yk=,tag:hyxqHkIExR+xQw2/jrHacw==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.9.1
