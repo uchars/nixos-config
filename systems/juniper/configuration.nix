@@ -71,6 +71,7 @@ in
   environment.systemPackages = with pkgs; [
     zfs
     vaultwarden
+    ddns-updater
     dashy-ui
     hd-idle
     vim
@@ -88,22 +89,30 @@ in
     after = [ "network-online.target" ];
     environment = {
       DATADIR = "%S/ddns-updater";
-      CONFIG = ''{"settings":[{"provider":"namecheap","domain":"${domain},${nextcloudSubdomain}.${domain},${vaultwardenSubdomain}.${domain},${pasteSubdomain}.${domain},www.${domain}","password": "${
-        builtins.readfile config.sops.secrets."juniper/ddnspassword".path
-      }" } ] }'';
     };
     unitConfig = {
       Description = "DDNS-updater service";
     };
+    script = ''
+      CONFIG={"settings":[{"provider":"namecheap","domain":"${domain},${nextcloudSubdomain}.${domain},${vaultwardenSubdomain}.${domain},${pasteSubdomain}.${domain},www.${domain}","password":"$(cat ${
+        config.sops.secrets."juniper/ddnspassword".path
+      })"}]} ${pkgs.ddns-updater}
+    '';
     serviceConfig = {
       TimeoutSec = "5min";
-      ExecStart = pkgs.ddns-updater;
       RestartSec = 30;
       DynamicUser = true;
       StateDirectory = "ddns-updater";
       Restart = "on-failure";
     };
   };
+  users.users.ddns-updater = {
+    home = "/var/lib/ddns-updater";
+    createHome = true;
+    isSystemUser = true;
+    group = "ddns-updater";
+  };
+  users.groups.ddns-updater = { };
 
   services.openssh = {
     enable = true;
@@ -311,7 +320,7 @@ in
     virtualHost = "${pasteSubdomain}.${domain}";
   };
 
-  sops.secrets."paperless/adminPass" = { };
+  sops.secrets."juniper/paperless/adminPass" = { };
   services.paperless = {
     enable = true;
     port = 2033;
