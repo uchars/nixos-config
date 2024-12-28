@@ -24,6 +24,10 @@
         virt-manager
       ];
       virtualisation.libvirtd.enable = true;
+      virtualisation.libvirtd.allowedBridges = [
+        "virbr0"
+        "virbr1"
+      ];
       hardware.graphics.enable = true;
       users.users.${cfg.user}.extraGroups = [ "libvirtd" ];
     };

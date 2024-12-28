@@ -4,6 +4,7 @@
 
   services.fstrim.enable = lib.mkDefault true;
 
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot = {
     initrd.systemd.enable = true;
     supportedFilesystems = [ "ntfs" ];
@@ -22,14 +23,7 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
-  programs.weylus = {
-    enable = true;
-    users = [ "sterz_n" ];
-    openFirewall = true;
-  };
-
   networking.hostName = "lumi";
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   environment.systemPackages = with pkgs; [
     mangohud
