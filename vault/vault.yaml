@@ -6,8 +6,8 @@ juniper:
         adminPass: ENC[AES256_GCM,data:b9fGfyIGnAYpsg2x,iv:SUkX05oGne1lJfGf6O7YCJHKxSZC1zBXK8p4c2uwjt8=,tag:SmJ4yWnWbdpBFeOdYMgKbA==,type:str]
     paperless:
         adminPass: ENC[AES256_GCM,data:ZTY4a7o7EjnN57rd,iv:BrA1qeJ68EJQnSTmkiWuE7qPZorUEUGUuospO/ZZQm8=,tag:wsa6XSHINrdKOI2IGZ/D4Q==,type:str]
-    ddnspassword: ENC[AES256_GCM,data:CwUJJKRSRzpANi2tgRPat4nGRopT8C9UbH3Hk82UTeU=,iv:oV3XXEksne6a4BXERvNPc+cRxnLYDYQrqHrZwFKZ7sU=,tag:HL5nV/W0JVgXYwwt31GRnw==,type:str]
-    vaultwarden: ENC[AES256_GCM,data:ql4t8IerGkEkK65nIjo62B3LHXvxyYgiPAuNmQg9q8HoBdb2PhJB/9ywGT8x4vDPbHDLKSG99956hqOmkLdFCcSqr8Io1sRDEqYP41IOTQu6X5WC82QMTTQJKdH9/aDLQc+y/nTASZfWIgqrxrjnThU76s8paDGxctF0cN7vp+f7hcz1EtfmHooT8fkUq6ebZlIvw+Y=,iv:gVRm8OW/qHkxS2iRw+FEZ1c4BxuBJkNUvSs8n8x10oU=,tag:KN+mEW718anB+hQJVzkPqg==,type:str]
+    ddnspassword: ENC[AES256_GCM,data:RjWkAvGbSXRkPJ1f404rXV2AuSmy8tfucRNtvFtA3BY=,iv:lJmrulFT+7fyafS7eq/SDhLf5W4RUTi3vO+wxbeN47Y=,tag:dw2f3M+3uCUl5S0XITWP9Q==,type:str]
+    vaultwarden: ENC[AES256_GCM,data:h3PPIst6l3fQQpEKtS35XKxhG6l6A9uLQI8m4Ffef3tKod0LNPTKscbOSLII8MsC3o3Cz2aNUwV/DbfM7oFc2dK+abGUFwJ8lSo52jLBXJfLcNE66b9cMW/NsRC2nTnwiIfIBgnFl3K2Dh5PfC8lAdcD9+uDmg3jjvdFsZf+w0ckG9+2uKFZRCrIhXUA+G/bgaKe,iv:+I6soUhGNDWuanaVPhy3YYImNSQJbfpZG30pG5PrSsA=,tag:P5iuy8m83jRvD4SxApJZUw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,8 +23,8 @@ sops:
             bmN2dDl1RnYzdGRsUnZPTW5ocThYUm8KdHyKQzESm2j/qwNkcDdpQcGTtDe+PpMP
             V4D5s1th2F1wfGZOH9c15A4De7GvfM4QdVa7RW1gm97qowvEEFvmGQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-12-26T19:43:18Z"
-    mac: ENC[AES256_GCM,data:UUhGE5fXDLZ+bQ6QTy6S8fnPq1Woqv4+Ob3hSoFeNGXUQJJxPGIKGFSH70BhRLCBZf3fapdxeVUY2/RKR7gqSrEwDng5UjuWwlDs/g462vSFFZI4RbLNu64aFUw7BWeeEuFr9R5eH5DlixMzixW9JwUuL784ZVx6ibh+wsO0XtQ=,iv:mb1Bg3iqFSS/5uviCIOfuTNcuBX+wSR5H0Twrv7FZ94=,tag:Ei+Ow5+fdXG2RLz4TUET2g==,type:str]
+    lastmodified: "2024-12-28T10:17:15Z"
+    mac: ENC[AES256_GCM,data:s7rios4xhhwv3g2rFnb/nGm5v/1O0NWOsyQB+bWwbkDPMTPct9LJvlANZDsCDdI9vBbL/K2syyrUCr+hLsNGaSZYWDxNpzw1mmslMX6PC3BL6IxeoG+mSOwTCcv7PF1M02obyE2t1ApQZvxGv1CjXwddGAlmLf/xFzf5tBteo/o=,iv:YLa5x7QTWaF7t8mOU1v1O4uem4ZqvH+gKiD/tAEL3Es=,tag:ns87wXwL2OZ53uk1hoQmkQ==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.9.1

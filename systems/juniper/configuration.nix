@@ -54,10 +54,14 @@ in
       allowedTCPPorts = [
         2033
         443
+	8000
+	53
       ];
       allowedUDPPorts = [
         2033
         443
+	8000
+	53
       ];
     };
   };
@@ -94,7 +98,7 @@ in
 	    DATADIR = "%S/ddns-updater";
     };
     script = ''
-export CONFIG="{\"settings\":[ {\"provider\":\"namecheap\",\"host\":\"@,cloud,pass,paste,www\",\"domain\":\"${domain}\",\"password\":\"$(cat ${config.sops.secrets."juniper/ddnspassword".path})\"}]}"
+export CONFIG="{\"settings\":[  {\"provider\":\"namecheap\",\"host\":\"@,pass,cloud,paste\",\"domain\":\"${domain}\",\"password\":\"$(cat ${config.sops.secrets."juniper/ddnspassword".path})\"}]}"
 echo $CONFIG
      ${pkgs.ddns-updater}/bin/ddns-updater
     '';
@@ -217,6 +221,7 @@ echo $CONFIG
     settings = {
       overwriteprotocol = "https";
     };
+    database.createLocally = true;
     config = {
       adminuser = "${nextcloudAdmin}";
       adminpassFile = config.sops.secrets."juniper/nextcloud/adminPass".path;
