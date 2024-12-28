@@ -24,6 +24,10 @@
         [
           discord
           obs-studio
+          bottles
+          lutris
+          wineWowPackages.staging
+          winetricks
         ]
         ++ (
           if cfg.emulation then

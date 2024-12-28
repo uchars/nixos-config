@@ -1,6 +1,7 @@
 {
   pkgs,
   emacs_dots,
+  inputs,
   username,
   ...
 }:
@@ -143,6 +144,7 @@ in
   elira.terminal = {
     enable = true;
     alacritty = true;
+    ghostty = true;
     tmux = true;
   };
 

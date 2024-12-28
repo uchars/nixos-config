@@ -2,12 +2,17 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
   options.elira.terminal = with lib; {
     enable = mkEnableOption "Terminal Things";
     alacritty = mkOption {
+      default = false;
+      type = types.bool;
+    };
+    ghostty = mkOption {
       default = false;
       type = types.bool;
     };
@@ -22,7 +27,17 @@
       cfg = config.elira.terminal;
     in
     lib.mkIf cfg.enable {
-      home.packages = with pkgs; (if cfg.alacritty then [ alacritty ] else [ ]);
+      home.packages =
+        with pkgs;
+        (if cfg.alacritty then [ alacritty ] else [ ])
+        ++ (
+          if cfg.ghostty then
+            [
+              inputs.ghostty.packages.x86_64-linux.default
+            ]
+          else
+            [ ]
+        );
 
       programs.tmux = {
         enable = cfg.tmux;
@@ -102,5 +117,17 @@
           opacity = 0.8
         '';
       };
+      home.file."./.config/ghostty/config" = {
+        recursive = true;
+        text = ''
+          #background = 282c34
+          #foreground = ffffff
+          background-opacity = 0.8
+          background-blur-radius = 60
+          window-decoration = false
+          copy-on-select = true
+        '';
+      };
+
     };
 }

@@ -29,6 +29,7 @@
   };
 
   networking.hostName = "lumi";
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   environment.systemPackages = with pkgs; [
     mangohud
@@ -37,6 +38,12 @@
   ];
 
   programs.gamemode.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.dragAndDrop = true;
+  users.extraGroups.vboxusers.members = [ "sterz_n" ];
 
   # Enable networking
   networking.networkmanager.enable = true;

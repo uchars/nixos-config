@@ -18,6 +18,7 @@
       inputs.home-manager.follows = "home-manager";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    ghostty.url = "github:ghostty-org/ghostty";
   };
   outputs =
     {
@@ -27,6 +28,7 @@
       plasma-manager,
       emacs-overlay,
       sops-nix,
+      ghostty,
       ...
     }@inputs:
     let
@@ -110,7 +112,7 @@
             plasma-manager.homeManagerModules.plasma-manager
           ];
           extraSpecialArgs = {
-            inherit emacs_dots;
+            inherit emacs_dots inputs;
             username = "sterz_n";
           };
         };
