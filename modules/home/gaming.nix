@@ -28,6 +28,7 @@
           lutris
           wineWowPackages.staging
           winetricks
+          protontricks
         ]
         ++ (
           if cfg.emulation then
