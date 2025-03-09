@@ -1,105 +1,546 @@
-(setq inhibit-startup-message t)
+;;; init.el --- Personal emacs config -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Works on my machine (tm)
+;;; Author: Nils Sterz
+;;; Code:
+(setq gc-cons-threshold #x40000000)
 
-(setq warning-minimum-level :emergency)
+;(setq url-proxy-services '(("http" . "user%40mail:password@proxy:8080")
+;                           ("https" . "user%40mail:password@proxy:8080")))
 
-; disable some UI elements
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
-(menu-bar-mode -1)          ; Disable the menu bar
+(setq read-process-output-max (* 1024 1024 4))
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(set-default-coding-systems 'utf-8)
-(setq indent-tabs-mode nil) ; spaces rule
+(setq use-package-always-ensure t)
 
-;; scroll settings
-(setq scroll-margin 8)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
-(setq use-dialog-box nil) ;; Disable dialog boxes since they weren't working in Mac OSX
+(use-package emacs
+  :ensure nil
+  :custom
+  (column-number-mode t)
+  (auto-save-default nil)
+  (create-lockfiles nil)
+  (delete-by-moving-to-trash t)
+  (display-line-numbers-type 'relative)
+  (history-length 42)
+  (inhibit-startup-message t)
+  (ispell-dictionary "en_US")
+  (pixel-scroll-precision-mode t)
+  (pixel-scroll-precision-use-momentum nil)
+  (ring-bell-function 'ignore)
+  (split-width-threshold 300)
+  (tab-width 4)
+  (truncate-lines t)
+  (use-dialog-box nil)
+  (warning-minimum-level :emergency)
+  :hook
+  (prog-mode . display-line-numbers-mode)
+  :config
+  (add-to-list 'load-path "~/.emacs.d/custom")
+  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+  (load custom-file 'noerror 'nomessage)
+  (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
+  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 140)
+  (setq scroll-margin 8)
+  (setq scroll-conservatively 100)
+  (setq use-short-answers t)
+  (setq global-hl-line-mode nil)
+  (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│))
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (setq tramp-default-method "ssh")
+  (setq auto-save-file-name-transforms
+		`((".*" "~/.emacs-saves/" t)))
+  (setq backup-directory-alist `(("." . "~/.saves")))
+  (when (eq window-system 'w32)
+	(setq tramp-default-method "plink")
+	(when (and (not (string-match putty-directory (getenv "PATH")))
+			   (file-directory-p putty-directory))
+	  (setenv "PATH" (concat putty-directory ";" (getenv "PATH")))
+	  (add-to-list 'exec-path putty-directory)))
+  :init
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (add-hook 'after-init-hook
+    (lambda ()
+      (with-current-buffer (get-buffer-create "*scratch*")
+        (insert (format
+                 ";; Loading (%s) Packages(%s)"
+                  (emacs-init-time)
+                  (number-to-string (length package-activated-list)))))))
+  (when scroll-bar-mode (scroll-bar-mode -1))
+  (save-place-mode 1)
+  (savehist-mode 1)
+  (indent-tabs-mode -1)
+  (global-hl-line-mode 1)
+  (modify-coding-system-alist 'file "" 'utf-8))
 
-;; disable symlink warnings
-(setq vc-follow-symlinks t)
+;; Tramp hosts
+(defvar n/tramp-hosts
+      '(("sterz_n@juniper" . "/ssh:sterz_n@10.42.42.10:")))
 
-(defun nils/transparency-enable ()
+(defun n/choose-tramp()
+  "Choose tramp host to connect to."
+  (interactive)
+  (let ((host (completing-read "Choose a host: " n/tramp-hosts)))
+	(find-file (concat (cdr (assoc host n/tramp-hosts)) "/"))))
+
+(defun n/transparency-enable ()
   "Enables Editor transparency."
   (interactive)
-  (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-  (add-to-list 'default-frame-alist '(alpha . (90 . 90))))
+  (set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+  (add-to-list 'default-frame-alist '(alpha . (80 . 80))))
 
-(defun nils/transparency-disable ()
+(defun n/transparency-disable ()
   "Disable Editor transparency."
   (interactive)
   (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
   (add-to-list 'default-frame-alist '(alpha . (100 . 100))))
 
-(defun nils/set-font ()
-  "Set the editor font."
-  (if (eq system-type 'windows-nt)
-      (set-face-attribute 'default nil :height 120)
-    (set-face-attribute 'default nil :height 120)))
-
-(nils/set-font)
-
-(setq image-use-external-converter t)
-
-(setq tramp-default-method "ssh")
-
-(load-theme 'wombat)
-
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;; change auto save directory
-(setq auto-save-default nil) ; until i figure out the nix problem
-(setq auto-save-file-name-transforms
-  `((".*" "~/.emacs-saves/" t)))
-(setq backup-directory-alist `(("." . "~/.saves")))
-
-(defun nils/home-manager-rebuild ()
-  "Home Manager build."
+(defun n/search-ddg ()
+  "Search DuckDuckGo for a query."
   (interactive)
-  (async-shell-command "home-manager switch --flake ~/.dotfiles/."))
+  (let ((q (read-string "Query: ")))
+    (eww (concat "https://ddg.gg/?q=" q))))
 
-(defun nils/nixos-rebuild ()
-  "NixOS system build."
+(defun n/search-google ()
+  "Search Google for a query."
   (interactive)
-  (async-shell-command "sudo nixos-rebuild switch --flake ~/.dotfiles/.#lumi"))
+  (let ((q (read-string "Query: ")))
+    (eww (concat "https://google.com/search?q=" q))))
 
-(dolist (mode '(org-mode-hook
-		image-mode-hook
-		lsp-ui-doc-frame-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(defun n/search-wiki ()
+  "Search wikipedia for a query."
+  (interactive)
+  (let ((q (read-string "Query: ")))
+    (eww (concat "https://wikipedia.org/wiki/" q))))
 
-(dolist (mode '(term-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (evil-emacs-state))))
+(defun n/search-cpp ()
+  "Search wikipedia for a query."
+  (interactive)
+  (let ((q (read-string "Query: ")))
+    (eww (concat "https://ddg.gg/?sites=cppreference.com&q=" q))))
 
-;; Initialize package sources
-(require 'package)
+(defun n/search-stackoverflow ()
+  "Search StackOverflow for a query."
+  (interactive)
+  (let ((q (read-string "Query: ")))
+    (eww (concat "https://ddg.gg/?sites=stackoverflow.com&q=" q))))
 
-(require 'treesit)
-(setq major-mode-remap-alist
-      '((css-mode . css-ts-mode)))
+(use-package evil
+  :ensure t
+  :hook
+  (after-init . evil-mode)
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-set-undo-system 'undo-tree)
+  (setq evil-leader/in-all-states t)
+  (setq evil-want-fine-undo t)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+  (evil-set-leader 'normal (kbd "SPC"))
+  (evil-set-leader 'visual (kbd "SPC"))
 
-(package-initialize)
-(unless package-archive-contents
- (package-refresh-contents))
+  (evil-define-key 'normal 'global (kbd "C-u") 'n/evil-scroll-up)
+  (evil-define-key 'normal 'global (kbd "C-d") 'n/evil-scroll-down)
+  (evil-define-key 'normal 'global (kbd "<leader> c c") 'compile)
+  (evil-define-key 'normal 'global (kbd "<leader> r c") 'recompile)
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd "<leader> i") 'eval-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader> t c") 'n/choose-tramp)
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+  (setq evil-emacs-state-modes '())
+  (evil-set-initial-state 'eshell-mode 'normal)
+  (evil-set-initial-state 'term-mode 'normal)
+  (evil-set-initial-state 'image-mode 'motion)
+  (evil-set-initial-state 'special-mode 'motion)
+  (evil-set-initial-state 'pdf-view-mode 'motion)
+  (evil-set-initial-state 'org-agenda-mode 'motion)
+  (evil-set-initial-state 'compilation-mode 'motion)
+  (evil-set-initial-state 'grep-mode 'motion)
+  (evil-set-initial-state 'Info-mode 'motion)
+  (evil-set-initial-state 'magit--mode 'motion)
+  (evil-set-initial-state 'magit-status-mode 'motion)
+  (evil-set-initial-state 'magit-diff-mode 'motion)
+  (evil-set-initial-state 'magit-stashes-mode 'motion)
+  (evil-set-initial-state 'epa-key-list-mode 'motion)
+  (evil-set-initial-state 'fuel-debug-mode 'motion))
 
-(require 'use-package)
-(setq use-package-always-ensure t)
+(use-package evil-commentary
+  :ensure t
+  :defer t
+  :init
+  (evil-commentary-mode))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-matchit
+  :ensure t
+  :after evil
+  :config
+  (global-evil-matchit-mode 1))
+
+(use-package dired
+  :ensure nil
+  :custom
+  (setq dired-compress-files-alist
+    '(("\\.tar\\.gz\\'" . "tar -c %i | gzip -c9 > %o")
+      ("\\.zip\\'" . "zip %o -r --filesync %i")))
+  (dired-listing-switches "-lah --group-directories-first")
+  (dired-guess-shell-alist-user
+   '(("\\.\\(png\\|jpe?g\\|tiff\\)" "feh" "xdg-open" "open")
+     ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)" "mpv" "xdg-open" "open")
+     (".*" "open" "xdg-open")))
+  (dired-kill-when-opening-new-dired-buffer t)
+  :config
+  (setq dired-mode-map (make-keymap))
+  (evil-set-initial-state 'dired-mode 'motion)
+  (evil-define-key 'normal 'global (kbd "C-b") 'dired-jump)
+  (evil-define-key 'motion dired-mode-map
+    (kbd "RET") 'dired-find-file
+    (kbd "j") 'dired-next-line
+    (kbd "k") 'dired-previous-line
+    (kbd "D") 'dired-do-delete
+    (kbd "O") 'dired-do-open
+    (kbd "-") 'dired-up-directory
+    (kbd "q") 'quit-window
+    (kbd "=") 'dired-diff
+    (kbd "mm") 'dired-mark
+    (kbd "mu") 'dired-unmark
+    (kbd "mU") 'dired-unmark-all-marks
+    (kbd "!") 'dired-do-shell-command
+    (kbd "R") 'dired-do-rename
+    (kbd "%") 'dired-create-empty-file
+    (kbd "C") 'dired-do-copy
+    (kbd "Z") 'dired-do-compress-to))
+
+(unless (eq system-type 'windows-nt)
+  (use-package exec-path-from-shell
+    :ensure t
+    :init
+    (exec-path-from-shell-initialize)))
+
+(use-package eldoc
+  :ensure nil
+  :init
+  (global-eldoc-mode))
+
+(use-package flymake
+  :ensure nil
+  :defer t
+  :hook (prog-mode . flymake-mode)
+  :config
+  (evil-define-key 'normal 'global (kbd "[ e") 'flymake-goto-prev-error)
+  (evil-define-key 'normal 'global (kbd "] e") 'flymake-goto-next-error)
+  :custom
+  (flymake-margin-indicators-string
+   '((error "!»" compilation-error) (warning "»" compilation-warning)
+	 (note "»" compilation-info))))
+
+(use-package org
+  :ensure nil
+  :defer t)
+
+(use-package ivy
+  :ensure t
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (evil-define-key 'normal 'global (kbd "<leader> /") 'swiper)
+  ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-next-line)
+  ;; (define-key ivy-minibuffer-map (kbd "<backtab>") 'ivy-previous-line)
+  (ivy-mode))
+
+(use-package vertico
+  :ensure t
+  :hook
+  (after-init . vertico-mode)
+  :custom
+  (vertico-count 10)
+  (vertico-resize nil)
+  (vertico-cycle nil))
+
+(use-package counsel
+  :ensure t
+  :after ivy
+  :config
+  (evil-define-key 'normal 'global (kbd "<leader> SPC") 'counsel-switch-buffer)
+  (evil-define-key 'motion 'global (kbd "<leader> SPC") 'counsel-switch-buffer)
+  :bind (("M-x" . counsel-M-x)
+		 ("SPC SPC" . counsel-switch-buffer)
+         ("C-h f" . counsel-describe-function)))
+
+(use-package orderless
+  :ensure t
+  :defer t
+  :after vertico
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package marginalia
+  :ensure t
+  :hook
+  (after-init . marginalia-mode))
+
+(use-package treesit-auto
+  :ensure t
+  :after emacs
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode t))
+
+(use-package diff-hl
+  :defer t
+  :ensure t
+  :hook
+  (find-file . (lambda ()
+                 (global-diff-hl-mode)
+                 (diff-hl-flydiff-mode)
+                 (diff-hl-margin-mode))))
+
+(use-package magit
+  :ensure t
+  :config
+  (setq magit-mode-map (make-keymap)
+        magit-status-mode-map (make-keymap)
+        magit-diff-mode-map (make-keymap)
+       magit-stashes-mode-map (make-keymap))
+  (evil-define-key 'motion 'global (kbd "<leader> g s") 'magit)
+  (evil-define-key 'motion 'global (kbd "<leader> g l") 'magit-log-current)
+  (evil-define-key 'motion magit-mode-map
+    (kbd "RET") #'magit-visit-thing
+    (kbd "TAB") #'magit-section-cycle
+    (kbd "=") #'magit-section-cycle
+    (kbd "R") #'magit-refresh
+    (kbd "s") #'magit-stage
+    (kbd "u") #'magit-unstage
+    (kbd "x") #'magit-discard
+    (kbd "c c") #'magit-commit
+    (kbd "c a") #'magit-commit-amend
+    (kbd "r r") #'magit-rebase
+    (kbd "P") #'magit-push
+  ))
+
+(use-package magit-todos
+  :ensure t
+  :defer t
+  :after magit
+  :config (magit-todos-mode 1))
+
+(use-package xclip
+  :ensure t
+  :defer t
+  :hook
+  (after-init . xclip-mode))
+
+(use-package indent-guide
+  :defer t
+  :ensure t
+  :hook
+  (prog-mode . indent-guide-mode)
+  :config
+  (setq indent-guide-char "│"))
+
+(use-package lsp-mode
+  :ensure t
+  :config
+  (setq lsp-idle-delay 0.500)
+  (setq lsp-log-io nil)
+  (evil-define-key 'normal prog-mode-map
+    (kbd "<leader> r n") 'lsp-rename
+    (kbd "<leader> c a") 'lsp-execute-code-action)
+  :hook ((c++-mode . lsp-deferred) (c-mode . lsp-deferred))
+  :commands (lsp lsp-deferred))
+
+(use-package flycheck
+  :ensure t
+  :hook
+  (lsp-mode . flycheck-mode)
+  (emacs-lisp-mode . flycheck-mode))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'at-point))
+
+(use-package lsp-treemacs
+  :after lsp)
+
+(use-package markdown-mode
+  :straight t
+  :mode "\\.md\\'"
+  :config
+  (setq markdown-command "marked")
+  (defun dw/set-markdown-header-font-sizes ()
+    (dolist (face '((markdown-header-face-1 . 1.2)
+                    (markdown-header-face-2 . 1.1)
+                    (markdown-header-face-3 . 1.0)
+                    (markdown-header-face-4 . 1.0)
+                    (markdown-header-face-5 . 1.0)))
+      (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
+  (defun dw/markdown-mode-hook ()
+    (dw/set-markdown-header-font-sizes))
+  (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
+
+(use-package company-box
+  :diminish
+  :hook (company-mode . company-box-mode)
+  :custom
+  (company-box-scrollbar nil))
+
+(use-package undo-tree
+  :defer t
+  :ensure t
+  :hook
+  (after-init . global-undo-tree-mode)
+  :init
+  (setq undo-tree-visualizer-timestamps t
+        undo-tree-visualizer-diff t
+        undo-limit 800000
+        undo-strong-limit 12000000)
+  :config
+  (evil-define-key 'normal 'global (kbd "<leader> u") 'undo-tree-visualize)
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/.cache/undo"))))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :defer t
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
+
+(use-package nerd-icons
+  :ensure t
+  :defer t)
+
+(use-package nerd-icons-dired
+  :ensure t
+  :defer t
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+(use-package nerd-icons-completion
+  :ensure t
+  :after (:all nerd-icons marginalia)
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(use-package catppuccin-theme
+  :ensure t
+  :config
+  (load-theme 'catppuccin :no-confirm))
+
+(defun n/evil-scroll-up ()
+  "Center page after scroll."
+  (interactive)
+  (evil-scroll-up nil)
+  (evil-scroll-line-to-center nil))
+
+(defun n/evil-scroll-down ()
+  "Center page after scroll."
+  (interactive)
+  (evil-scroll-down nil)
+  (evil-scroll-line-to-center nil))
+
+(use-package haskell-mode
+  :ensure t
+  :defer t)
+
+(use-package company
+  :ensure t
+  :hook
+  (after-init . global-company-mode))
+
+(use-package lsp-haskell
+  :ensure t
+  :defer t
+  :config
+  (setq lsp-haskell-server-path "~/.ghcup/bin/haskell-language-server-wrapper"))
+
+(use-package rust-mode
+  :ensure t
+  :after lsp-mode
+  :hook
+  (rust-mode . lsp)
+  :mode "\\.rs\\'")
+
+(use-package cargo
+  :ensure t
+  :defer t)
+
+(use-package cmake-mode
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'")
+  :hook (cmake-mode . lsp-deferred))
+
+(use-package projectile
+  :ensure t
+  :custom ((projectile-completion-system 'ivy))
+  :config
+  (setq projectile-project-search-path '("~/.files" "~/projects/" "~/work/"))
+  (setq projectile-switch-project-action #'projectile-dired)
+  (evil-define-key 'normal 'global (kbd "C-p") 'projectile-find-file)
+  (evil-define-key 'motion 'global (kbd "C-p") 'projectile-find-file)
+  (evil-define-key 'normal 'global (kbd "<leader> p p") 'projectile-switch-project)
+  (evil-define-key 'motion 'global (kbd "<leader> p p") 'projectile-switch-project)
+  (evil-define-key 'normal 'global (kbd "<leader> p f") 'project-find-file)
+  (evil-define-key 'motion 'global (kbd "<leader> p f") 'project-find-file)
+  :hook
+  (after-init . projectile-mode))
+
+(use-package ripgrep
+  :ensure t
+  :after projectile)
+
+(use-package mood-line
+  :ensure t
+  :config
+  (mood-line-mode))
+
+(use-package vterm
+  :ensure t
+  :config
+  (evil-define-key 'normal 'global (kbd "<leader> v t") 'vterm))
+
+(use-package harpoon
+  :ensure t
+  :config
+  (evil-define-key 'normal 'global
+	(kbd "<leader> 1") 'harpoon-go-to-1
+	(kbd "<leader> 2") 'harpoon-go-to-2
+	(kbd "<leader> 3") 'harpoon-go-to-3
+	(kbd "<leader> 4") 'harpoon-go-to-4
+	(kbd "<leader> m") 'harpoon-add-file
+	(kbd "<leader> h l") 'harpoon-quick-menu-hydra
+	(kbd "<leader> d 1") 'harpoon-delete-1
+	(kbd "<leader> d 2") 'harpoon-delete-2
+	(kbd "<leader> d 3") 'harpoon-delete-3))
+
+(use-package pdf-tools
+  :ensure t
+  :mode ("\\.pdf'" . pdf-view-mode)
+  :config
+  (define-key pdf-view-mode-map (kbd "q") nil)
+  (evil-define-key motion pdf-view-mode-map
+    "h" 'scroll-left
+    "l" 'scroll-right
+	"j" 'pdf-view-next-line-or-next-page
+    "k" 'pdf-view-previous-line-or-previous-page
+    "J" 'pdf-view-scroll-up-or-next-page
+    "K" 'pdf-view-scroll-down-or-previous-page
+	"]" 'pdf-view-next-page-command
+    "[" 'pdf-view-previous-page-command
+	"-" 'pdf-view-shrink
+    "+" 'pdf-view-enlarge
+    ))
 
 (defun nils/org-mode-setup ()
   (org-indent-mode)
@@ -110,6 +551,7 @@
   (diminish org-indent-mode))
 
 (use-package org
+  :ensure t
   :defer t
   :hook (org-mode . nils/org-mode-setup)
   :config
@@ -152,6 +594,7 @@
     (evil-org-agenda-set-keys)))
 
 (use-package org-roam
+  :ensure t
   :init
   (setq org-roam-v2-ack t)
   :custom
@@ -171,245 +614,12 @@
   (org-roam-setup))
 
 (use-package org-roam-ui
+  :ensure t
   :after org-roam
   :config
   (setq org-roam-ui-sync-theme t
 	org-roam-ui-follow t
 	org-roam-ui-update-on-save t))
-
-(use-package marginalia
-  :after vertico
-  :straight t
-  :custom
-  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-  :init
-  (marginalia-mode))
-
-(use-package diminish)
-(diminish 'eldoc-mode)
-(use-package command-log-mode)
-
-(use-package tree-sitter
-  :diminish
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :after tree-sitter)
-
-(use-package swiper)
-
-(use-package ivy
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1)
-  :diminish)
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package all-the-icons)
-
-(use-package general
-  :after evil
-  :config
-  (general-create-definer nils/spc-leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "C-SPC"))
-
-(use-package vundo)
-
-(defun nils/evil-scroll-up ()
-  "Emacs version of C-u zz."
-  (interactive)
-  (evil-scroll-up nil)
-  (evil-scroll-line-to-center nil))
-
-(defun nils/evil-scroll-down ()
-  "Emacs version of C-d zz."
-  (interactive)
-  (evil-scroll-down nil)
-  (evil-scroll-line-to-center nil))
-
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (evil-define-key 'normal 'global (kbd "C-u") 'nils/evil-scroll-up)
-  (evil-define-key 'normal 'global (kbd "C-d") 'nils/evil-scroll-down)
-  (evil-set-undo-system 'undo-redo)
-  (define-key evil-motion-state-map "K" nil)
-  (define-key evil-motion-state-map (kbd "C-f") nil)
-  (define-key evil-normal-state-map "K" 'lsp-ui-doc-glance)
-  (define-key evil-normal-state-map (kbd "]e") 'flycheck-next-error)
-  (define-key evil-normal-state-map (kbd "[e") 'flycheck-previous-error)
-  :diminish)
-
-;; line numbers
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
-
-(use-package evil-collection
-  :after evil
-  :custom (evil-collection-want-unimpaired-p nil)
-  :config
-  (evil-collection-init)
-  :diminish)
-
-(use-package evil-nerd-commenter
-  :after evil)
-
-(use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-	 ("C-f" . 'counsel-rg)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history))
-  :config
-  (counsel-mode 1)
-  :diminish)
-
-(use-package hydra
-  :defer t)
-
-(use-package magit
-  :commands magit-status)
-
-(use-package magit-todos
-  :defer t
-  :after magit
-  :config (magit-todos-mode 1))
-
-(use-package git-gutter
-  :diminish
-  :hook
-  ((text-mode . git-gutter-mode)
-   (prog-mode . git-gutter-mode))
-  :config
-  (setq git-gutter:update-interval 2))
-
-(use-package projectile
-  :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-  (when (file-directory-p "~/Documents/src/")
-    (add-to-list projectile-project-search-path '("~/Documents/src/")))
-  (when (file-directory-p "~/src/")
-    (add-to-list projectile-project-search-path '("~/src/")))
-  (when (file-directory-p "~/.dotfiles/")
-    (add-to-list 'projectile-project-search-path "~/.dotfiles/"))
-  (when (file-directory-p "~/work/")
-    (add-to-list 'projectile-project-search-path "~/work/"))
-
-  (setq projectile-switch-project-action #'projectile-dired)
-  :diminish projectile-mode)
-
-(use-package ripgrep
-  :after projectile)
-
-(use-package counsel-projectile
-  :after projectile
-  :config (counsel-projectile-mode))
-
-(use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
-
-(defhydra hydra-text-scale (:timeout 4)
-  "scale text"
-  ("j" text-scale-increase "in")
-  ("k" text-scale-decrease "out")
-  ("f" nil "finished" :exit t))
-
-;; lsp
-(defun nils/lsp-mode-setup ()
-  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (general-define-key
-   :states '(normal)
-   :prefix "SPC"
-   "ca" 'lsp-execute-code-action
-   "gr" 'lsp-find-references)
-  (lsp-headerline-breadcrumb-mode))
-
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :hook
-  (lsp-mode . nils/lsp-mode-setup)
-  (c-mode . lsp-deferred)
-  (c++-mode . lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l"))
-
-(use-package flycheck
-  :defer t
-  :diminish
-  :hook
-  (lsp-mode . flycheck-mode)
-  (emacs-lisp-mode . flycheck-mode))
-
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'at-point))
-
-(use-package ccls
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp))))
-
-(use-package cmake-mode
-  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'")
-  :hook (cmake-mode . lsp-deferred))
-
-(use-package cmake-font-lock
-  :after cmake-mode
-  :config (cmake-font-lock-activate))
-
-(use-package typescript-mode
-  :diminish
-  :after tree-sitter
-  :hook
-  (typescript-mode . lsp)
-  :config
-  (define-derived-mode typescriptreact-mode typescript-mode
-    "TypeScript TSX")
-  (setq typescript-indent-level 2)
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
-
-(use-package rust-mode
-  :diminish
-  :after lsp-mode
-  :hook
-  (rust-mode . lsp)
-  :mode "\\.rs\\'")
-
-(use-package cargo
-  :defer t)
 
 (use-package lsp-nix
   "Install 'nil' & 'nixpkgs-fmt'"
@@ -422,96 +632,5 @@
   :hook (nix-mode . lsp-deferred)
   :mode "\\.nix\\'")
 
-(use-package go-mode
-  "Install 'gofmt' & 'gopls'"
-  :diminish
-  :after lsp-mode
-					;  :hook (go-mode . lsp)
-  :mode "\\.go\\'")
-(add-hook 'go-mode-hook #'lsp)
-
-(use-package company
-  :diminish
-  :after lsp-mode
-  :hook
-  (lsp-mode . company-mode)
-  :bind
-  (:map company-active-map
-	("<tab>" . company-select-next)
-	("<backtab>" . company-select-previous))
-  (:map lsp-mode-map
-	("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
-
-(use-package company-box
-  :diminish
-  :hook (company-mode . company-box-mode)
-  :custom
-  (company-box-scrollbar nil))
-
-;; symbols (functions, variables) inside of the file
-(use-package lsp-treemacs
-  :after lsp)
-
-(use-package markdown-mode
-  :straight t
-  :mode "\\.md\\'"
-  :config
-  (setq markdown-command "marked")
-  (defun dw/set-markdown-header-font-sizes ()
-    (dolist (face '((markdown-header-face-1 . 1.2)
-                    (markdown-header-face-2 . 1.1)
-                    (markdown-header-face-3 . 1.0)
-                    (markdown-header-face-4 . 1.0)
-                    (markdown-header-face-5 . 1.0)))
-      (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
-  (defun dw/markdown-mode-hook ()
-    (dw/set-markdown-header-font-sizes))
-  (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
-
-(use-package bufler
-  :bind (("C-M-j" . bufler-switch-buffer)
-	 ("C-M-k" . bufler-workspace-frame-set))
-  :config
-  (evil-collection-define-key 'normal 'bufler-list-mode-map
-    (kbd "RET")   'bufler-list-buffer-switch
-    (kbd "M-RET") 'bufler-list-buffer-peek
-    "D"           'bufler-list-buffer-kill)
-  (setf bufler-groups
-	(bufler-defgroups
-	 (group (auto-workspace))
-	 (group (auto-projectile))
-	 (group
-	  (group-or "Browsers"
-		    (name-match "Firefox" (rx bos "Firefox"))
-		    (name-match "Chromium" (rx bos "Chromium")))))
-	(group
-	 (group-or "Help/Info"
-		   (mode-match "*Help*" (rx bos (or "help-" "helpful-")))
-		   (mode-match "*Info*" (rx bos "info-"))))
-	(auto-mode)))
-
-(nils/spc-leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text")
-  "sf" 'find-file
-  "SPC" 'counsel-switch-buffer
-  "C-SPC" 'counsel-switch-buffer
-  "gs" 'magit-status
-  "fm" 'lsp-format-buffer
-  "gd" 'magit-diff-unstaged
-  "gf" 'magit-fetch
-  "gF" 'magit-fetch-all
-  "gc" 'magit-branch-or-checkout
-  "/" 'evilnc-comment-or-uncomment-lines
-  ;; org-mode bindings
-  "o"   '(:ignore t :which-key "org mode")
-  "oi"  '(:ignore t :which-key "insert")
-  "oil" '(org-insert-link :which-key "insert link")
-  "on"  '(org-toggle-narrow-to-subtree :which-key "toggle narrow")
-  "os"  '(dw/counsel-rg-org-files :which-key "search notes")
-  "oa"  '(org-agenda :which-key "status")
-  "ot"  '(org-todo-list :which-key "todos")
-  "oc"  '(org-capture t :which-key "capture")
-  "ox"  '(org-export-dispatch t :which-key "export"))
+(provide 'init)
+;;; init.el ends here
