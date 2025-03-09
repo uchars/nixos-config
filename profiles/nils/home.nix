@@ -83,6 +83,7 @@ in
     inkscape
     bitwarden-desktop
     audacity
+    anki
   ];
 
   services.flameshot = {
@@ -113,6 +114,7 @@ in
     shellAliases = shAliases;
     bashrcExtra = ''
       export PATH="$PATH:~/.local/bin";
+      export PS1='\[\e[38;5;209;1m\][\[\e[22m\]\u@\H:\w\[\e[1m\]]> \[\e[0m\]'
     '';
   };
 

@@ -114,7 +114,7 @@
         text = ''
           [window]
           decorations = "None"
-          opacity = 0.8
+          # opacity = 0.8
         '';
       };
       home.file."./.config/ghostty/config" = {
@@ -126,6 +126,7 @@
           background-blur-radius = 60
           window-decoration = false
           copy-on-select = true
+          macos-titlebar-style = hidden
         '';
       };
 
