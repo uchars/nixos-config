@@ -188,6 +188,11 @@
             options.mountpoint = "legacy";
             options."com.sun:auto-snapshot" = "true";
           };
+          "crypt/appdata/navidrome" = {
+            type = "zfs_fs";
+            options.mountpoint = "legacy";
+            options."com.sun:auto-snapshot" = "true";
+          };
         };
       };
     };

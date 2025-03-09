@@ -54,14 +54,16 @@ in
       allowedTCPPorts = [
         2033
         443
-	8000
-	53
+        8000
+        53
+        4533
       ];
       allowedUDPPorts = [
         2033
         443
-	8000
-	53
+        8000
+        53
+        4533
       ];
     };
   };
@@ -82,6 +84,8 @@ in
     wget
     git
     ripgrep
+    clang-tools
+    ffmpeg
   ];
 
   sops.secrets."juniper/ddnspassword" = {
@@ -95,12 +99,14 @@ in
       Description = "DDNS-updater service";
     };
     environment = {
-	    DATADIR = "%S/ddns-updater";
+      DATADIR = "%S/ddns-updater";
     };
     script = ''
-export CONFIG="{\"settings\":[  {\"provider\":\"namecheap\",\"host\":\"@,pass,cloud,paste\",\"domain\":\"${domain}\",\"password\":\"$(cat ${config.sops.secrets."juniper/ddnspassword".path})\"}]}"
-echo $CONFIG
-     ${pkgs.ddns-updater}/bin/ddns-updater
+      export CONFIG="{\"settings\":[  {\"provider\":\"namecheap\",\"host\":\"@,pass,cloud,paste\",\"domain\":\"${domain}\",\"password\":\"$(cat ${
+        config.sops.secrets."juniper/ddnspassword".path
+      })\"}]}"
+      echo $CONFIG
+           ${pkgs.ddns-updater}/bin/ddns-updater
     '';
     serviceConfig = {
       TimeoutSec = "5min";
@@ -321,7 +327,7 @@ echo $CONFIG
 
   sops.secrets."juniper/paperless/adminPass" = { };
   services.paperless = {
-    enable = true;
+    enable = false;
     port = 2033;
     dataDir = "/raid/crypt/appdata/paperless/data";
     mediaDir = "/raid/crypt/appdata/paperless/media";
@@ -334,8 +340,18 @@ echo $CONFIG
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       # Type = "forking";
-      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a sda -i 900 -a sdb -i 900 -a sdc -i 900 -a sde -i 900 -a sdh -i 900";
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -d";
     };
+  };
+
+  services.navidrome = {
+    enable = true;
+    settings = {
+      Port = 4533;
+      Address = "10.42.42.10";
+      MusicFolder =  "/raid/crypt/appdata/navidrome";
+    };
+    user = "navidrome";
   };
 
   users.users.sterz_n = {
