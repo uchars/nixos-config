@@ -161,7 +161,7 @@ in
 
   elira.browser = {
     enable = true;
-    brave = false;
+    brave = true;
     firefox = true;
     tor = true;
   };
