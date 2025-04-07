@@ -73,7 +73,9 @@ in
     unzip
     ethtool
     networkmanager
+    magic-vlsi
     yt-dlp
+    libreoffice
     openconnect
     dbus
     feh
@@ -84,6 +86,7 @@ in
     bitwarden-desktop
     audacity
     anki
+    thunderbird
   ];
 
   services.flameshot = {
@@ -119,6 +122,11 @@ in
   services.nextcloud-client = {
     enable = true;
     startInBackground = true;
+  };
+
+  programs.rofi = {
+    enable = true;
+    theme = "solarized";
   };
 
   dconf.settings = {

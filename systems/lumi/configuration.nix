@@ -86,6 +86,17 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   security.rtkit.enable = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;

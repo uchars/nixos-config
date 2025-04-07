@@ -109,7 +109,6 @@
       environment.systemPackages = with pkgs; [
         blueman
         betterlockscreen
-        rofi
         alsa-utils
         st
       ];
