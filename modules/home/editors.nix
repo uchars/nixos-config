@@ -60,7 +60,7 @@
         enable = cfg.emacs.enable;
         package = pkgs.emacsWithPackagesFromUsePackage {
           config = "${cfg.emacs.config_dir}/init.el";
-          package = pkgs.emacs29;
+          package = pkgs.emacs30;
         };
       };
       services.emacs.enable = true;

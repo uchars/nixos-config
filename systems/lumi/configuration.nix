@@ -6,11 +6,22 @@
 
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot = {
+    plymouth = {
+      enable = true;
+      theme = "spinner";
+    };
     initrd.systemd.enable = true;
     supportedFilesystems = [ "ntfs" ];
+    consoleLogLevel = 3;
+    initrd.verbose = false;
 
     kernelParams = [
       "video=3440x1440"
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=0"
+      "rd.systemd.show_status=auto"
     ];
 
     loader = {
@@ -33,11 +44,11 @@
 
   programs.gamemode.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.dragAndDrop = true;
-  users.extraGroups.vboxusers.members = [ "sterz_n" ];
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enableExtensionPack = true;
+  #virtualisation.virtualbox.guest.enable = true;
+  #virtualisation.virtualbox.guest.dragAndDrop = true;
+  #users.extraGroups.vboxusers.members = [ "sterz_n" ];
 
   # Enable networking
   networking.networkmanager.enable = true;
