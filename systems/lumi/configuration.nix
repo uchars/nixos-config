@@ -139,6 +139,23 @@
     name = "gdm";
   };
 
+  elira.syncthing = {
+    enable = true;
+    user = "sterz_n";
+    dir = "/home/sterz_n/Documents";
+    sharedFolders = {
+      "Uni_Documents" = {
+        path = "/home/sterz_n/Nextcloud/Documents/Uni";
+        devices = [ "boox" ];
+      };
+    };
+    deviceConfig = {
+      boox = {
+        id = "VHC5QDC-IDELDHV-OZ4I5LO-LPX7JVY-D554HCL-NUAFXAU-NKVCPDO-533ZEAV";
+      };
+    };
+  };
+
   users.users.sterz_n = {
     isNormalUser = true;
     description = "Nils Sterz";

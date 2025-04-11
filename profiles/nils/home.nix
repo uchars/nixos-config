@@ -61,6 +61,7 @@ in
     stack
     zathura
     syncthing
+    ripgrep
     texinfo
     autoconf
     gnumake
@@ -72,6 +73,7 @@ in
     mpv
     unzip
     ethtool
+    id3v2
     networkmanager
     magic-vlsi
     yt-dlp
@@ -163,7 +165,7 @@ in
     rust = true;
     android = false;
     java = true;
-    jdkVersions = [ pkgs.jdk23 ];
+    jdkVersions = [ pkgs.jdk21 ];
   };
 
   elira.keyboard = {

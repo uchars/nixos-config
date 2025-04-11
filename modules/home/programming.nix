@@ -63,6 +63,6 @@
           else
             [ ]
         )
-        ++ (if cfg.java then [ jetbrains.idea-ultimate ] ++ cfg.jdkVersions else [ ]);
+        ++ (if cfg.java then [ jetbrains.idea-community jdt-language-server ] ++ cfg.jdkVersions else [ ]);
     };
 }

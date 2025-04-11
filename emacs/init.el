@@ -358,6 +358,9 @@
   (ef-themes-with-colors
     (set-face-attribute 'lsp-ui-doc-background nil :background bg-main)))
 
+(use-package lsp-java
+  :after lsp)
+
 ;; (use-package eglot
 ;;   :ensure t
 ;;   :hook (prog-mode . eglot-ensure)
