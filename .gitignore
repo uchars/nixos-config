@@ -1,6 +1,6 @@
 result*
 secret/*
-
+*.swp
 pki/*
 *.crt
 *.key
