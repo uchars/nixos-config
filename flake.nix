@@ -75,7 +75,7 @@
             inherit system;
           };
         };
-        lumi = lib.nixosSystem {
+        yuzu = lib.nixosSystem {
           inherit system;
           modules = [
             ./systems/yuzu/configuration.nix
