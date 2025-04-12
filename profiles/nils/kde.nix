@@ -2,40 +2,46 @@
   programs.plasma = {
     enable = true;
     shortcuts = {
-      "ActivityManager"."switch-to-activity-714ada75-a79b-412d-8b48-e224d717c622" =
-        [ ];
-      "KDE Keyboard Layout Switcher"."Switch keyboard layout to English (US)" =
-        [ ];
+      "ActivityManager"."switch-to-activity-714ada75-a79b-412d-8b48-e224d717c622" = [ ];
+      "KDE Keyboard Layout Switcher"."Switch keyboard layout to English (US)" = [ ];
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to German" = [ ];
-      "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" =
-        "Meta+Space";
+      "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = "Meta+Alt+L";
+      "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" = "Meta+Space,Meta+Alt+K";
       "kaccess"."Toggle Screen Reader On and Off" = "Meta+Alt+S";
       "kcm_touchpad"."Disable Touchpad" = "Touchpad Off";
       "kcm_touchpad"."Enable Touchpad" = "Touchpad On";
-      "kcm_touchpad"."Toggle Touchpad" = "Touchpad Toggle";
-      "kded5"."Show System Activity" = "Ctrl+Esc";
-      "kded5"."display" = [ "Display" "Meta+P" ];
+      "kcm_touchpad"."Toggle Touchpad" = ["Touchpad Toggle,Touchpad Toggle" "Meta+Ctrl+Zenkaku Hankaku"];
       "khotkeys"."{d03619b6-9b3c-48cc-9d9c-a2aadb485550}" = [ ];
       "kmix"."decrease_microphone_volume" = "Microphone Volume Down";
       "kmix"."decrease_volume" = "Volume Down";
+      "kmix"."decrease_volume_small" = "Shift+Volume Down";
       "kmix"."increase_microphone_volume" = "Microphone Volume Up";
       "kmix"."increase_volume" = "Volume Up";
-      "kmix"."mic_mute" = [ "Microphone Mute" "Meta+Volume Mute" ];
+      "kmix"."increase_volume_small" = "Shift+Volume Up";
+      "kmix"."mic_mute" = ["Microphone Mute" "Meta+Volume Mute,Microphone Mute" "Meta+Volume Mute,Mute Microphone"];
       "kmix"."mute" = "Volume Mute";
-      "ksmserver"."Halt Without Confirmation" = [ ];
-      "ksmserver"."Lock Session" = [ "Meta+L" "Screensaver" ];
+      "ksmserver"."Halt Without Confirmation" = "none,,Shut Down Without Confirmation";
+      "ksmserver"."Lock Session" = ["Meta+L" "Screensaver,Meta+L" "Screensaver,Lock Session"];
       "ksmserver"."Log Out" = "Ctrl+Alt+Del";
-      "ksmserver"."Log Out Without Confirmation" = [ ];
-      "ksmserver"."Reboot Without Confirmation" = [ ];
+      "ksmserver"."Log Out Without Confirmation" = "none,,Log Out Without Confirmation";
+      "ksmserver"."LogOut" = [ ];
+      "ksmserver"."Reboot" = [ ];
+      "ksmserver"."Reboot Without Confirmation" = "none,,Reboot Without Confirmation";
+      "ksmserver"."Shut Down" = [ ];
       "kwin"."Activate Window Demanding Attention" = "Meta+Ctrl+A";
-      "kwin"."Decrease Opacity" = [ ];
+      "kwin"."Cube" = "Meta+C,none,Toggle Cube";
+      "kwin"."Cycle Overview" = [ ];
+      "kwin"."Cycle Overview Opposite" = [ ];
+      "kwin"."Decrease Opacity" = "none,,Decrease Opacity of Active Window by 5%";
       "kwin"."Edit Tiles" = "Meta+T";
       "kwin"."Expose" = "Ctrl+F9";
-      "kwin"."ExposeAll" = [ "Ctrl+F10" "Launch (C)" ];
+      "kwin"."ExposeAll" = ["Ctrl+F10" "Launch (C),Ctrl+F10" "Launch (C),Toggle Present Windows (All desktops)"];
       "kwin"."ExposeClass" = "Ctrl+F7";
       "kwin"."ExposeClassCurrentDesktop" = [ ];
-      "kwin"."Increase Opacity" = [ ];
+      "kwin"."Grid View" = "Meta+G";
+      "kwin"."Increase Opacity" = "none,,Increase Opacity of Active Window by 5%";
       "kwin"."Kill Window" = "Meta+Ctrl+Esc";
+      "kwin"."Move Tablet to Next Output" = [ ];
       "kwin"."MoveMouseToCenter" = "Meta+F6";
       "kwin"."MoveMouseToFocus" = "Meta+F5";
       "kwin"."MoveZoomDown" = [ ];
@@ -43,10 +49,10 @@
       "kwin"."MoveZoomRight" = [ ];
       "kwin"."MoveZoomUp" = [ ];
       "kwin"."Overview" = "Meta+W";
-      "kwin"."Setup Window Shortcut" = [ ];
+      "kwin"."Setup Window Shortcut" = "none,,Setup Window Shortcut";
       "kwin"."Show Desktop" = "Meta+D";
-      "kwin"."ShowDesktopGrid" = "Meta+F8";
-      "kwin"."Suspend Compositing" = "Alt+Shift+F12";
+      "kwin"."ShowDesktopGrid" = "Meta+F8,none";
+      "kwin"."Suspend Compositing" = "Alt+Shift+F12,none";
       "kwin"."Switch One Desktop Down" = "Meta+Ctrl+Down";
       "kwin"."Switch One Desktop Up" = "Meta+Ctrl+Up";
       "kwin"."Switch One Desktop to the Left" = "Meta+Ctrl+Left";
@@ -55,227 +61,205 @@
       "kwin"."Switch Window Left" = "Meta+Alt+Left";
       "kwin"."Switch Window Right" = "Meta+Alt+Right";
       "kwin"."Switch Window Up" = "Meta+Alt+Up";
-      "kwin"."Switch to Desktop 1" = "Ctrl+F1";
-      "kwin"."Switch to Desktop 10" = [ ];
-      "kwin"."Switch to Desktop 11" = [ ];
-      "kwin"."Switch to Desktop 12" = [ ];
-      "kwin"."Switch to Desktop 13" = [ ];
-      "kwin"."Switch to Desktop 14" = [ ];
-      "kwin"."Switch to Desktop 15" = [ ];
-      "kwin"."Switch to Desktop 16" = [ ];
-      "kwin"."Switch to Desktop 17" = [ ];
-      "kwin"."Switch to Desktop 18" = [ ];
-      "kwin"."Switch to Desktop 19" = [ ];
-      "kwin"."Switch to Desktop 2" = "Ctrl+F2";
-      "kwin"."Switch to Desktop 20" = [ ];
-      "kwin"."Switch to Desktop 3" = "Ctrl+F3";
-      "kwin"."Switch to Desktop 4" = "Ctrl+F4";
-      "kwin"."Switch to Desktop 5" = [ ];
-      "kwin"."Switch to Desktop 6" = [ ];
-      "kwin"."Switch to Desktop 7" = [ ];
-      "kwin"."Switch to Desktop 8" = [ ];
-      "kwin"."Switch to Desktop 9" = [ ];
-      "kwin"."Switch to Next Desktop" = [ ];
-      "kwin"."Switch to Next Screen" = [ ];
-      "kwin"."Switch to Previous Desktop" = [ ];
-      "kwin"."Switch to Previous Screen" = [ ];
-      "kwin"."Switch to Screen 0" = [ ];
-      "kwin"."Switch to Screen 1" = [ ];
-      "kwin"."Switch to Screen 2" = [ ];
-      "kwin"."Switch to Screen 3" = [ ];
-      "kwin"."Switch to Screen 4" = [ ];
-      "kwin"."Switch to Screen 5" = [ ];
-      "kwin"."Switch to Screen 6" = [ ];
-      "kwin"."Switch to Screen 7" = [ ];
-      "kwin"."Switch to Screen Above" = [ ];
-      "kwin"."Switch to Screen Below" = [ ];
-      "kwin"."Switch to Screen to the Left" = [ ];
-      "kwin"."Switch to Screen to the Right" = [ ];
+      "kwin"."Switch to Desktop 1" = "Meta+1,Ctrl+F1,Switch to Desktop 1";
+      "kwin"."Switch to Desktop 10" = "none,,Switch to Desktop 10";
+      "kwin"."Switch to Desktop 11" = "none,,Switch to Desktop 11";
+      "kwin"."Switch to Desktop 12" = "none,,Switch to Desktop 12";
+      "kwin"."Switch to Desktop 13" = "none,,Switch to Desktop 13";
+      "kwin"."Switch to Desktop 14" = "none,,Switch to Desktop 14";
+      "kwin"."Switch to Desktop 15" = "none,,Switch to Desktop 15";
+      "kwin"."Switch to Desktop 16" = "none,,Switch to Desktop 16";
+      "kwin"."Switch to Desktop 17" = "none,,Switch to Desktop 17";
+      "kwin"."Switch to Desktop 18" = "none,,Switch to Desktop 18";
+      "kwin"."Switch to Desktop 19" = "none,,Switch to Desktop 19";
+      "kwin"."Switch to Desktop 2" = "Meta+2,Ctrl+F2,Switch to Desktop 2";
+      "kwin"."Switch to Desktop 20" = "none,,Switch to Desktop 20";
+      "kwin"."Switch to Desktop 3" = ["Meta+3" "Ctrl+F3,Ctrl+F3,Switch to Desktop 3"];
+      "kwin"."Switch to Desktop 4" = "Meta+4,Ctrl+F4,Switch to Desktop 4";
+      "kwin"."Switch to Desktop 5" = "none,,Switch to Desktop 5";
+      "kwin"."Switch to Desktop 6" = "none,,Switch to Desktop 6";
+      "kwin"."Switch to Desktop 7" = "none,,Switch to Desktop 7";
+      "kwin"."Switch to Desktop 8" = "none,,Switch to Desktop 8";
+      "kwin"."Switch to Desktop 9" = "none,,Switch to Desktop 9";
+      "kwin"."Switch to Next Desktop" = "none,,Switch to Next Desktop";
+      "kwin"."Switch to Next Screen" = "none,,Switch to Next Screen";
+      "kwin"."Switch to Previous Desktop" = "none,,Switch to Previous Desktop";
+      "kwin"."Switch to Previous Screen" = "none,,Switch to Previous Screen";
+      "kwin"."Switch to Screen 0" = "none,,Switch to Screen 0";
+      "kwin"."Switch to Screen 1" = "none,,Switch to Screen 1";
+      "kwin"."Switch to Screen 2" = "none,,Switch to Screen 2";
+      "kwin"."Switch to Screen 3" = "none,,Switch to Screen 3";
+      "kwin"."Switch to Screen 4" = "none,,Switch to Screen 4";
+      "kwin"."Switch to Screen 5" = "none,,Switch to Screen 5";
+      "kwin"."Switch to Screen 6" = "none,,Switch to Screen 6";
+      "kwin"."Switch to Screen 7" = "none,,Switch to Screen 7";
+      "kwin"."Switch to Screen Above" = "none,,Switch to Screen Above";
+      "kwin"."Switch to Screen Below" = "none,,Switch to Screen Below";
+      "kwin"."Switch to Screen to the Left" = "none,,Switch to Screen to the Left";
+      "kwin"."Switch to Screen to the Right" = "none,,Switch to Screen to the Right";
       "kwin"."Toggle Night Color" = [ ];
-      "kwin"."Toggle Window Raise/Lower" = [ ];
+      "kwin"."Toggle Window Raise/Lower" = "none,,Toggle Window Raise/Lower";
       "kwin"."Walk Through Desktop List" = [ ];
       "kwin"."Walk Through Desktop List (Reverse)" = [ ];
       "kwin"."Walk Through Desktops" = [ ];
       "kwin"."Walk Through Desktops (Reverse)" = [ ];
       "kwin"."Walk Through Windows" = "Alt+Tab";
-      "kwin"."Walk Through Windows (Reverse)" = "Alt+Shift+Backtab";
-      "kwin"."Walk Through Windows Alternative" = [ ];
-      "kwin"."Walk Through Windows Alternative (Reverse)" = [ ];
+      "kwin"."Walk Through Windows (Reverse)" = "Alt+Shift+Backtab,Alt+Shift+Tab,Walk Through Windows (Reverse)";
+      "kwin"."Walk Through Windows Alternative" = "none,,Walk Through Windows Alternative";
+      "kwin"."Walk Through Windows Alternative (Reverse)" = "none,,Walk Through Windows Alternative (Reverse)";
       "kwin"."Walk Through Windows of Current Application" = "Alt+`";
       "kwin"."Walk Through Windows of Current Application (Reverse)" = "Alt+~";
-      "kwin"."Walk Through Windows of Current Application Alternative" = [ ];
-      "kwin"."Walk Through Windows of Current Application Alternative (Reverse)" =
-        [ ];
-      "kwin"."Window Above Other Windows" = [ ];
-      "kwin"."Window Below Other Windows" = [ ];
+      "kwin"."Walk Through Windows of Current Application Alternative" = "none,,Walk Through Windows of Current Application Alternative";
+      "kwin"."Walk Through Windows of Current Application Alternative (Reverse)" = "none,,Walk Through Windows of Current Application Alternative (Reverse)";
+      "kwin"."Window Above Other Windows" = "none,,Keep Window Above Others";
+      "kwin"."Window Below Other Windows" = "none,,Keep Window Below Others";
       "kwin"."Window Close" = "Alt+F4";
-      "kwin"."Window Fullscreen" = [ ];
-      "kwin"."Window Grow Horizontal" = [ ];
-      "kwin"."Window Grow Vertical" = [ ];
-      "kwin"."Window Lower" = [ ];
+      "kwin"."Window Fullscreen" = "none,,Make Window Fullscreen";
+      "kwin"."Window Grow Horizontal" = "none,,Expand Window Horizontally";
+      "kwin"."Window Grow Vertical" = "none,,Expand Window Vertically";
+      "kwin"."Window Lower" = "none,,Lower Window";
       "kwin"."Window Maximize" = "Meta+PgUp";
-      "kwin"."Window Maximize Horizontal" = [ ];
-      "kwin"."Window Maximize Vertical" = [ ];
+      "kwin"."Window Maximize Horizontal" = "none,,Maximize Window Horizontally";
+      "kwin"."Window Maximize Vertical" = "none,,Maximize Window Vertically";
       "kwin"."Window Minimize" = "Meta+PgDown";
-      "kwin"."Window Move" = [ ];
-      "kwin"."Window Move Center" = [ ];
-      "kwin"."Window No Border" = [ ];
-      "kwin"."Window On All Desktops" = [ ];
+      "kwin"."Window Move" = "none,,Move Window";
+      "kwin"."Window Move Center" = "none,,Move Window to the Center";
+      "kwin"."Window No Border" = "none,,Toggle Window Titlebar and Frame";
+      "kwin"."Window On All Desktops" = "none,,Keep Window on All Desktops";
       "kwin"."Window One Desktop Down" = "Meta+Ctrl+Shift+Down";
       "kwin"."Window One Desktop Up" = "Meta+Ctrl+Shift+Up";
       "kwin"."Window One Desktop to the Left" = "Meta+Ctrl+Shift+Left";
       "kwin"."Window One Desktop to the Right" = "Meta+Ctrl+Shift+Right";
-      "kwin"."Window One Screen Down" = [ ];
-      "kwin"."Window One Screen Up" = [ ];
-      "kwin"."Window One Screen to the Left" = [ ];
-      "kwin"."Window One Screen to the Right" = [ ];
+      "kwin"."Window One Screen Down" = "none,,Move Window One Screen Down";
+      "kwin"."Window One Screen Up" = "none,,Move Window One Screen Up";
+      "kwin"."Window One Screen to the Left" = "none,,Move Window One Screen to the Left";
+      "kwin"."Window One Screen to the Right" = "none,,Move Window One Screen to the Right";
       "kwin"."Window Operations Menu" = "Alt+F3";
-      "kwin"."Window Pack Down" = [ ];
-      "kwin"."Window Pack Left" = [ ];
-      "kwin"."Window Pack Right" = [ ];
-      "kwin"."Window Pack Up" = [ ];
+      "kwin"."Window Pack Down" = "none,,Move Window Down";
+      "kwin"."Window Pack Left" = "none,,Move Window Left";
+      "kwin"."Window Pack Right" = "none,,Move Window Right";
+      "kwin"."Window Pack Up" = "none,,Move Window Up";
       "kwin"."Window Quick Tile Bottom" = "Meta+Down";
-      "kwin"."Window Quick Tile Bottom Left" = [ ];
-      "kwin"."Window Quick Tile Bottom Right" = [ ];
+      "kwin"."Window Quick Tile Bottom Left" = "none,,Quick Tile Window to the Bottom Left";
+      "kwin"."Window Quick Tile Bottom Right" = "none,,Quick Tile Window to the Bottom Right";
       "kwin"."Window Quick Tile Left" = "Meta+Left";
       "kwin"."Window Quick Tile Right" = "Meta+Right";
       "kwin"."Window Quick Tile Top" = "Meta+Up";
-      "kwin"."Window Quick Tile Top Left" = [ ];
-      "kwin"."Window Quick Tile Top Right" = [ ];
-      "kwin"."Window Raise" = [ ];
-      "kwin"."Window Resize" = [ ];
-      "kwin"."Window Shade" = [ ];
-      "kwin"."Window Shrink Horizontal" = [ ];
-      "kwin"."Window Shrink Vertical" = [ ];
-      "kwin"."Window to Desktop 1" = [ ];
-      "kwin"."Window to Desktop 10" = [ ];
-      "kwin"."Window to Desktop 11" = [ ];
-      "kwin"."Window to Desktop 12" = [ ];
-      "kwin"."Window to Desktop 13" = [ ];
-      "kwin"."Window to Desktop 14" = [ ];
-      "kwin"."Window to Desktop 15" = [ ];
-      "kwin"."Window to Desktop 16" = [ ];
-      "kwin"."Window to Desktop 17" = [ ];
-      "kwin"."Window to Desktop 18" = [ ];
-      "kwin"."Window to Desktop 19" = [ ];
-      "kwin"."Window to Desktop 2" = [ ];
-      "kwin"."Window to Desktop 20" = [ ];
-      "kwin"."Window to Desktop 3" = [ ];
-      "kwin"."Window to Desktop 4" = [ ];
-      "kwin"."Window to Desktop 5" = [ ];
-      "kwin"."Window to Desktop 6" = [ ];
-      "kwin"."Window to Desktop 7" = [ ];
-      "kwin"."Window to Desktop 8" = [ ];
-      "kwin"."Window to Desktop 9" = [ ];
-      "kwin"."Window to Next Desktop" = [ ];
+      "kwin"."Window Quick Tile Top Left" = "none,,Quick Tile Window to the Top Left";
+      "kwin"."Window Quick Tile Top Right" = "none,,Quick Tile Window to the Top Right";
+      "kwin"."Window Raise" = "none,,Raise Window";
+      "kwin"."Window Resize" = "none,,Resize Window";
+      "kwin"."Window Shade" = "none,,Shade Window";
+      "kwin"."Window Shrink Horizontal" = "none,,Shrink Window Horizontally";
+      "kwin"."Window Shrink Vertical" = "none,,Shrink Window Vertically";
+      "kwin"."Window to Desktop 1" = "none,,Window to Desktop 1";
+      "kwin"."Window to Desktop 10" = "none,,Window to Desktop 10";
+      "kwin"."Window to Desktop 11" = "none,,Window to Desktop 11";
+      "kwin"."Window to Desktop 12" = "none,,Window to Desktop 12";
+      "kwin"."Window to Desktop 13" = "none,,Window to Desktop 13";
+      "kwin"."Window to Desktop 14" = "none,,Window to Desktop 14";
+      "kwin"."Window to Desktop 15" = "none,,Window to Desktop 15";
+      "kwin"."Window to Desktop 16" = "none,,Window to Desktop 16";
+      "kwin"."Window to Desktop 17" = "none,,Window to Desktop 17";
+      "kwin"."Window to Desktop 18" = "none,,Window to Desktop 18";
+      "kwin"."Window to Desktop 19" = "none,,Window to Desktop 19";
+      "kwin"."Window to Desktop 2" = "none,,Window to Desktop 2";
+      "kwin"."Window to Desktop 20" = "none,,Window to Desktop 20";
+      "kwin"."Window to Desktop 3" = "none,,Window to Desktop 3";
+      "kwin"."Window to Desktop 4" = "none,,Window to Desktop 4";
+      "kwin"."Window to Desktop 5" = "none,,Window to Desktop 5";
+      "kwin"."Window to Desktop 6" = "none,,Window to Desktop 6";
+      "kwin"."Window to Desktop 7" = "none,,Window to Desktop 7";
+      "kwin"."Window to Desktop 8" = "none,,Window to Desktop 8";
+      "kwin"."Window to Desktop 9" = "none,,Window to Desktop 9";
+      "kwin"."Window to Next Desktop" = "none,,Window to Next Desktop";
       "kwin"."Window to Next Screen" = "Meta+Shift+Right";
-      "kwin"."Window to Previous Desktop" = [ ];
+      "kwin"."Window to Previous Desktop" = "none,,Window to Previous Desktop";
       "kwin"."Window to Previous Screen" = "Meta+Shift+Left";
-      "kwin"."Window to Screen 0" = [ ];
-      "kwin"."Window to Screen 1" = [ ];
-      "kwin"."Window to Screen 2" = [ ];
-      "kwin"."Window to Screen 3" = [ ];
-      "kwin"."Window to Screen 4" = [ ];
-      "kwin"."Window to Screen 5" = [ ];
-      "kwin"."Window to Screen 6" = [ ];
-      "kwin"."Window to Screen 7" = [ ];
-      "kwin"."view_actual_size" = [ ];
-      "kwin"."view_zoom_in" = [ "Meta++" "Meta+=" ];
+      "kwin"."Window to Screen 0" = "none,,Move Window to Screen 0";
+      "kwin"."Window to Screen 1" = "none,,Move Window to Screen 1";
+      "kwin"."Window to Screen 2" = "none,,Move Window to Screen 2";
+      "kwin"."Window to Screen 3" = "none,,Move Window to Screen 3";
+      "kwin"."Window to Screen 4" = "none,,Move Window to Screen 4";
+      "kwin"."Window to Screen 5" = "none,,Move Window to Screen 5";
+      "kwin"."Window to Screen 6" = "none,,Move Window to Screen 6";
+      "kwin"."Window to Screen 7" = "none,,Move Window to Screen 7";
+      "kwin"."view_actual_size" = "none,Meta+0,Zoom to Actual Size";
+      "kwin"."view_zoom_in" = ["Meta++" "Meta+=,Meta++" "Meta+=,Zoom In"];
       "kwin"."view_zoom_out" = "Meta+-";
-      "mediacontrol"."mediavolumedown" = [ ];
-      "mediacontrol"."mediavolumeup" = [ ];
+      "mediacontrol"."mediavolumedown" = "none,,Media volume down";
+      "mediacontrol"."mediavolumeup" = "none,,Media volume up";
       "mediacontrol"."nextmedia" = "Media Next";
       "mediacontrol"."pausemedia" = "Media Pause";
-      "mediacontrol"."playmedia" = [ ];
+      "mediacontrol"."playmedia" = "none,,Play media playback";
       "mediacontrol"."playpausemedia" = "Media Play";
       "mediacontrol"."previousmedia" = "Media Previous";
       "mediacontrol"."stopmedia" = "Media Stop";
-      "org.kde.dolphin.desktop"."_launch" = "Meta+E";
-      "org.kde.krunner.desktop"."RunClipboard" = "Alt+Shift+F2";
-      "org.kde.krunner.desktop"."_launch" = [ "Alt+Space" "Alt+F2" "Search" ];
-      "org.kde.plasma.emojier.desktop"."_launch" =
-        [ "Meta+." "Meta+Ctrl+Alt+Shift+Space" ];
-      "org.kde.spectacle.desktop"."ActiveWindowScreenShot" = "Meta+Print";
-      "org.kde.spectacle.desktop"."CurrentMonitorScreenShot" = [ ];
-      "org.kde.spectacle.desktop"."FullScreenScreenShot" = "Shift+Print";
-      "org.kde.spectacle.desktop"."OpenWithoutScreenshot" = [ ];
-      "org.kde.spectacle.desktop"."RectangularRegionScreenShot" =
-        "Meta+Shift+Print";
-      "org.kde.spectacle.desktop"."WindowUnderCursorScreenShot" =
-        "Meta+Ctrl+Print";
-      "org.kde.spectacle.desktop"."_launch" = "Print";
-      "org_kde_powerdevil"."Decrease Keyboard Brightness" =
-        "Keyboard Brightness Down";
-      "org_kde_powerdevil"."Decrease Screen Brightness" =
-        "Monitor Brightness Down";
+      "org_kde_powerdevil"."Decrease Keyboard Brightness" = "Keyboard Brightness Down";
+      "org_kde_powerdevil"."Decrease Screen Brightness" = "Monitor Brightness Down";
+      "org_kde_powerdevil"."Decrease Screen Brightness Small" = "Shift+Monitor Brightness Down";
       "org_kde_powerdevil"."Hibernate" = "Hibernate";
-      "org_kde_powerdevil"."Increase Keyboard Brightness" =
-        "Keyboard Brightness Up";
-      "org_kde_powerdevil"."Increase Screen Brightness" =
-        "Monitor Brightness Up";
+      "org_kde_powerdevil"."Increase Keyboard Brightness" = "Keyboard Brightness Up";
+      "org_kde_powerdevil"."Increase Screen Brightness" = "Monitor Brightness Up";
+      "org_kde_powerdevil"."Increase Screen Brightness Small" = "Shift+Monitor Brightness Up";
       "org_kde_powerdevil"."PowerDown" = "Power Down";
       "org_kde_powerdevil"."PowerOff" = "Power Off";
       "org_kde_powerdevil"."Sleep" = "Sleep";
-      "org_kde_powerdevil"."Toggle Keyboard Backlight" =
-        "Keyboard Light On/Off";
+      "org_kde_powerdevil"."Toggle Keyboard Backlight" = "Keyboard Light On/Off";
       "org_kde_powerdevil"."Turn Off Screen" = [ ];
-      "plasmashell"."activate task manager entry 1" = "Meta+1";
+      "org_kde_powerdevil"."powerProfile" = ["Battery" "Meta+B,Battery" "Meta+B,Switch Power Profile"];
+      "plasmashell"."activate application launcher" = ["Meta" "Alt+F1,Meta" "Alt+F1,Activate Application Launcher"];
+      "plasmashell"."activate task manager entry 1" = "none,Meta+1,Activate Task Manager Entry 1";
       "plasmashell"."activate task manager entry 10" = "Meta+0";
-      "plasmashell"."activate task manager entry 2" = "Meta+2";
-      "plasmashell"."activate task manager entry 3" = "Meta+3";
-      "plasmashell"."activate task manager entry 4" = "Meta+4";
+      "plasmashell"."activate task manager entry 2" = "none,Meta+2,Activate Task Manager Entry 2";
+      "plasmashell"."activate task manager entry 3" = "none,Meta+3,Activate Task Manager Entry 3";
+      "plasmashell"."activate task manager entry 4" = "none,Meta+4,Activate Task Manager Entry 4";
       "plasmashell"."activate task manager entry 5" = "Meta+5";
       "plasmashell"."activate task manager entry 6" = "Meta+6";
       "plasmashell"."activate task manager entry 7" = "Meta+7";
       "plasmashell"."activate task manager entry 8" = "Meta+8";
       "plasmashell"."activate task manager entry 9" = "Meta+9";
-      "plasmashell"."clear-history" = [ ];
+      "plasmashell"."clear-history" = "none,,Clear Clipboard History";
       "plasmashell"."clipboard_action" = "Meta+Ctrl+X";
       "plasmashell"."cycle-panels" = "Meta+Alt+P";
-      "plasmashell"."cycleNextAction" = [ ];
-      "plasmashell"."cyclePrevAction" = [ ];
+      "plasmashell"."cycleNextAction" = "none,,Next History Item";
+      "plasmashell"."cyclePrevAction" = "none,,Previous History Item";
       "plasmashell"."edit_clipboard" = [ ];
       "plasmashell"."manage activities" = "Meta+Q";
-      "plasmashell"."next activity" = "Meta+Tab";
-      "plasmashell"."previous activity" = "Meta+Shift+Tab";
+      "plasmashell"."next activity" = "Meta+Tab,none,Walk through activities";
+      "plasmashell"."previous activity" = "Meta+Shift+Tab,none,Walk through activities (Reverse)";
       "plasmashell"."repeat_action" = "Meta+Ctrl+R";
       "plasmashell"."show dashboard" = "Ctrl+F12";
-      "plasmashell"."show-barcode" = [ ];
+      "plasmashell"."show-barcode" = "none,,Show Barcode…";
       "plasmashell"."show-on-mouse-pos" = "Meta+V";
       "plasmashell"."stop current activity" = "Meta+S";
-      "plasmashell"."switch to next activity" = [ ];
-      "plasmashell"."switch to previous activity" = [ ];
-      "plasmashell"."toggle do not disturb" = [ ];
-      "systemsettings.desktop"."_launch" = "Tools";
-      "systemsettings.desktop"."kcm-kscreen" = [ ];
-      "systemsettings.desktop"."kcm-lookandfeel" = [ ];
-      "systemsettings.desktop"."kcm-users" = [ ];
-      "systemsettings.desktop"."powerdevilprofilesconfig" = [ ];
-      "systemsettings.desktop"."screenlocker" = [ ];
+      "plasmashell"."switch to next activity" = "none,,Switch to Next Activity";
+      "plasmashell"."switch to previous activity" = "none,,Switch to Previous Activity";
+      "plasmashell"."toggle do not disturb" = "none,,Toggle do not disturb";
+      "services/org.kde.plasma-systemmonitor.desktop"."_launch" = "Ctrl+Esc";
+      "services/org.kde.spectacle.desktop"."RecordWindow" = [ ];
+      "services/org.kde.spectacle.desktop"."_launch" = "Print";
     };
     configFile = {
       "baloofilerc"."General"."dbVersion" = 2;
-      "baloofilerc"."General"."exclude filters" =
-        "*~,*.part,*.o,*.la,*.lo,*.loT,*.moc,moc_*.cpp,qrc_*.cpp,ui_*.h,cmake_install.cmake,CMakeCache.txt,CTestTestfile.cmake,libtool,config.status,confdefs.h,autom4te,conftest,confstat,Makefile.am,*.gcode,.ninja_deps,.ninja_log,build.ninja,*.csproj,*.m4,*.rej,*.gmo,*.pc,*.omf,*.aux,*.tmp,*.po,*.vm*,*.nvram,*.rcore,*.swp,*.swap,lzo,litmain.sh,*.orig,.histfile.*,.xsession-errors*,*.map,*.so,*.a,*.db,*.qrc,*.ini,*.init,*.img,*.vdi,*.vbox*,vbox.log,*.qcow2,*.vmdk,*.vhd,*.vhdx,*.sql,*.sql.gz,*.ytdl,*.class,*.pyc,*.pyo,*.elc,*.qmlc,*.jsc,*.fastq,*.fq,*.gb,*.fasta,*.fna,*.gbff,*.faa,po,CVS,.svn,.git,_darcs,.bzr,.hg,CMakeFiles,CMakeTmp,CMakeTmpQmake,.moc,.obj,.pch,.uic,.npm,.yarn,.yarn-cache,__pycache__,node_modules,node_packages,nbproject,.venv,venv,core-dumps,lost+found";
+      "baloofilerc"."General"."exclude filters" = "*~,*.part,*.o,*.la,*.lo,*.loT,*.moc,moc_*.cpp,qrc_*.cpp,ui_*.h,cmake_install.cmake,CMakeCache.txt,CTestTestfile.cmake,libtool,config.status,confdefs.h,autom4te,conftest,confstat,Makefile.am,*.gcode,.ninja_deps,.ninja_log,build.ninja,*.csproj,*.m4,*.rej,*.gmo,*.pc,*.omf,*.aux,*.tmp,*.po,*.vm*,*.nvram,*.rcore,*.swp,*.swap,lzo,litmain.sh,*.orig,.histfile.*,.xsession-errors*,*.map,*.so,*.a,*.db,*.qrc,*.ini,*.init,*.img,*.vdi,*.vbox*,vbox.log,*.qcow2,*.vmdk,*.vhd,*.vhdx,*.sql,*.sql.gz,*.ytdl,*.class,*.pyc,*.pyo,*.elc,*.qmlc,*.jsc,*.fastq,*.fq,*.gb,*.fasta,*.fna,*.gbff,*.faa,po,CVS,.svn,.git,_darcs,.bzr,.hg,CMakeFiles,CMakeTmp,CMakeTmpQmake,.moc,.obj,.pch,.uic,.npm,.yarn,.yarn-cache,__pycache__,node_modules,node_packages,nbproject,.venv,venv,core-dumps,lost+found";
       "baloofilerc"."General"."exclude filters version" = 8;
+      "dolphinrc"."General"."ViewPropsTimestamp" = "2025,4,12,10,21,55.093";
       "dolphinrc"."IconsMode"."PreviewSize" = 224;
       "dolphinrc"."KFileDialog Settings"."Places Icons Auto-resize" = false;
       "dolphinrc"."KFileDialog Settings"."Places Icons Static Size" = 22;
-      "kactivitymanagerdrc"."activities"."714ada75-a79b-412d-8b48-e224d717c622" =
-        "Default";
-      "kactivitymanagerdrc"."main"."currentActivity" =
-        "714ada75-a79b-412d-8b48-e224d717c622";
+      "kactivitymanagerdrc"."activities"."714ada75-a79b-412d-8b48-e224d717c622" = "Default";
+      "kactivitymanagerdrc"."main"."currentActivity" = "714ada75-a79b-412d-8b48-e224d717c622";
+      "kcminputrc"."Libinput/6127/24823/HAILUCK CO.,LTD Duet 7 USB Composite Device Touchpad"."NaturalScroll" = true;
+      "kcminputrc"."Libinput/6127/24823/HAILUCK CO.,LTD Duet 7 USB Composite Device Touchpad"."PointerAcceleration" = 0.400;
       "kcminputrc"."Mouse"."X11LibInputXAccelProfileFlat" = false;
-      "kcminputrc"."Tmp"."update_info" =
-        "delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize";
+      "kcminputrc"."Tmp"."update_info" = "delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize";
       "kded5rc"."Module-device_automounter"."autoload" = false;
       "kdeglobals"."General"."BrowserApplication" = "firefox.desktop";
       "kdeglobals"."General"."TerminalApplication" = "wezterm start --cwd .";
-      "kdeglobals"."General"."TerminalService" =
-        "org.wezfurlong.wezterm.desktop";
+      "kdeglobals"."General"."TerminalService" = "org.wezfurlong.wezterm.desktop";
       "kdeglobals"."KFileDialog Settings"."Allow Expansion" = false;
-      "kdeglobals"."KFileDialog Settings"."Automatically select filename extension" =
-        true;
+      "kdeglobals"."KFileDialog Settings"."Automatically select filename extension" = true;
       "kdeglobals"."KFileDialog Settings"."Breadcrumb Navigation" = true;
       "kdeglobals"."KFileDialog Settings"."Decoration position" = 2;
       "kdeglobals"."KFileDialog Settings"."LocationCombo Completionmode" = 5;
@@ -299,34 +283,6 @@
       "kdeglobals"."WM"."inactiveBlend" = "161,169,177";
       "kdeglobals"."WM"."inactiveForeground" = "161,169,177";
       "kgammarc"."ConfigFile"."use" = "kgammarc";
-      "kglobalshortcutsrc"."ActivityManager"."_k_friendly_name" =
-        "Activity Manager";
-      "kglobalshortcutsrc"."KDE Keyboard Layout Switcher"."_k_friendly_name" =
-        "Keyboard Layout Switcher";
-      "kglobalshortcutsrc"."kaccess"."_k_friendly_name" = "Accessibility";
-      "kglobalshortcutsrc"."kcm_touchpad"."_k_friendly_name" = "Touchpad";
-      "kglobalshortcutsrc"."kded5"."_k_friendly_name" = "KDE Daemon";
-      "kglobalshortcutsrc"."khotkeys"."_k_friendly_name" =
-        "Custom Shortcuts Service";
-      "kglobalshortcutsrc"."kmix"."_k_friendly_name" = "Audio Volume";
-      "kglobalshortcutsrc"."ksmserver"."_k_friendly_name" =
-        "Session Management";
-      "kglobalshortcutsrc"."kwin"."_k_friendly_name" = "KWin";
-      "kglobalshortcutsrc"."mediacontrol"."_k_friendly_name" =
-        "Media Controller";
-      "kglobalshortcutsrc"."org.kde.dolphin.desktop"."_k_friendly_name" =
-        "Dolphin";
-      "kglobalshortcutsrc"."org.kde.krunner.desktop"."_k_friendly_name" =
-        "KRunner";
-      "kglobalshortcutsrc"."org.kde.plasma.emojier.desktop"."_k_friendly_name" =
-        "Emoji Selector";
-      "kglobalshortcutsrc"."org.kde.spectacle.desktop"."_k_friendly_name" =
-        "Spectacle";
-      "kglobalshortcutsrc"."org_kde_powerdevil"."_k_friendly_name" =
-        "Power Management";
-      "kglobalshortcutsrc"."plasmashell"."_k_friendly_name" = "Plasma";
-      "kglobalshortcutsrc"."systemsettings.desktop"."_k_friendly_name" =
-        "System Settings";
       "khotkeysrc"."Data"."DataCount" = 3;
       "khotkeysrc"."Data_1"."Comment" = "KMenuEdit Global Shortcuts";
       "khotkeysrc"."Data_1"."DataCount" = 1;
@@ -349,10 +305,8 @@
       "khotkeysrc"."Data_1_1Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_1_1Triggers0"."Key" = "";
       "khotkeysrc"."Data_1_1Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_1_1Triggers0"."Uuid" =
-        "{d03619b6-9b3c-48cc-9d9c-a2aadb485550}";
-      "khotkeysrc"."Data_2"."Comment" =
-        "This group contains various examples demonstrating most of the features of KHotkeys. (Note that this group and all its actions are disabled by default.)";
+      "khotkeysrc"."Data_1_1Triggers0"."Uuid" = "{d03619b6-9b3c-48cc-9d9c-a2aadb485550}";
+      "khotkeysrc"."Data_2"."Comment" = "This group contains various examples demonstrating most of the features of KHotkeys. (Note that this group and all its actions are disabled by default.)";
       "khotkeysrc"."Data_2"."DataCount" = 8;
       "khotkeysrc"."Data_2"."Enabled" = false;
       "khotkeysrc"."Data_2"."ImportId" = "kde32b1";
@@ -361,8 +315,7 @@
       "khotkeysrc"."Data_2"."Type" = "ACTION_DATA_GROUP";
       "khotkeysrc"."Data_2Conditions"."Comment" = "";
       "khotkeysrc"."Data_2Conditions"."ConditionsCount" = 0;
-      "khotkeysrc"."Data_2_1"."Comment" =
-        "After pressing Ctrl+Alt+I, the KSIRC window will be activated, if it exists. Simple.";
+      "khotkeysrc"."Data_2_1"."Comment" = "After pressing Ctrl+Alt+I, the KSIRC window will be activated, if it exists. Simple.";
       "khotkeysrc"."Data_2_1"."Enabled" = false;
       "khotkeysrc"."Data_2_1"."Name" = "Activate KSIRC Window";
       "khotkeysrc"."Data_2_1"."Type" = "SIMPLE_ACTION_DATA";
@@ -385,24 +338,14 @@
       "khotkeysrc"."Data_2_1Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_1Triggers0"."Key" = "Ctrl+Alt+I";
       "khotkeysrc"."Data_2_1Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_1Triggers0"."Uuid" =
-        "{f6b6f234-d986-4b0a-af9e-c832bb0ff19c}";
-      "khotkeysrc"."Data_2_2"."Comment" = ''
-        After pressing Alt+Ctrl+H the input of 'Hello' will be simulated, as if you typed it.  This is especially useful if you have call to frequently type a word (for instance, 'unsigned').  Every keypress in the input is separated by a colon ':'. Note that the keypresses literally mean keypresses, so you have to write what you would press on the keyboard. In the table below, the left column shows the input and the right column shows what to type.
-
-        "enter" (i.e. new line)                Enter or Return
-        a (i.e. small a)                          A
-        A (i.e. capital a)                       Shift+A
-        : (colon)                                  Shift+;
-        ' '  (space)                              Space'';
+      "khotkeysrc"."Data_2_1Triggers0"."Uuid" = "{f6b6f234-d986-4b0a-af9e-c832bb0ff19c}";
+      "khotkeysrc"."Data_2_2"."Comment" = "After pressing Alt+Ctrl+H the input of 'Hello' will be simulated, as if you typed it.  This is especially useful if you have call to frequently type a word (for instance, 'unsigned').  Every keypress in the input is separated by a colon ':'. Note that the keypresses literally mean keypresses, so you have to write what you would press on the keyboard. In the table below, the left column shows the input and the right column shows what to type.\n\n\"enter\" (i.e. new line)                Enter or Return\na (i.e. small a)                          A\nA (i.e. capital a)                       Shift+A\n: (colon)                                  Shift+;\n' '  (space)                              Space";
       "khotkeysrc"."Data_2_2"."Enabled" = false;
       "khotkeysrc"."Data_2_2"."Name" = "Type 'Hello'";
       "khotkeysrc"."Data_2_2"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_2_2Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_2_2Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_2_2Actions0"."Input" = ''
-        Shift+H:E:L:L:O
-      '';
+      "khotkeysrc"."Data_2_2Actions0"."Input" = "Shift+H:E:L:L:O\n";
       "khotkeysrc"."Data_2_2Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_2_2Conditions"."Comment" = "";
       "khotkeysrc"."Data_2_2Conditions"."ConditionsCount" = 0;
@@ -410,10 +353,8 @@
       "khotkeysrc"."Data_2_2Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_2Triggers0"."Key" = "Ctrl+Alt+H";
       "khotkeysrc"."Data_2_2Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_2Triggers0"."Uuid" =
-        "{4236d254-9982-4f69-a270-06298f2cfaa1}";
-      "khotkeysrc"."Data_2_3"."Comment" =
-        "This action runs Konsole, after pressing Ctrl+Alt+T.";
+      "khotkeysrc"."Data_2_2Triggers0"."Uuid" = "{4236d254-9982-4f69-a270-06298f2cfaa1}";
+      "khotkeysrc"."Data_2_3"."Comment" = "This action runs Konsole, after pressing Ctrl+Alt+T.";
       "khotkeysrc"."Data_2_3"."Enabled" = false;
       "khotkeysrc"."Data_2_3"."Name" = "Run Konsole";
       "khotkeysrc"."Data_2_3"."Type" = "SIMPLE_ACTION_DATA";
@@ -426,17 +367,8 @@
       "khotkeysrc"."Data_2_3Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_3Triggers0"."Key" = "Ctrl+Alt+T";
       "khotkeysrc"."Data_2_3Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_3Triggers0"."Uuid" =
-        "{6aceb41d-cb39-4a7e-8d8f-c7ba160a3dae}";
-      "khotkeysrc"."Data_2_4"."Comment" = ''
-        Read the comment on the "Type 'Hello'" action first.
-
-        Qt Designer uses Ctrl+F4 for closing windows.  In KDE, however, Ctrl+F4 is the shortcut for going to virtual desktop 4, so this shortcut does not work in Qt Designer.  Further, Qt Designer does not use KDE's standard Ctrl+W for closing the window.
-
-        This problem can be solved by remapping Ctrl+W to Ctrl+F4 when the active window is Qt Designer. When Qt Designer is active, every time Ctrl+W is pressed, Ctrl+F4 will be sent to Qt Designer instead. In other applications, the effect of Ctrl+W is unchanged.
-
-        We now need to specify three things: A new shortcut trigger on 'Ctrl+W', a new keyboard input action sending Ctrl+F4, and a new condition that the active window is Qt Designer.
-        Qt Designer seems to always have title 'Qt Designer by Trolltech', so the condition will check for the active window having that title.'';
+      "khotkeysrc"."Data_2_3Triggers0"."Uuid" = "{6aceb41d-cb39-4a7e-8d8f-c7ba160a3dae}";
+      "khotkeysrc"."Data_2_4"."Comment" = "Read the comment on the \"Type 'Hello'\" action first.\n\nQt Designer uses Ctrl+F4 for closing windows.  In KDE, however, Ctrl+F4 is the shortcut for going to virtual desktop 4, so this shortcut does not work in Qt Designer.  Further, Qt Designer does not use KDE's standard Ctrl+W for closing the window.\n\nThis problem can be solved by remapping Ctrl+W to Ctrl+F4 when the active window is Qt Designer. When Qt Designer is active, every time Ctrl+W is pressed, Ctrl+F4 will be sent to Qt Designer instead. In other applications, the effect of Ctrl+W is unchanged.\n\nWe now need to specify three things: A new shortcut trigger on 'Ctrl+W', a new keyboard input action sending Ctrl+F4, and a new condition that the active window is Qt Designer.\nQt Designer seems to always have title 'Qt Designer by Trolltech', so the condition will check for the active window having that title.";
       "khotkeysrc"."Data_2_4"."Enabled" = false;
       "khotkeysrc"."Data_2_4"."Name" = "Remap Ctrl+W to Ctrl+F4 in Qt Designer";
       "khotkeysrc"."Data_2_4"."Type" = "GENERIC_ACTION_DATA";
@@ -454,8 +386,7 @@
       "khotkeysrc"."Data_2_4Conditions0Window0"."Comment" = "";
       "khotkeysrc"."Data_2_4Conditions0Window0"."Role" = "";
       "khotkeysrc"."Data_2_4Conditions0Window0"."RoleType" = 0;
-      "khotkeysrc"."Data_2_4Conditions0Window0"."Title" =
-        "Qt Designer by Trolltech";
+      "khotkeysrc"."Data_2_4Conditions0Window0"."Title" = "Qt Designer by Trolltech";
       "khotkeysrc"."Data_2_4Conditions0Window0"."TitleType" = 2;
       "khotkeysrc"."Data_2_4Conditions0Window0"."Type" = "SIMPLE";
       "khotkeysrc"."Data_2_4Conditions0Window0"."WindowTypes" = 33;
@@ -463,13 +394,10 @@
       "khotkeysrc"."Data_2_4Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_4Triggers0"."Key" = "Ctrl+W";
       "khotkeysrc"."Data_2_4Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_4Triggers0"."Uuid" =
-        "{437ba2b8-c8b8-4c04-85bf-7661b5a86991}";
-      "khotkeysrc"."Data_2_5"."Comment" =
-        "By pressing Alt+Ctrl+W a D-Bus call will be performed that will show the minicli. You can use any kind of D-Bus call, just like using the command line 'qdbus' tool.";
+      "khotkeysrc"."Data_2_4Triggers0"."Uuid" = "{437ba2b8-c8b8-4c04-85bf-7661b5a86991}";
+      "khotkeysrc"."Data_2_5"."Comment" = "By pressing Alt+Ctrl+W a D-Bus call will be performed that will show the minicli. You can use any kind of D-Bus call, just like using the command line 'qdbus' tool.";
       "khotkeysrc"."Data_2_5"."Enabled" = false;
-      "khotkeysrc"."Data_2_5"."Name" =
-        "Perform D-Bus call 'qdbus org.kde.krunner /App display'";
+      "khotkeysrc"."Data_2_5"."Name" = "Perform D-Bus call 'qdbus org.kde.krunner /App display'";
       "khotkeysrc"."Data_2_5"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_2_5Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_2_5Actions0"."Arguments" = "";
@@ -483,14 +411,8 @@
       "khotkeysrc"."Data_2_5Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_5Triggers0"."Key" = "Ctrl+Alt+W";
       "khotkeysrc"."Data_2_5Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_5Triggers0"."Uuid" =
-        "{b7bfbaf7-7981-4c0a-8b29-10d7262fa91f}";
-      "khotkeysrc"."Data_2_6"."Comment" = ''
-        Read the comment on the "Type 'Hello'" action first.
-
-        Just like the "Type 'Hello'" action, this one simulates keyboard input, specifically, after pressing Ctrl+Alt+B, it sends B to XMMS (B in XMMS jumps to the next song). The 'Send to specific window' checkbox is checked and a window with its class containing 'XMMS_Player' is specified; this will make the input always be sent to this window. This way, you can control XMMS even if, for instance, it is on a different virtual desktop.
-
-        (Run 'xprop' and click on the XMMS window and search for WM_CLASS to see 'XMMS_Player').'';
+      "khotkeysrc"."Data_2_5Triggers0"."Uuid" = "{b7bfbaf7-7981-4c0a-8b29-10d7262fa91f}";
+      "khotkeysrc"."Data_2_6"."Comment" = "Read the comment on the \"Type 'Hello'\" action first.\n\nJust like the \"Type 'Hello'\" action, this one simulates keyboard input, specifically, after pressing Ctrl+Alt+B, it sends B to XMMS (B in XMMS jumps to the next song). The 'Send to specific window' checkbox is checked and a window with its class containing 'XMMS_Player' is specified; this will make the input always be sent to this window. This way, you can control XMMS even if, for instance, it is on a different virtual desktop.\n\n(Run 'xprop' and click on the XMMS window and search for WM_CLASS to see 'XMMS_Player').";
       "khotkeysrc"."Data_2_6"."Enabled" = false;
       "khotkeysrc"."Data_2_6"."Name" = "Next in XMMS";
       "khotkeysrc"."Data_2_6"."Type" = "SIMPLE_ACTION_DATA";
@@ -498,13 +420,11 @@
       "khotkeysrc"."Data_2_6Actions0"."DestinationWindow" = 1;
       "khotkeysrc"."Data_2_6Actions0"."Input" = "B";
       "khotkeysrc"."Data_2_6Actions0"."Type" = "KEYBOARD_INPUT";
-      "khotkeysrc"."Data_2_6Actions0DestinationWindow"."Comment" =
-        "XMMS window";
+      "khotkeysrc"."Data_2_6Actions0DestinationWindow"."Comment" = "XMMS window";
       "khotkeysrc"."Data_2_6Actions0DestinationWindow"."WindowsCount" = 1;
       "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."Class" = "XMMS_Player";
       "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."ClassType" = 1;
-      "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."Comment" =
-        "XMMS Player window";
+      "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."Comment" = "XMMS Player window";
       "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."Role" = "";
       "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."RoleType" = 0;
       "khotkeysrc"."Data_2_6Actions0DestinationWindow0"."Title" = "";
@@ -517,24 +437,8 @@
       "khotkeysrc"."Data_2_6Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_6Triggers0"."Key" = "Ctrl+Alt+B";
       "khotkeysrc"."Data_2_6Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_6Triggers0"."Uuid" =
-        "{19aad492-5ded-4ae6-9960-24736e1a9c86}";
-      "khotkeysrc"."Data_2_7"."Comment" = ''
-        Konqueror in KDE3.1 has tabs, and now you can also have gestures.
-
-        Just press the middle mouse button and start drawing one of the gestures, and after you are finished, release the mouse button. If you only need to paste the selection, it still works, just click the middle mouse button. (You can change the mouse button to use in the global settings).
-
-        Right now, there are the following gestures available:
-        move right and back left - Forward (Alt+Right)
-        move left and back right - Back (Alt+Left)
-        move up and back down  - Up (Alt+Up)
-        circle counterclockwise - Reload (F5)
-
-        The gesture shapes can be entered by performing them in the configuration dialog. You can also look at your numeric pad to help you: gestures are recognized like a 3x3 grid of fields, numbered 1 to 9.
-
-        Note that you must perform exactly the gesture to trigger the action. Because of this, it is possible to enter more gestures for the action. You should try to avoid complicated gestures where you change the direction of mouse movement more than once.  For instance, 45654 or 74123 are simple to perform, but 1236987 may be already quite difficult.
-
-        The conditions for all gestures are defined in this group. All these gestures are active only if the active window is Konqueror (class contains 'konqueror').'';
+      "khotkeysrc"."Data_2_6Triggers0"."Uuid" = "{19aad492-5ded-4ae6-9960-24736e1a9c86}";
+      "khotkeysrc"."Data_2_7"."Comment" = "Konqueror in KDE3.1 has tabs, and now you can also have gestures.\n\nJust press the middle mouse button and start drawing one of the gestures, and after you are finished, release the mouse button. If you only need to paste the selection, it still works, just click the middle mouse button. (You can change the mouse button to use in the global settings).\n\nRight now, there are the following gestures available:\nmove right and back left - Forward (Alt+Right)\nmove left and back right - Back (Alt+Left)\nmove up and back down  - Up (Alt+Up)\ncircle counterclockwise - Reload (F5)\n\nThe gesture shapes can be entered by performing them in the configuration dialog. You can also look at your numeric pad to help you: gestures are recognized like a 3x3 grid of fields, numbered 1 to 9.\n\nNote that you must perform exactly the gesture to trigger the action. Because of this, it is possible to enter more gestures for the action. You should try to avoid complicated gestures where you change the direction of mouse movement more than once.  For instance, 45654 or 74123 are simple to perform, but 1236987 may be already quite difficult.\n\nThe conditions for all gestures are defined in this group. All these gestures are active only if the active window is Konqueror (class contains 'konqueror').";
       "khotkeysrc"."Data_2_7"."DataCount" = 4;
       "khotkeysrc"."Data_2_7"."Enabled" = false;
       "khotkeysrc"."Data_2_7"."Name" = "Konqi Gestures";
@@ -566,14 +470,11 @@
       "khotkeysrc"."Data_2_7_1Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_2_7_1Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_2_7_1Triggers"."TriggersCount" = 3;
-      "khotkeysrc"."Data_2_7_1Triggers0"."GesturePointData" =
-        "0,0.0625,1,1,0.5,0.0625,0.0625,1,0.875,0.5,0.125,0.0625,1,0.75,0.5,0.1875,0.0625,1,0.625,0.5,0.25,0.0625,1,0.5,0.5,0.3125,0.0625,1,0.375,0.5,0.375,0.0625,1,0.25,0.5,0.4375,0.0625,1,0.125,0.5,0.5,0.0625,0,0,0.5,0.5625,0.0625,0,0.125,0.5,0.625,0.0625,0,0.25,0.5,0.6875,0.0625,0,0.375,0.5,0.75,0.0625,0,0.5,0.5,0.8125,0.0625,0,0.625,0.5,0.875,0.0625,0,0.75,0.5,0.9375,0.0625,0,0.875,0.5,1,0,0,1,0.5";
+      "khotkeysrc"."Data_2_7_1Triggers0"."GesturePointData" = "0,0.0625,1,1,0.5,0.0625,0.0625,1,0.875,0.5,0.125,0.0625,1,0.75,0.5,0.1875,0.0625,1,0.625,0.5,0.25,0.0625,1,0.5,0.5,0.3125,0.0625,1,0.375,0.5,0.375,0.0625,1,0.25,0.5,0.4375,0.0625,1,0.125,0.5,0.5,0.0625,0,0,0.5,0.5625,0.0625,0,0.125,0.5,0.625,0.0625,0,0.25,0.5,0.6875,0.0625,0,0.375,0.5,0.75,0.0625,0,0.5,0.5,0.8125,0.0625,0,0.625,0.5,0.875,0.0625,0,0.75,0.5,0.9375,0.0625,0,0.875,0.5,1,0,0,1,0.5";
       "khotkeysrc"."Data_2_7_1Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_1Triggers1"."GesturePointData" =
-        "0,0.0833333,1,0.5,0.5,0.0833333,0.0833333,1,0.375,0.5,0.166667,0.0833333,1,0.25,0.5,0.25,0.0833333,1,0.125,0.5,0.333333,0.0833333,0,0,0.5,0.416667,0.0833333,0,0.125,0.5,0.5,0.0833333,0,0.25,0.5,0.583333,0.0833333,0,0.375,0.5,0.666667,0.0833333,0,0.5,0.5,0.75,0.0833333,0,0.625,0.5,0.833333,0.0833333,0,0.75,0.5,0.916667,0.0833333,0,0.875,0.5,1,0,0,1,0.5";
+      "khotkeysrc"."Data_2_7_1Triggers1"."GesturePointData" = "0,0.0833333,1,0.5,0.5,0.0833333,0.0833333,1,0.375,0.5,0.166667,0.0833333,1,0.25,0.5,0.25,0.0833333,1,0.125,0.5,0.333333,0.0833333,0,0,0.5,0.416667,0.0833333,0,0.125,0.5,0.5,0.0833333,0,0.25,0.5,0.583333,0.0833333,0,0.375,0.5,0.666667,0.0833333,0,0.5,0.5,0.75,0.0833333,0,0.625,0.5,0.833333,0.0833333,0,0.75,0.5,0.916667,0.0833333,0,0.875,0.5,1,0,0,1,0.5";
       "khotkeysrc"."Data_2_7_1Triggers1"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_1Triggers2"."GesturePointData" =
-        "0,0.0833333,1,1,0.5,0.0833333,0.0833333,1,0.875,0.5,0.166667,0.0833333,1,0.75,0.5,0.25,0.0833333,1,0.625,0.5,0.333333,0.0833333,1,0.5,0.5,0.416667,0.0833333,1,0.375,0.5,0.5,0.0833333,1,0.25,0.5,0.583333,0.0833333,1,0.125,0.5,0.666667,0.0833333,0,0,0.5,0.75,0.0833333,0,0.125,0.5,0.833333,0.0833333,0,0.25,0.5,0.916667,0.0833333,0,0.375,0.5,1,0,0,0.5,0.5";
+      "khotkeysrc"."Data_2_7_1Triggers2"."GesturePointData" = "0,0.0833333,1,1,0.5,0.0833333,0.0833333,1,0.875,0.5,0.166667,0.0833333,1,0.75,0.5,0.25,0.0833333,1,0.625,0.5,0.333333,0.0833333,1,0.5,0.5,0.416667,0.0833333,1,0.375,0.5,0.5,0.0833333,1,0.25,0.5,0.583333,0.0833333,1,0.125,0.5,0.666667,0.0833333,0,0,0.5,0.75,0.0833333,0,0.125,0.5,0.833333,0.0833333,0,0.25,0.5,0.916667,0.0833333,0,0.375,0.5,1,0,0,0.5,0.5";
       "khotkeysrc"."Data_2_7_1Triggers2"."Type" = "GESTURE";
       "khotkeysrc"."Data_2_7_2"."Comment" = "";
       "khotkeysrc"."Data_2_7_2"."Enabled" = false;
@@ -587,14 +488,11 @@
       "khotkeysrc"."Data_2_7_2Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_2_7_2Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_2_7_2Triggers"."TriggersCount" = 3;
-      "khotkeysrc"."Data_2_7_2Triggers0"."GesturePointData" =
-        "0,0.0625,0,0,0.5,0.0625,0.0625,0,0.125,0.5,0.125,0.0625,0,0.25,0.5,0.1875,0.0625,0,0.375,0.5,0.25,0.0625,0,0.5,0.5,0.3125,0.0625,0,0.625,0.5,0.375,0.0625,0,0.75,0.5,0.4375,0.0625,0,0.875,0.5,0.5,0.0625,1,1,0.5,0.5625,0.0625,1,0.875,0.5,0.625,0.0625,1,0.75,0.5,0.6875,0.0625,1,0.625,0.5,0.75,0.0625,1,0.5,0.5,0.8125,0.0625,1,0.375,0.5,0.875,0.0625,1,0.25,0.5,0.9375,0.0625,1,0.125,0.5,1,0,0,0,0.5";
+      "khotkeysrc"."Data_2_7_2Triggers0"."GesturePointData" = "0,0.0625,0,0,0.5,0.0625,0.0625,0,0.125,0.5,0.125,0.0625,0,0.25,0.5,0.1875,0.0625,0,0.375,0.5,0.25,0.0625,0,0.5,0.5,0.3125,0.0625,0,0.625,0.5,0.375,0.0625,0,0.75,0.5,0.4375,0.0625,0,0.875,0.5,0.5,0.0625,1,1,0.5,0.5625,0.0625,1,0.875,0.5,0.625,0.0625,1,0.75,0.5,0.6875,0.0625,1,0.625,0.5,0.75,0.0625,1,0.5,0.5,0.8125,0.0625,1,0.375,0.5,0.875,0.0625,1,0.25,0.5,0.9375,0.0625,1,0.125,0.5,1,0,0,0,0.5";
       "khotkeysrc"."Data_2_7_2Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_2Triggers1"."GesturePointData" =
-        "0,0.0833333,0,0.5,0.5,0.0833333,0.0833333,0,0.625,0.5,0.166667,0.0833333,0,0.75,0.5,0.25,0.0833333,0,0.875,0.5,0.333333,0.0833333,1,1,0.5,0.416667,0.0833333,1,0.875,0.5,0.5,0.0833333,1,0.75,0.5,0.583333,0.0833333,1,0.625,0.5,0.666667,0.0833333,1,0.5,0.5,0.75,0.0833333,1,0.375,0.5,0.833333,0.0833333,1,0.25,0.5,0.916667,0.0833333,1,0.125,0.5,1,0,0,0,0.5";
+      "khotkeysrc"."Data_2_7_2Triggers1"."GesturePointData" = "0,0.0833333,0,0.5,0.5,0.0833333,0.0833333,0,0.625,0.5,0.166667,0.0833333,0,0.75,0.5,0.25,0.0833333,0,0.875,0.5,0.333333,0.0833333,1,1,0.5,0.416667,0.0833333,1,0.875,0.5,0.5,0.0833333,1,0.75,0.5,0.583333,0.0833333,1,0.625,0.5,0.666667,0.0833333,1,0.5,0.5,0.75,0.0833333,1,0.375,0.5,0.833333,0.0833333,1,0.25,0.5,0.916667,0.0833333,1,0.125,0.5,1,0,0,0,0.5";
       "khotkeysrc"."Data_2_7_2Triggers1"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_2Triggers2"."GesturePointData" =
-        "0,0.0833333,0,0,0.5,0.0833333,0.0833333,0,0.125,0.5,0.166667,0.0833333,0,0.25,0.5,0.25,0.0833333,0,0.375,0.5,0.333333,0.0833333,0,0.5,0.5,0.416667,0.0833333,0,0.625,0.5,0.5,0.0833333,0,0.75,0.5,0.583333,0.0833333,0,0.875,0.5,0.666667,0.0833333,1,1,0.5,0.75,0.0833333,1,0.875,0.5,0.833333,0.0833333,1,0.75,0.5,0.916667,0.0833333,1,0.625,0.5,1,0,0,0.5,0.5";
+      "khotkeysrc"."Data_2_7_2Triggers2"."GesturePointData" = "0,0.0833333,0,0,0.5,0.0833333,0.0833333,0,0.125,0.5,0.166667,0.0833333,0,0.25,0.5,0.25,0.0833333,0,0.375,0.5,0.333333,0.0833333,0,0.5,0.5,0.416667,0.0833333,0,0.625,0.5,0.5,0.0833333,0,0.75,0.5,0.583333,0.0833333,0,0.875,0.5,0.666667,0.0833333,1,1,0.5,0.75,0.0833333,1,0.875,0.5,0.833333,0.0833333,1,0.75,0.5,0.916667,0.0833333,1,0.625,0.5,1,0,0,0.5,0.5";
       "khotkeysrc"."Data_2_7_2Triggers2"."Type" = "GESTURE";
       "khotkeysrc"."Data_2_7_3"."Comment" = "";
       "khotkeysrc"."Data_2_7_3"."Enabled" = false;
@@ -608,14 +506,11 @@
       "khotkeysrc"."Data_2_7_3Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_2_7_3Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_2_7_3Triggers"."TriggersCount" = 3;
-      "khotkeysrc"."Data_2_7_3Triggers0"."GesturePointData" =
-        "0,0.0625,-0.5,0.5,1,0.0625,0.0625,-0.5,0.5,0.875,0.125,0.0625,-0.5,0.5,0.75,0.1875,0.0625,-0.5,0.5,0.625,0.25,0.0625,-0.5,0.5,0.5,0.3125,0.0625,-0.5,0.5,0.375,0.375,0.0625,-0.5,0.5,0.25,0.4375,0.0625,-0.5,0.5,0.125,0.5,0.0625,0.5,0.5,0,0.5625,0.0625,0.5,0.5,0.125,0.625,0.0625,0.5,0.5,0.25,0.6875,0.0625,0.5,0.5,0.375,0.75,0.0625,0.5,0.5,0.5,0.8125,0.0625,0.5,0.5,0.625,0.875,0.0625,0.5,0.5,0.75,0.9375,0.0625,0.5,0.5,0.875,1,0,0,0.5,1";
+      "khotkeysrc"."Data_2_7_3Triggers0"."GesturePointData" = "0,0.0625,-0.5,0.5,1,0.0625,0.0625,-0.5,0.5,0.875,0.125,0.0625,-0.5,0.5,0.75,0.1875,0.0625,-0.5,0.5,0.625,0.25,0.0625,-0.5,0.5,0.5,0.3125,0.0625,-0.5,0.5,0.375,0.375,0.0625,-0.5,0.5,0.25,0.4375,0.0625,-0.5,0.5,0.125,0.5,0.0625,0.5,0.5,0,0.5625,0.0625,0.5,0.5,0.125,0.625,0.0625,0.5,0.5,0.25,0.6875,0.0625,0.5,0.5,0.375,0.75,0.0625,0.5,0.5,0.5,0.8125,0.0625,0.5,0.5,0.625,0.875,0.0625,0.5,0.5,0.75,0.9375,0.0625,0.5,0.5,0.875,1,0,0,0.5,1";
       "khotkeysrc"."Data_2_7_3Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_3Triggers1"."GesturePointData" =
-        "0,0.0833333,-0.5,0.5,1,0.0833333,0.0833333,-0.5,0.5,0.875,0.166667,0.0833333,-0.5,0.5,0.75,0.25,0.0833333,-0.5,0.5,0.625,0.333333,0.0833333,-0.5,0.5,0.5,0.416667,0.0833333,-0.5,0.5,0.375,0.5,0.0833333,-0.5,0.5,0.25,0.583333,0.0833333,-0.5,0.5,0.125,0.666667,0.0833333,0.5,0.5,0,0.75,0.0833333,0.5,0.5,0.125,0.833333,0.0833333,0.5,0.5,0.25,0.916667,0.0833333,0.5,0.5,0.375,1,0,0,0.5,0.5";
+      "khotkeysrc"."Data_2_7_3Triggers1"."GesturePointData" = "0,0.0833333,-0.5,0.5,1,0.0833333,0.0833333,-0.5,0.5,0.875,0.166667,0.0833333,-0.5,0.5,0.75,0.25,0.0833333,-0.5,0.5,0.625,0.333333,0.0833333,-0.5,0.5,0.5,0.416667,0.0833333,-0.5,0.5,0.375,0.5,0.0833333,-0.5,0.5,0.25,0.583333,0.0833333,-0.5,0.5,0.125,0.666667,0.0833333,0.5,0.5,0,0.75,0.0833333,0.5,0.5,0.125,0.833333,0.0833333,0.5,0.5,0.25,0.916667,0.0833333,0.5,0.5,0.375,1,0,0,0.5,0.5";
       "khotkeysrc"."Data_2_7_3Triggers1"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_3Triggers2"."GesturePointData" =
-        "0,0.0833333,-0.5,0.5,0.5,0.0833333,0.0833333,-0.5,0.5,0.375,0.166667,0.0833333,-0.5,0.5,0.25,0.25,0.0833333,-0.5,0.5,0.125,0.333333,0.0833333,0.5,0.5,0,0.416667,0.0833333,0.5,0.5,0.125,0.5,0.0833333,0.5,0.5,0.25,0.583333,0.0833333,0.5,0.5,0.375,0.666667,0.0833333,0.5,0.5,0.5,0.75,0.0833333,0.5,0.5,0.625,0.833333,0.0833333,0.5,0.5,0.75,0.916667,0.0833333,0.5,0.5,0.875,1,0,0,0.5,1";
+      "khotkeysrc"."Data_2_7_3Triggers2"."GesturePointData" = "0,0.0833333,-0.5,0.5,0.5,0.0833333,0.0833333,-0.5,0.5,0.375,0.166667,0.0833333,-0.5,0.5,0.25,0.25,0.0833333,-0.5,0.5,0.125,0.333333,0.0833333,0.5,0.5,0,0.416667,0.0833333,0.5,0.5,0.125,0.5,0.0833333,0.5,0.5,0.25,0.583333,0.0833333,0.5,0.5,0.375,0.666667,0.0833333,0.5,0.5,0.5,0.75,0.0833333,0.5,0.5,0.625,0.833333,0.0833333,0.5,0.5,0.75,0.916667,0.0833333,0.5,0.5,0.875,1,0,0,0.5,1";
       "khotkeysrc"."Data_2_7_3Triggers2"."Type" = "GESTURE";
       "khotkeysrc"."Data_2_7_4"."Comment" = "";
       "khotkeysrc"."Data_2_7_4"."Enabled" = false;
@@ -629,17 +524,13 @@
       "khotkeysrc"."Data_2_7_4Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_2_7_4Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_2_7_4Triggers"."TriggersCount" = 3;
-      "khotkeysrc"."Data_2_7_4Triggers0"."GesturePointData" =
-        "0,0.03125,0,0,1,0.03125,0.03125,0,0.125,1,0.0625,0.03125,0,0.25,1,0.09375,0.03125,0,0.375,1,0.125,0.03125,0,0.5,1,0.15625,0.03125,0,0.625,1,0.1875,0.03125,0,0.75,1,0.21875,0.03125,0,0.875,1,0.25,0.03125,-0.5,1,1,0.28125,0.03125,-0.5,1,0.875,0.3125,0.03125,-0.5,1,0.75,0.34375,0.03125,-0.5,1,0.625,0.375,0.03125,-0.5,1,0.5,0.40625,0.03125,-0.5,1,0.375,0.4375,0.03125,-0.5,1,0.25,0.46875,0.03125,-0.5,1,0.125,0.5,0.03125,1,1,0,0.53125,0.03125,1,0.875,0,0.5625,0.03125,1,0.75,0,0.59375,0.03125,1,0.625,0,0.625,0.03125,1,0.5,0,0.65625,0.03125,1,0.375,0,0.6875,0.03125,1,0.25,0,0.71875,0.03125,1,0.125,0,0.75,0.03125,0.5,0,0,0.78125,0.03125,0.5,0,0.125,0.8125,0.03125,0.5,0,0.25,0.84375,0.03125,0.5,0,0.375,0.875,0.03125,0.5,0,0.5,0.90625,0.03125,0.5,0,0.625,0.9375,0.03125,0.5,0,0.75,0.96875,0.03125,0.5,0,0.875,1,0,0,0,1";
+      "khotkeysrc"."Data_2_7_4Triggers0"."GesturePointData" = "0,0.03125,0,0,1,0.03125,0.03125,0,0.125,1,0.0625,0.03125,0,0.25,1,0.09375,0.03125,0,0.375,1,0.125,0.03125,0,0.5,1,0.15625,0.03125,0,0.625,1,0.1875,0.03125,0,0.75,1,0.21875,0.03125,0,0.875,1,0.25,0.03125,-0.5,1,1,0.28125,0.03125,-0.5,1,0.875,0.3125,0.03125,-0.5,1,0.75,0.34375,0.03125,-0.5,1,0.625,0.375,0.03125,-0.5,1,0.5,0.40625,0.03125,-0.5,1,0.375,0.4375,0.03125,-0.5,1,0.25,0.46875,0.03125,-0.5,1,0.125,0.5,0.03125,1,1,0,0.53125,0.03125,1,0.875,0,0.5625,0.03125,1,0.75,0,0.59375,0.03125,1,0.625,0,0.625,0.03125,1,0.5,0,0.65625,0.03125,1,0.375,0,0.6875,0.03125,1,0.25,0,0.71875,0.03125,1,0.125,0,0.75,0.03125,0.5,0,0,0.78125,0.03125,0.5,0,0.125,0.8125,0.03125,0.5,0,0.25,0.84375,0.03125,0.5,0,0.375,0.875,0.03125,0.5,0,0.5,0.90625,0.03125,0.5,0,0.625,0.9375,0.03125,0.5,0,0.75,0.96875,0.03125,0.5,0,0.875,1,0,0,0,1";
       "khotkeysrc"."Data_2_7_4Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_4Triggers1"."GesturePointData" =
-        "0,0.0277778,0,0,1,0.0277778,0.0277778,0,0.125,1,0.0555556,0.0277778,0,0.25,1,0.0833333,0.0277778,0,0.375,1,0.111111,0.0277778,0,0.5,1,0.138889,0.0277778,0,0.625,1,0.166667,0.0277778,0,0.75,1,0.194444,0.0277778,0,0.875,1,0.222222,0.0277778,-0.5,1,1,0.25,0.0277778,-0.5,1,0.875,0.277778,0.0277778,-0.5,1,0.75,0.305556,0.0277778,-0.5,1,0.625,0.333333,0.0277778,-0.5,1,0.5,0.361111,0.0277778,-0.5,1,0.375,0.388889,0.0277778,-0.5,1,0.25,0.416667,0.0277778,-0.5,1,0.125,0.444444,0.0277778,1,1,0,0.472222,0.0277778,1,0.875,0,0.5,0.0277778,1,0.75,0,0.527778,0.0277778,1,0.625,0,0.555556,0.0277778,1,0.5,0,0.583333,0.0277778,1,0.375,0,0.611111,0.0277778,1,0.25,0,0.638889,0.0277778,1,0.125,0,0.666667,0.0277778,0.5,0,0,0.694444,0.0277778,0.5,0,0.125,0.722222,0.0277778,0.5,0,0.25,0.75,0.0277778,0.5,0,0.375,0.777778,0.0277778,0.5,0,0.5,0.805556,0.0277778,0.5,0,0.625,0.833333,0.0277778,0.5,0,0.75,0.861111,0.0277778,0.5,0,0.875,0.888889,0.0277778,0,0,1,0.916667,0.0277778,0,0.125,1,0.944444,0.0277778,0,0.25,1,0.972222,0.0277778,0,0.375,1,1,0,0,0.5,1";
+      "khotkeysrc"."Data_2_7_4Triggers1"."GesturePointData" = "0,0.0277778,0,0,1,0.0277778,0.0277778,0,0.125,1,0.0555556,0.0277778,0,0.25,1,0.0833333,0.0277778,0,0.375,1,0.111111,0.0277778,0,0.5,1,0.138889,0.0277778,0,0.625,1,0.166667,0.0277778,0,0.75,1,0.194444,0.0277778,0,0.875,1,0.222222,0.0277778,-0.5,1,1,0.25,0.0277778,-0.5,1,0.875,0.277778,0.0277778,-0.5,1,0.75,0.305556,0.0277778,-0.5,1,0.625,0.333333,0.0277778,-0.5,1,0.5,0.361111,0.0277778,-0.5,1,0.375,0.388889,0.0277778,-0.5,1,0.25,0.416667,0.0277778,-0.5,1,0.125,0.444444,0.0277778,1,1,0,0.472222,0.0277778,1,0.875,0,0.5,0.0277778,1,0.75,0,0.527778,0.0277778,1,0.625,0,0.555556,0.0277778,1,0.5,0,0.583333,0.0277778,1,0.375,0,0.611111,0.0277778,1,0.25,0,0.638889,0.0277778,1,0.125,0,0.666667,0.0277778,0.5,0,0,0.694444,0.0277778,0.5,0,0.125,0.722222,0.0277778,0.5,0,0.25,0.75,0.0277778,0.5,0,0.375,0.777778,0.0277778,0.5,0,0.5,0.805556,0.0277778,0.5,0,0.625,0.833333,0.0277778,0.5,0,0.75,0.861111,0.0277778,0.5,0,0.875,0.888889,0.0277778,0,0,1,0.916667,0.0277778,0,0.125,1,0.944444,0.0277778,0,0.25,1,0.972222,0.0277778,0,0.375,1,1,0,0,0.5,1";
       "khotkeysrc"."Data_2_7_4Triggers1"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_7_4Triggers2"."GesturePointData" =
-        "0,0.0277778,0.5,0,0.5,0.0277778,0.0277778,0.5,0,0.625,0.0555556,0.0277778,0.5,0,0.75,0.0833333,0.0277778,0.5,0,0.875,0.111111,0.0277778,0,0,1,0.138889,0.0277778,0,0.125,1,0.166667,0.0277778,0,0.25,1,0.194444,0.0277778,0,0.375,1,0.222222,0.0277778,0,0.5,1,0.25,0.0277778,0,0.625,1,0.277778,0.0277778,0,0.75,1,0.305556,0.0277778,0,0.875,1,0.333333,0.0277778,-0.5,1,1,0.361111,0.0277778,-0.5,1,0.875,0.388889,0.0277778,-0.5,1,0.75,0.416667,0.0277778,-0.5,1,0.625,0.444444,0.0277778,-0.5,1,0.5,0.472222,0.0277778,-0.5,1,0.375,0.5,0.0277778,-0.5,1,0.25,0.527778,0.0277778,-0.5,1,0.125,0.555556,0.0277778,1,1,0,0.583333,0.0277778,1,0.875,0,0.611111,0.0277778,1,0.75,0,0.638889,0.0277778,1,0.625,0,0.666667,0.0277778,1,0.5,0,0.694444,0.0277778,1,0.375,0,0.722222,0.0277778,1,0.25,0,0.75,0.0277778,1,0.125,0,0.777778,0.0277778,0.5,0,0,0.805556,0.0277778,0.5,0,0.125,0.833333,0.0277778,0.5,0,0.25,0.861111,0.0277778,0.5,0,0.375,0.888889,0.0277778,0.5,0,0.5,0.916667,0.0277778,0.5,0,0.625,0.944444,0.0277778,0.5,0,0.75,0.972222,0.0277778,0.5,0,0.875,1,0,0,0,1";
+      "khotkeysrc"."Data_2_7_4Triggers2"."GesturePointData" = "0,0.0277778,0.5,0,0.5,0.0277778,0.0277778,0.5,0,0.625,0.0555556,0.0277778,0.5,0,0.75,0.0833333,0.0277778,0.5,0,0.875,0.111111,0.0277778,0,0,1,0.138889,0.0277778,0,0.125,1,0.166667,0.0277778,0,0.25,1,0.194444,0.0277778,0,0.375,1,0.222222,0.0277778,0,0.5,1,0.25,0.0277778,0,0.625,1,0.277778,0.0277778,0,0.75,1,0.305556,0.0277778,0,0.875,1,0.333333,0.0277778,-0.5,1,1,0.361111,0.0277778,-0.5,1,0.875,0.388889,0.0277778,-0.5,1,0.75,0.416667,0.0277778,-0.5,1,0.625,0.444444,0.0277778,-0.5,1,0.5,0.472222,0.0277778,-0.5,1,0.375,0.5,0.0277778,-0.5,1,0.25,0.527778,0.0277778,-0.5,1,0.125,0.555556,0.0277778,1,1,0,0.583333,0.0277778,1,0.875,0,0.611111,0.0277778,1,0.75,0,0.638889,0.0277778,1,0.625,0,0.666667,0.0277778,1,0.5,0,0.694444,0.0277778,1,0.375,0,0.722222,0.0277778,1,0.25,0,0.75,0.0277778,1,0.125,0,0.777778,0.0277778,0.5,0,0,0.805556,0.0277778,0.5,0,0.125,0.833333,0.0277778,0.5,0,0.25,0.861111,0.0277778,0.5,0,0.375,0.888889,0.0277778,0.5,0,0.5,0.916667,0.0277778,0.5,0,0.625,0.944444,0.0277778,0.5,0,0.75,0.972222,0.0277778,0.5,0,0.875,1,0,0,0,1";
       "khotkeysrc"."Data_2_7_4Triggers2"."Type" = "GESTURE";
-      "khotkeysrc"."Data_2_8"."Comment" =
-        "After pressing Win+E (Tux+E) a WWW browser will be launched, and it will open http://www.kde.org . You may run all kind of commands you can run in minicli (Alt+F2).";
+      "khotkeysrc"."Data_2_8"."Comment" = "After pressing Win+E (Tux+E) a WWW browser will be launched, and it will open http://www.kde.org . You may run all kind of commands you can run in minicli (Alt+F2).";
       "khotkeysrc"."Data_2_8"."Enabled" = false;
       "khotkeysrc"."Data_2_8"."Name" = "Go to KDE Website";
       "khotkeysrc"."Data_2_8"."Type" = "SIMPLE_ACTION_DATA";
@@ -652,8 +543,7 @@
       "khotkeysrc"."Data_2_8Triggers"."TriggersCount" = 1;
       "khotkeysrc"."Data_2_8Triggers0"."Key" = "Meta+E";
       "khotkeysrc"."Data_2_8Triggers0"."Type" = "SHORTCUT";
-      "khotkeysrc"."Data_2_8Triggers0"."Uuid" =
-        "{fdabd761-0482-4282-b591-95eab2e9e293}";
+      "khotkeysrc"."Data_2_8Triggers0"."Uuid" = "{fdabd761-0482-4282-b591-95eab2e9e293}";
       "khotkeysrc"."Data_3"."Comment" = "Basic Konqueror gestures.";
       "khotkeysrc"."Data_3"."DataCount" = 14;
       "khotkeysrc"."Data_3"."Enabled" = true;
@@ -679,28 +569,21 @@
       "khotkeysrc"."Data_3_1"."Enabled" = true;
       "khotkeysrc"."Data_3_1"."Name" = "Back";
       "khotkeysrc"."Data_3_1"."Type" = "SIMPLE_ACTION_DATA";
-      "khotkeysrc"."Data_3_10"."Comment" = ''
-        Opera-style: Press, move up, release.
-        NOTE: Conflicts with 'New Tab', and as such is disabled by default.'';
+      "khotkeysrc"."Data_3_10"."Comment" = "Opera-style: Press, move up, release.\nNOTE: Conflicts with 'New Tab', and as such is disabled by default.";
       "khotkeysrc"."Data_3_10"."Enabled" = false;
       "khotkeysrc"."Data_3_10"."Name" = "Stop Loading";
       "khotkeysrc"."Data_3_10"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_10Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_10Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_10Actions0"."Input" = ''
-        Escape
-      '';
+      "khotkeysrc"."Data_3_10Actions0"."Input" = "Escape\n";
       "khotkeysrc"."Data_3_10Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_10Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_10Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_10Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_10Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_10Triggers0"."GesturePointData" =
-        "0,0.125,-0.5,0.5,1,0.125,0.125,-0.5,0.5,0.875,0.25,0.125,-0.5,0.5,0.75,0.375,0.125,-0.5,0.5,0.625,0.5,0.125,-0.5,0.5,0.5,0.625,0.125,-0.5,0.5,0.375,0.75,0.125,-0.5,0.5,0.25,0.875,0.125,-0.5,0.5,0.125,1,0,0,0.5,0";
+      "khotkeysrc"."Data_3_10Triggers0"."GesturePointData" = "0,0.125,-0.5,0.5,1,0.125,0.125,-0.5,0.5,0.875,0.25,0.125,-0.5,0.5,0.75,0.375,0.125,-0.5,0.5,0.625,0.5,0.125,-0.5,0.5,0.5,0.625,0.125,-0.5,0.5,0.375,0.75,0.125,-0.5,0.5,0.25,0.875,0.125,-0.5,0.5,0.125,1,0,0,0.5,0";
       "khotkeysrc"."Data_3_10Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_11"."Comment" = ''
-        Going up in URL/directory structure.
-        Mozilla-style: Press, move up, move left, move up, release.'';
+      "khotkeysrc"."Data_3_11"."Comment" = "Going up in URL/directory structure.\nMozilla-style: Press, move up, move left, move up, release.";
       "khotkeysrc"."Data_3_11"."Enabled" = true;
       "khotkeysrc"."Data_3_11"."Name" = "Up";
       "khotkeysrc"."Data_3_11"."Type" = "SIMPLE_ACTION_DATA";
@@ -712,49 +595,37 @@
       "khotkeysrc"."Data_3_11Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_11Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_11Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_11Triggers0"."GesturePointData" =
-        "0,0.0625,-0.5,1,1,0.0625,0.0625,-0.5,1,0.875,0.125,0.0625,-0.5,1,0.75,0.1875,0.0625,-0.5,1,0.625,0.25,0.0625,1,1,0.5,0.3125,0.0625,1,0.875,0.5,0.375,0.0625,1,0.75,0.5,0.4375,0.0625,1,0.625,0.5,0.5,0.0625,1,0.5,0.5,0.5625,0.0625,1,0.375,0.5,0.625,0.0625,1,0.25,0.5,0.6875,0.0625,1,0.125,0.5,0.75,0.0625,-0.5,0,0.5,0.8125,0.0625,-0.5,0,0.375,0.875,0.0625,-0.5,0,0.25,0.9375,0.0625,-0.5,0,0.125,1,0,0,0,0";
+      "khotkeysrc"."Data_3_11Triggers0"."GesturePointData" = "0,0.0625,-0.5,1,1,0.0625,0.0625,-0.5,1,0.875,0.125,0.0625,-0.5,1,0.75,0.1875,0.0625,-0.5,1,0.625,0.25,0.0625,1,1,0.5,0.3125,0.0625,1,0.875,0.5,0.375,0.0625,1,0.75,0.5,0.4375,0.0625,1,0.625,0.5,0.5,0.0625,1,0.5,0.5,0.5625,0.0625,1,0.375,0.5,0.625,0.0625,1,0.25,0.5,0.6875,0.0625,1,0.125,0.5,0.75,0.0625,-0.5,0,0.5,0.8125,0.0625,-0.5,0,0.375,0.875,0.0625,-0.5,0,0.25,0.9375,0.0625,-0.5,0,0.125,1,0,0,0,0";
       "khotkeysrc"."Data_3_11Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_12"."Comment" = ''
-        Going up in URL/directory structure.
-        Opera-style: Press, move up, move left, move up, release.
-        NOTE: Conflicts with  "Activate Previous Tab", and as such is disabled by default.'';
+      "khotkeysrc"."Data_3_12"."Comment" = "Going up in URL/directory structure.\nOpera-style: Press, move up, move left, move up, release.\nNOTE: Conflicts with  \"Activate Previous Tab\", and as such is disabled by default.";
       "khotkeysrc"."Data_3_12"."Enabled" = false;
       "khotkeysrc"."Data_3_12"."Name" = "Up #2";
       "khotkeysrc"."Data_3_12"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_12Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_12Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_12Actions0"."Input" = ''
-        Alt+Up
-      '';
+      "khotkeysrc"."Data_3_12Actions0"."Input" = "Alt+Up\n";
       "khotkeysrc"."Data_3_12Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_12Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_12Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_12Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_12Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_12Triggers0"."GesturePointData" =
-        "0,0.0625,-0.5,1,1,0.0625,0.0625,-0.5,1,0.875,0.125,0.0625,-0.5,1,0.75,0.1875,0.0625,-0.5,1,0.625,0.25,0.0625,-0.5,1,0.5,0.3125,0.0625,-0.5,1,0.375,0.375,0.0625,-0.5,1,0.25,0.4375,0.0625,-0.5,1,0.125,0.5,0.0625,1,1,0,0.5625,0.0625,1,0.875,0,0.625,0.0625,1,0.75,0,0.6875,0.0625,1,0.625,0,0.75,0.0625,1,0.5,0,0.8125,0.0625,1,0.375,0,0.875,0.0625,1,0.25,0,0.9375,0.0625,1,0.125,0,1,0,0,0,0";
+      "khotkeysrc"."Data_3_12Triggers0"."GesturePointData" = "0,0.0625,-0.5,1,1,0.0625,0.0625,-0.5,1,0.875,0.125,0.0625,-0.5,1,0.75,0.1875,0.0625,-0.5,1,0.625,0.25,0.0625,-0.5,1,0.5,0.3125,0.0625,-0.5,1,0.375,0.375,0.0625,-0.5,1,0.25,0.4375,0.0625,-0.5,1,0.125,0.5,0.0625,1,1,0,0.5625,0.0625,1,0.875,0,0.625,0.0625,1,0.75,0,0.6875,0.0625,1,0.625,0,0.75,0.0625,1,0.5,0,0.8125,0.0625,1,0.375,0,0.875,0.0625,1,0.25,0,0.9375,0.0625,1,0.125,0,1,0,0,0,0";
       "khotkeysrc"."Data_3_12Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_13"."Comment" =
-        "Press, move up, move right, release.";
+      "khotkeysrc"."Data_3_13"."Comment" = "Press, move up, move right, release.";
       "khotkeysrc"."Data_3_13"."Enabled" = true;
       "khotkeysrc"."Data_3_13"."Name" = "Activate Next Tab";
       "khotkeysrc"."Data_3_13"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_13Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_13Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_13Actions0"."Input" = ''
-        Ctrl+.
-      '';
+      "khotkeysrc"."Data_3_13Actions0"."Input" = "Ctrl+.\n";
       "khotkeysrc"."Data_3_13Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_13Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_13Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_13Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_13Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_13Triggers0"."GesturePointData" =
-        "0,0.0625,-0.5,0,1,0.0625,0.0625,-0.5,0,0.875,0.125,0.0625,-0.5,0,0.75,0.1875,0.0625,-0.5,0,0.625,0.25,0.0625,-0.5,0,0.5,0.3125,0.0625,-0.5,0,0.375,0.375,0.0625,-0.5,0,0.25,0.4375,0.0625,-0.5,0,0.125,0.5,0.0625,0,0,0,0.5625,0.0625,0,0.125,0,0.625,0.0625,0,0.25,0,0.6875,0.0625,0,0.375,0,0.75,0.0625,0,0.5,0,0.8125,0.0625,0,0.625,0,0.875,0.0625,0,0.75,0,0.9375,0.0625,0,0.875,0,1,0,0,1,0";
+      "khotkeysrc"."Data_3_13Triggers0"."GesturePointData" = "0,0.0625,-0.5,0,1,0.0625,0.0625,-0.5,0,0.875,0.125,0.0625,-0.5,0,0.75,0.1875,0.0625,-0.5,0,0.625,0.25,0.0625,-0.5,0,0.5,0.3125,0.0625,-0.5,0,0.375,0.375,0.0625,-0.5,0,0.25,0.4375,0.0625,-0.5,0,0.125,0.5,0.0625,0,0,0,0.5625,0.0625,0,0.125,0,0.625,0.0625,0,0.25,0,0.6875,0.0625,0,0.375,0,0.75,0.0625,0,0.5,0,0.8125,0.0625,0,0.625,0,0.875,0.0625,0,0.75,0,0.9375,0.0625,0,0.875,0,1,0,0,1,0";
       "khotkeysrc"."Data_3_13Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_14"."Comment" =
-        "Press, move up, move left, release.";
+      "khotkeysrc"."Data_3_14"."Comment" = "Press, move up, move left, release.";
       "khotkeysrc"."Data_3_14"."Enabled" = true;
       "khotkeysrc"."Data_3_14"."Name" = "Activate Previous Tab";
       "khotkeysrc"."Data_3_14"."Type" = "SIMPLE_ACTION_DATA";
@@ -766,8 +637,7 @@
       "khotkeysrc"."Data_3_14Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_14Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_14Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_14Triggers0"."GesturePointData" =
-        "0,0.0625,-0.5,1,1,0.0625,0.0625,-0.5,1,0.875,0.125,0.0625,-0.5,1,0.75,0.1875,0.0625,-0.5,1,0.625,0.25,0.0625,-0.5,1,0.5,0.3125,0.0625,-0.5,1,0.375,0.375,0.0625,-0.5,1,0.25,0.4375,0.0625,-0.5,1,0.125,0.5,0.0625,1,1,0,0.5625,0.0625,1,0.875,0,0.625,0.0625,1,0.75,0,0.6875,0.0625,1,0.625,0,0.75,0.0625,1,0.5,0,0.8125,0.0625,1,0.375,0,0.875,0.0625,1,0.25,0,0.9375,0.0625,1,0.125,0,1,0,0,0,0";
+      "khotkeysrc"."Data_3_14Triggers0"."GesturePointData" = "0,0.0625,-0.5,1,1,0.0625,0.0625,-0.5,1,0.875,0.125,0.0625,-0.5,1,0.75,0.1875,0.0625,-0.5,1,0.625,0.25,0.0625,-0.5,1,0.5,0.3125,0.0625,-0.5,1,0.375,0.375,0.0625,-0.5,1,0.25,0.4375,0.0625,-0.5,1,0.125,0.5,0.0625,1,1,0,0.5625,0.0625,1,0.875,0,0.625,0.0625,1,0.75,0,0.6875,0.0625,1,0.625,0,0.75,0.0625,1,0.5,0,0.8125,0.0625,1,0.375,0,0.875,0.0625,1,0.25,0,0.9375,0.0625,1,0.125,0,1,0,0,0,0";
       "khotkeysrc"."Data_3_14Triggers0"."Type" = "GESTURE";
       "khotkeysrc"."Data_3_1Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_1Actions0"."DestinationWindow" = 2;
@@ -777,26 +647,21 @@
       "khotkeysrc"."Data_3_1Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_1Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_1Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_1Triggers0"."GesturePointData" =
-        "0,0.125,1,1,0.5,0.125,0.125,1,0.875,0.5,0.25,0.125,1,0.75,0.5,0.375,0.125,1,0.625,0.5,0.5,0.125,1,0.5,0.5,0.625,0.125,1,0.375,0.5,0.75,0.125,1,0.25,0.5,0.875,0.125,1,0.125,0.5,1,0,0,0,0.5";
+      "khotkeysrc"."Data_3_1Triggers0"."GesturePointData" = "0,0.125,1,1,0.5,0.125,0.125,1,0.875,0.5,0.25,0.125,1,0.75,0.5,0.375,0.125,1,0.625,0.5,0.5,0.125,1,0.5,0.5,0.625,0.125,1,0.375,0.5,0.75,0.125,1,0.25,0.5,0.875,0.125,1,0.125,0.5,1,0,0,0,0.5";
       "khotkeysrc"."Data_3_1Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_2"."Comment" =
-        "Press, move down, move up, move down, release.";
+      "khotkeysrc"."Data_3_2"."Comment" = "Press, move down, move up, move down, release.";
       "khotkeysrc"."Data_3_2"."Enabled" = true;
       "khotkeysrc"."Data_3_2"."Name" = "Duplicate Tab";
       "khotkeysrc"."Data_3_2"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_2Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_2Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_2Actions0"."Input" = ''
-        Ctrl+Shift+D
-      '';
+      "khotkeysrc"."Data_3_2Actions0"."Input" = "Ctrl+Shift+D\n";
       "khotkeysrc"."Data_3_2Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_2Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_2Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_2Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_2Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_2Triggers0"."GesturePointData" =
-        "0,0.0416667,0.5,0.5,0,0.0416667,0.0416667,0.5,0.5,0.125,0.0833333,0.0416667,0.5,0.5,0.25,0.125,0.0416667,0.5,0.5,0.375,0.166667,0.0416667,0.5,0.5,0.5,0.208333,0.0416667,0.5,0.5,0.625,0.25,0.0416667,0.5,0.5,0.75,0.291667,0.0416667,0.5,0.5,0.875,0.333333,0.0416667,-0.5,0.5,1,0.375,0.0416667,-0.5,0.5,0.875,0.416667,0.0416667,-0.5,0.5,0.75,0.458333,0.0416667,-0.5,0.5,0.625,0.5,0.0416667,-0.5,0.5,0.5,0.541667,0.0416667,-0.5,0.5,0.375,0.583333,0.0416667,-0.5,0.5,0.25,0.625,0.0416667,-0.5,0.5,0.125,0.666667,0.0416667,0.5,0.5,0,0.708333,0.0416667,0.5,0.5,0.125,0.75,0.0416667,0.5,0.5,0.25,0.791667,0.0416667,0.5,0.5,0.375,0.833333,0.0416667,0.5,0.5,0.5,0.875,0.0416667,0.5,0.5,0.625,0.916667,0.0416667,0.5,0.5,0.75,0.958333,0.0416667,0.5,0.5,0.875,1,0,0,0.5,1";
+      "khotkeysrc"."Data_3_2Triggers0"."GesturePointData" = "0,0.0416667,0.5,0.5,0,0.0416667,0.0416667,0.5,0.5,0.125,0.0833333,0.0416667,0.5,0.5,0.25,0.125,0.0416667,0.5,0.5,0.375,0.166667,0.0416667,0.5,0.5,0.5,0.208333,0.0416667,0.5,0.5,0.625,0.25,0.0416667,0.5,0.5,0.75,0.291667,0.0416667,0.5,0.5,0.875,0.333333,0.0416667,-0.5,0.5,1,0.375,0.0416667,-0.5,0.5,0.875,0.416667,0.0416667,-0.5,0.5,0.75,0.458333,0.0416667,-0.5,0.5,0.625,0.5,0.0416667,-0.5,0.5,0.5,0.541667,0.0416667,-0.5,0.5,0.375,0.583333,0.0416667,-0.5,0.5,0.25,0.625,0.0416667,-0.5,0.5,0.125,0.666667,0.0416667,0.5,0.5,0,0.708333,0.0416667,0.5,0.5,0.125,0.75,0.0416667,0.5,0.5,0.25,0.791667,0.0416667,0.5,0.5,0.375,0.833333,0.0416667,0.5,0.5,0.5,0.875,0.0416667,0.5,0.5,0.625,0.916667,0.0416667,0.5,0.5,0.75,0.958333,0.0416667,0.5,0.5,0.875,1,0,0,0.5,1";
       "khotkeysrc"."Data_3_2Triggers0"."Type" = "GESTURE";
       "khotkeysrc"."Data_3_3"."Comment" = "Press, move down, move up, release.";
       "khotkeysrc"."Data_3_3"."Enabled" = true;
@@ -804,16 +669,13 @@
       "khotkeysrc"."Data_3_3"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_3Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_3Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_3Actions0"."Input" = ''
-        Ctrl+D
-      '';
+      "khotkeysrc"."Data_3_3Actions0"."Input" = "Ctrl+D\n";
       "khotkeysrc"."Data_3_3Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_3Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_3Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_3Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_3Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_3Triggers0"."GesturePointData" =
-        "0,0.0625,0.5,0.5,0,0.0625,0.0625,0.5,0.5,0.125,0.125,0.0625,0.5,0.5,0.25,0.1875,0.0625,0.5,0.5,0.375,0.25,0.0625,0.5,0.5,0.5,0.3125,0.0625,0.5,0.5,0.625,0.375,0.0625,0.5,0.5,0.75,0.4375,0.0625,0.5,0.5,0.875,0.5,0.0625,-0.5,0.5,1,0.5625,0.0625,-0.5,0.5,0.875,0.625,0.0625,-0.5,0.5,0.75,0.6875,0.0625,-0.5,0.5,0.625,0.75,0.0625,-0.5,0.5,0.5,0.8125,0.0625,-0.5,0.5,0.375,0.875,0.0625,-0.5,0.5,0.25,0.9375,0.0625,-0.5,0.5,0.125,1,0,0,0.5,0";
+      "khotkeysrc"."Data_3_3Triggers0"."GesturePointData" = "0,0.0625,0.5,0.5,0,0.0625,0.0625,0.5,0.5,0.125,0.125,0.0625,0.5,0.5,0.25,0.1875,0.0625,0.5,0.5,0.375,0.25,0.0625,0.5,0.5,0.5,0.3125,0.0625,0.5,0.5,0.625,0.375,0.0625,0.5,0.5,0.75,0.4375,0.0625,0.5,0.5,0.875,0.5,0.0625,-0.5,0.5,1,0.5625,0.0625,-0.5,0.5,0.875,0.625,0.0625,-0.5,0.5,0.75,0.6875,0.0625,-0.5,0.5,0.625,0.75,0.0625,-0.5,0.5,0.5,0.8125,0.0625,-0.5,0.5,0.375,0.875,0.0625,-0.5,0.5,0.25,0.9375,0.0625,-0.5,0.5,0.125,1,0,0,0.5,0";
       "khotkeysrc"."Data_3_3Triggers0"."Type" = "GESTURE";
       "khotkeysrc"."Data_3_4"."Comment" = "Press, move right, release.";
       "khotkeysrc"."Data_3_4"."Enabled" = true;
@@ -827,56 +689,41 @@
       "khotkeysrc"."Data_3_4Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_4Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_4Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_4Triggers0"."GesturePointData" =
-        "0,0.125,0,0,0.5,0.125,0.125,0,0.125,0.5,0.25,0.125,0,0.25,0.5,0.375,0.125,0,0.375,0.5,0.5,0.125,0,0.5,0.5,0.625,0.125,0,0.625,0.5,0.75,0.125,0,0.75,0.5,0.875,0.125,0,0.875,0.5,1,0,0,1,0.5";
+      "khotkeysrc"."Data_3_4Triggers0"."GesturePointData" = "0,0.125,0,0,0.5,0.125,0.125,0,0.125,0.5,0.25,0.125,0,0.25,0.5,0.375,0.125,0,0.375,0.5,0.5,0.125,0,0.5,0.5,0.625,0.125,0,0.625,0.5,0.75,0.125,0,0.75,0.5,0.875,0.125,0,0.875,0.5,1,0,0,1,0.5";
       "khotkeysrc"."Data_3_4Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_5"."Comment" = ''
-        Press, move down, move half up, move right, move down, release.
-        (Drawing a lowercase 'h'.)'';
+      "khotkeysrc"."Data_3_5"."Comment" = "Press, move down, move half up, move right, move down, release.\n(Drawing a lowercase 'h'.)";
       "khotkeysrc"."Data_3_5"."Enabled" = true;
       "khotkeysrc"."Data_3_5"."Name" = "Home";
       "khotkeysrc"."Data_3_5"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_5Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_5Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_5Actions0"."Input" = ''
-        Alt+Home
-      '';
+      "khotkeysrc"."Data_3_5Actions0"."Input" = "Alt+Home\n";
       "khotkeysrc"."Data_3_5Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_5Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_5Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_5Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_5Triggers"."TriggersCount" = 2;
-      "khotkeysrc"."Data_3_5Triggers0"."GesturePointData" =
-        "0,0.0461748,0.5,0,0,0.0461748,0.0461748,0.5,0,0.125,0.0923495,0.0461748,0.5,0,0.25,0.138524,0.0461748,0.5,0,0.375,0.184699,0.0461748,0.5,0,0.5,0.230874,0.0461748,0.5,0,0.625,0.277049,0.0461748,0.5,0,0.75,0.323223,0.0461748,0.5,0,0.875,0.369398,0.065301,-0.25,0,1,0.434699,0.065301,-0.25,0.125,0.875,0.5,0.065301,-0.25,0.25,0.75,0.565301,0.065301,-0.25,0.375,0.625,0.630602,0.0461748,0,0.5,0.5,0.676777,0.0461748,0,0.625,0.5,0.722951,0.0461748,0,0.75,0.5,0.769126,0.0461748,0,0.875,0.5,0.815301,0.0461748,0.5,1,0.5,0.861476,0.0461748,0.5,1,0.625,0.90765,0.0461748,0.5,1,0.75,0.953825,0.0461748,0.5,1,0.875,1,0,0,1,1";
+      "khotkeysrc"."Data_3_5Triggers0"."GesturePointData" = "0,0.0461748,0.5,0,0,0.0461748,0.0461748,0.5,0,0.125,0.0923495,0.0461748,0.5,0,0.25,0.138524,0.0461748,0.5,0,0.375,0.184699,0.0461748,0.5,0,0.5,0.230874,0.0461748,0.5,0,0.625,0.277049,0.0461748,0.5,0,0.75,0.323223,0.0461748,0.5,0,0.875,0.369398,0.065301,-0.25,0,1,0.434699,0.065301,-0.25,0.125,0.875,0.5,0.065301,-0.25,0.25,0.75,0.565301,0.065301,-0.25,0.375,0.625,0.630602,0.0461748,0,0.5,0.5,0.676777,0.0461748,0,0.625,0.5,0.722951,0.0461748,0,0.75,0.5,0.769126,0.0461748,0,0.875,0.5,0.815301,0.0461748,0.5,1,0.5,0.861476,0.0461748,0.5,1,0.625,0.90765,0.0461748,0.5,1,0.75,0.953825,0.0461748,0.5,1,0.875,1,0,0,1,1";
       "khotkeysrc"."Data_3_5Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_5Triggers1"."GesturePointData" =
-        "0,0.0416667,0.5,0,0,0.0416667,0.0416667,0.5,0,0.125,0.0833333,0.0416667,0.5,0,0.25,0.125,0.0416667,0.5,0,0.375,0.166667,0.0416667,0.5,0,0.5,0.208333,0.0416667,0.5,0,0.625,0.25,0.0416667,0.5,0,0.75,0.291667,0.0416667,0.5,0,0.875,0.333333,0.0416667,-0.5,0,1,0.375,0.0416667,-0.5,0,0.875,0.416667,0.0416667,-0.5,0,0.75,0.458333,0.0416667,-0.5,0,0.625,0.5,0.0416667,0,0,0.5,0.541667,0.0416667,0,0.125,0.5,0.583333,0.0416667,0,0.25,0.5,0.625,0.0416667,0,0.375,0.5,0.666667,0.0416667,0,0.5,0.5,0.708333,0.0416667,0,0.625,0.5,0.75,0.0416667,0,0.75,0.5,0.791667,0.0416667,0,0.875,0.5,0.833333,0.0416667,0.5,1,0.5,0.875,0.0416667,0.5,1,0.625,0.916667,0.0416667,0.5,1,0.75,0.958333,0.0416667,0.5,1,0.875,1,0,0,1,1";
+      "khotkeysrc"."Data_3_5Triggers1"."GesturePointData" = "0,0.0416667,0.5,0,0,0.0416667,0.0416667,0.5,0,0.125,0.0833333,0.0416667,0.5,0,0.25,0.125,0.0416667,0.5,0,0.375,0.166667,0.0416667,0.5,0,0.5,0.208333,0.0416667,0.5,0,0.625,0.25,0.0416667,0.5,0,0.75,0.291667,0.0416667,0.5,0,0.875,0.333333,0.0416667,-0.5,0,1,0.375,0.0416667,-0.5,0,0.875,0.416667,0.0416667,-0.5,0,0.75,0.458333,0.0416667,-0.5,0,0.625,0.5,0.0416667,0,0,0.5,0.541667,0.0416667,0,0.125,0.5,0.583333,0.0416667,0,0.25,0.5,0.625,0.0416667,0,0.375,0.5,0.666667,0.0416667,0,0.5,0.5,0.708333,0.0416667,0,0.625,0.5,0.75,0.0416667,0,0.75,0.5,0.791667,0.0416667,0,0.875,0.5,0.833333,0.0416667,0.5,1,0.5,0.875,0.0416667,0.5,1,0.625,0.916667,0.0416667,0.5,1,0.75,0.958333,0.0416667,0.5,1,0.875,1,0,0,1,1";
       "khotkeysrc"."Data_3_5Triggers1"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_6"."Comment" = ''
-        Press, move right, move down, move right, release.
-        Mozilla-style: Press, move down, move right, release.'';
+      "khotkeysrc"."Data_3_6"."Comment" = "Press, move right, move down, move right, release.\nMozilla-style: Press, move down, move right, release.";
       "khotkeysrc"."Data_3_6"."Enabled" = true;
       "khotkeysrc"."Data_3_6"."Name" = "Close Tab";
       "khotkeysrc"."Data_3_6"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_6Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_6Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_6Actions0"."Input" = ''
-        Ctrl+W
-      '';
+      "khotkeysrc"."Data_3_6Actions0"."Input" = "Ctrl+W\n";
       "khotkeysrc"."Data_3_6Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_6Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_6Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_6Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_6Triggers"."TriggersCount" = 2;
-      "khotkeysrc"."Data_3_6Triggers0"."GesturePointData" =
-        "0,0.0625,0,0,0,0.0625,0.0625,0,0.125,0,0.125,0.0625,0,0.25,0,0.1875,0.0625,0,0.375,0,0.25,0.0625,0.5,0.5,0,0.3125,0.0625,0.5,0.5,0.125,0.375,0.0625,0.5,0.5,0.25,0.4375,0.0625,0.5,0.5,0.375,0.5,0.0625,0.5,0.5,0.5,0.5625,0.0625,0.5,0.5,0.625,0.625,0.0625,0.5,0.5,0.75,0.6875,0.0625,0.5,0.5,0.875,0.75,0.0625,0,0.5,1,0.8125,0.0625,0,0.625,1,0.875,0.0625,0,0.75,1,0.9375,0.0625,0,0.875,1,1,0,0,1,1";
+      "khotkeysrc"."Data_3_6Triggers0"."GesturePointData" = "0,0.0625,0,0,0,0.0625,0.0625,0,0.125,0,0.125,0.0625,0,0.25,0,0.1875,0.0625,0,0.375,0,0.25,0.0625,0.5,0.5,0,0.3125,0.0625,0.5,0.5,0.125,0.375,0.0625,0.5,0.5,0.25,0.4375,0.0625,0.5,0.5,0.375,0.5,0.0625,0.5,0.5,0.5,0.5625,0.0625,0.5,0.5,0.625,0.625,0.0625,0.5,0.5,0.75,0.6875,0.0625,0.5,0.5,0.875,0.75,0.0625,0,0.5,1,0.8125,0.0625,0,0.625,1,0.875,0.0625,0,0.75,1,0.9375,0.0625,0,0.875,1,1,0,0,1,1";
       "khotkeysrc"."Data_3_6Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_6Triggers1"."GesturePointData" =
-        "0,0.0625,0.5,0,0,0.0625,0.0625,0.5,0,0.125,0.125,0.0625,0.5,0,0.25,0.1875,0.0625,0.5,0,0.375,0.25,0.0625,0.5,0,0.5,0.3125,0.0625,0.5,0,0.625,0.375,0.0625,0.5,0,0.75,0.4375,0.0625,0.5,0,0.875,0.5,0.0625,0,0,1,0.5625,0.0625,0,0.125,1,0.625,0.0625,0,0.25,1,0.6875,0.0625,0,0.375,1,0.75,0.0625,0,0.5,1,0.8125,0.0625,0,0.625,1,0.875,0.0625,0,0.75,1,0.9375,0.0625,0,0.875,1,1,0,0,1,1";
+      "khotkeysrc"."Data_3_6Triggers1"."GesturePointData" = "0,0.0625,0.5,0,0,0.0625,0.0625,0.5,0,0.125,0.125,0.0625,0.5,0,0.25,0.1875,0.0625,0.5,0,0.375,0.25,0.0625,0.5,0,0.5,0.3125,0.0625,0.5,0,0.625,0.375,0.0625,0.5,0,0.75,0.4375,0.0625,0.5,0,0.875,0.5,0.0625,0,0,1,0.5625,0.0625,0,0.125,1,0.625,0.0625,0,0.25,1,0.6875,0.0625,0,0.375,1,0.75,0.0625,0,0.5,1,0.8125,0.0625,0,0.625,1,0.875,0.0625,0,0.75,1,0.9375,0.0625,0,0.875,1,1,0,0,1,1";
       "khotkeysrc"."Data_3_6Triggers1"."Type" = "GESTURE";
-      "khotkeysrc"."Data_3_7"."Comment" = ''
-        Press, move up, release.
-        Conflicts with Opera-style 'Up #2', which is disabled by default.'';
+      "khotkeysrc"."Data_3_7"."Comment" = "Press, move up, release.\nConflicts with Opera-style 'Up #2', which is disabled by default.";
       "khotkeysrc"."Data_3_7"."Enabled" = true;
       "khotkeysrc"."Data_3_7"."Name" = "New Tab";
       "khotkeysrc"."Data_3_7"."Type" = "SIMPLE_ACTION_DATA";
@@ -888,8 +735,7 @@
       "khotkeysrc"."Data_3_7Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_7Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_7Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_7Triggers0"."GesturePointData" =
-        "0,0.125,-0.5,0.5,1,0.125,0.125,-0.5,0.5,0.875,0.25,0.125,-0.5,0.5,0.75,0.375,0.125,-0.5,0.5,0.625,0.5,0.125,-0.5,0.5,0.5,0.625,0.125,-0.5,0.5,0.375,0.75,0.125,-0.5,0.5,0.25,0.875,0.125,-0.5,0.5,0.125,1,0,0,0.5,0";
+      "khotkeysrc"."Data_3_7Triggers0"."GesturePointData" = "0,0.125,-0.5,0.5,1,0.125,0.125,-0.5,0.5,0.875,0.25,0.125,-0.5,0.5,0.75,0.375,0.125,-0.5,0.5,0.625,0.5,0.125,-0.5,0.5,0.5,0.625,0.125,-0.5,0.5,0.375,0.75,0.125,-0.5,0.5,0.25,0.875,0.125,-0.5,0.5,0.125,1,0,0,0.5,0";
       "khotkeysrc"."Data_3_7Triggers0"."Type" = "GESTURE";
       "khotkeysrc"."Data_3_8"."Comment" = "Press, move down, release.";
       "khotkeysrc"."Data_3_8"."Enabled" = true;
@@ -897,16 +743,13 @@
       "khotkeysrc"."Data_3_8"."Type" = "SIMPLE_ACTION_DATA";
       "khotkeysrc"."Data_3_8Actions"."ActionsCount" = 1;
       "khotkeysrc"."Data_3_8Actions0"."DestinationWindow" = 2;
-      "khotkeysrc"."Data_3_8Actions0"."Input" = ''
-        Ctrl+N
-      '';
+      "khotkeysrc"."Data_3_8Actions0"."Input" = "Ctrl+N\n";
       "khotkeysrc"."Data_3_8Actions0"."Type" = "KEYBOARD_INPUT";
       "khotkeysrc"."Data_3_8Conditions"."Comment" = "";
       "khotkeysrc"."Data_3_8Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_8Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_8Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_8Triggers0"."GesturePointData" =
-        "0,0.125,0.5,0.5,0,0.125,0.125,0.5,0.5,0.125,0.25,0.125,0.5,0.5,0.25,0.375,0.125,0.5,0.5,0.375,0.5,0.125,0.5,0.5,0.5,0.625,0.125,0.5,0.5,0.625,0.75,0.125,0.5,0.5,0.75,0.875,0.125,0.5,0.5,0.875,1,0,0,0.5,1";
+      "khotkeysrc"."Data_3_8Triggers0"."GesturePointData" = "0,0.125,0.5,0.5,0,0.125,0.125,0.5,0.5,0.125,0.25,0.125,0.5,0.5,0.25,0.375,0.125,0.5,0.5,0.375,0.5,0.125,0.5,0.5,0.5,0.625,0.125,0.5,0.5,0.625,0.75,0.125,0.5,0.5,0.75,0.875,0.125,0.5,0.5,0.875,1,0,0,0.5,1";
       "khotkeysrc"."Data_3_8Triggers0"."Type" = "GESTURE";
       "khotkeysrc"."Data_3_9"."Comment" = "Press, move up, move down, release.";
       "khotkeysrc"."Data_3_9"."Enabled" = true;
@@ -920,64 +763,64 @@
       "khotkeysrc"."Data_3_9Conditions"."ConditionsCount" = 0;
       "khotkeysrc"."Data_3_9Triggers"."Comment" = "Gesture_triggers";
       "khotkeysrc"."Data_3_9Triggers"."TriggersCount" = 1;
-      "khotkeysrc"."Data_3_9Triggers0"."GesturePointData" =
-        "0,0.0625,-0.5,0.5,1,0.0625,0.0625,-0.5,0.5,0.875,0.125,0.0625,-0.5,0.5,0.75,0.1875,0.0625,-0.5,0.5,0.625,0.25,0.0625,-0.5,0.5,0.5,0.3125,0.0625,-0.5,0.5,0.375,0.375,0.0625,-0.5,0.5,0.25,0.4375,0.0625,-0.5,0.5,0.125,0.5,0.0625,0.5,0.5,0,0.5625,0.0625,0.5,0.5,0.125,0.625,0.0625,0.5,0.5,0.25,0.6875,0.0625,0.5,0.5,0.375,0.75,0.0625,0.5,0.5,0.5,0.8125,0.0625,0.5,0.5,0.625,0.875,0.0625,0.5,0.5,0.75,0.9375,0.0625,0.5,0.5,0.875,1,0,0,0.5,1";
+      "khotkeysrc"."Data_3_9Triggers0"."GesturePointData" = "0,0.0625,-0.5,0.5,1,0.0625,0.0625,-0.5,0.5,0.875,0.125,0.0625,-0.5,0.5,0.75,0.1875,0.0625,-0.5,0.5,0.625,0.25,0.0625,-0.5,0.5,0.5,0.3125,0.0625,-0.5,0.5,0.375,0.375,0.0625,-0.5,0.5,0.25,0.4375,0.0625,-0.5,0.5,0.125,0.5,0.0625,0.5,0.5,0,0.5625,0.0625,0.5,0.5,0.125,0.625,0.0625,0.5,0.5,0.25,0.6875,0.0625,0.5,0.5,0.375,0.75,0.0625,0.5,0.5,0.5,0.8125,0.0625,0.5,0.5,0.625,0.875,0.0625,0.5,0.5,0.75,0.9375,0.0625,0.5,0.5,0.875,1,0,0,0.5,1";
       "khotkeysrc"."Data_3_9Triggers0"."Type" = "GESTURE";
-      "khotkeysrc"."General"."BrowserApplication[$d]" = "";
-      "khotkeysrc"."General"."ColorSchemeHash[$d]" = "";
-      "khotkeysrc"."General"."ColorScheme[$d]" = "";
-      "khotkeysrc"."General"."TerminalApplication[$d]" = "";
-      "khotkeysrc"."General"."TerminalService[$d]" = "";
+      "khotkeysrc"."General"."BrowserApplication\x5b$d\x5d" = "";
+      "khotkeysrc"."General"."ColorSchemeHash\x5b$d\x5d" = "";
+      "khotkeysrc"."General"."ColorScheme\x5b$d\x5d" = "";
+      "khotkeysrc"."General"."TerminalApplication\x5b$d\x5d" = "";
+      "khotkeysrc"."General"."TerminalService\x5b$d\x5d" = "";
       "khotkeysrc"."Gestures"."Disabled" = true;
       "khotkeysrc"."Gestures"."MouseButton" = 2;
       "khotkeysrc"."Gestures"."Timeout" = 300;
       "khotkeysrc"."GesturesExclude"."Comment" = "";
       "khotkeysrc"."GesturesExclude"."WindowsCount" = 0;
-      "khotkeysrc"."Icons"."Theme[$d]" = "";
-      "khotkeysrc"."KDE"."LookAndFeelPackage[$d]" = "";
-      "khotkeysrc"."KDE"."widgetStyle[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Allow Expansion[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Automatically select filename extension[$d]" =
-        "";
-      "khotkeysrc"."KFileDialog Settings"."Breadcrumb Navigation[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Decoration position[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."LocationCombo Completionmode[$d]" =
-        "";
-      "khotkeysrc"."KFileDialog Settings"."PathCombo Completionmode[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Show Bookmarks[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Show Full Path[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Show Inline Previews[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Show Preview[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Show Speedbar[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Show hidden files[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Sort by[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Sort directories first[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Sort hidden files last[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Sort reversed[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."Speedbar Width[$d]" = "";
-      "khotkeysrc"."KFileDialog Settings"."View Style[$d]" = "";
-      "khotkeysrc"."Main"."AlreadyImported" =
-        "defaults,kde32b1,konqueror_gestures_kde321";
+      "khotkeysrc"."Icons"."Theme\x5b$d\x5d" = "";
+      "khotkeysrc"."KDE"."LookAndFeelPackage\x5b$d\x5d" = "";
+      "khotkeysrc"."KDE"."widgetStyle\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Allow Expansion\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Automatically select filename extension\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Breadcrumb Navigation\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Decoration position\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."LocationCombo Completionmode\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."PathCombo Completionmode\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Show Bookmarks\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Show Full Path\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Show Inline Previews\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Show Preview\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Show Speedbar\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Show hidden files\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Sort by\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Sort directories first\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Sort hidden files last\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Sort reversed\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."Speedbar Width\x5b$d\x5d" = "";
+      "khotkeysrc"."KFileDialog Settings"."View Style\x5b$d\x5d" = "";
+      "khotkeysrc"."Main"."AlreadyImported" = "defaults,kde32b1,konqueror_gestures_kde321";
       "khotkeysrc"."Main"."Disabled" = false;
       "khotkeysrc"."Voice"."Shortcut" = "";
-      "khotkeysrc"."WM"."activeBackground[$d]" = "";
-      "khotkeysrc"."WM"."activeBlend[$d]" = "";
-      "khotkeysrc"."WM"."activeForeground[$d]" = "";
-      "khotkeysrc"."WM"."inactiveBackground[$d]" = "";
-      "khotkeysrc"."WM"."inactiveBlend[$d]" = "";
-      "khotkeysrc"."WM"."inactiveForeground[$d]" = "";
+      "khotkeysrc"."WM"."activeBackground\x5b$d\x5d" = "";
+      "khotkeysrc"."WM"."activeBlend\x5b$d\x5d" = "";
+      "khotkeysrc"."WM"."activeForeground\x5b$d\x5d" = "";
+      "khotkeysrc"."WM"."inactiveBackground\x5b$d\x5d" = "";
+      "khotkeysrc"."WM"."inactiveBlend\x5b$d\x5d" = "";
+      "khotkeysrc"."WM"."inactiveForeground\x5b$d\x5d" = "";
       "kscreenlockerrc"."Daemon"."Autolock" = false;
       "kscreenlockerrc"."Daemon"."LockOnResume" = false;
       "kwalletrc"."Wallet"."First Use" = false;
       "kwinrc"."Desktops"."Id_1" = "20a4eb72-2224-44ae-ac66-85a03eb97894";
-      "kwinrc"."Desktops"."Number" = 1;
-      "kwinrc"."Desktops"."Rows" = 1;
+      "kwinrc"."Desktops"."Id_2" = "71e02e68-431a-4ca8-9826-fe2c7f5d42c7";
+      "kwinrc"."Desktops"."Id_3" = "673f903c-285b-4df3-8680-347cd51b0603";
+      "kwinrc"."Desktops"."Id_4" = "f5d9463e-b60f-4ceb-a4b5-451009df7e98";
+      "kwinrc"."Desktops"."Number" = 4;
+      "kwinrc"."Desktops"."Rows" = 2;
       "kwinrc"."Effect-blur"."NoiseStrength" = 12;
       "kwinrc"."Tiling"."padding" = 4;
-      "kwinrc"."Tiling.1111055b-298c-53ff-8032-eb4bce8a2386"."tiles" = ''
-        {"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}'';
-      "kwinrc"."Tiling.bacffbc4-69cc-5102-aaee-6dcf700d5a9b"."tiles" = ''
-        {"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}'';
+      "kwinrc"."Tiling.1111055b-298c-53ff-8032-eb4bce8a2386"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      "kwinrc"."Tiling.bacffbc4-69cc-5102-aaee-6dcf700d5a9b"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      "kwinrc"."Tiling/e2a87dac-46d9-556d-9894-6b5ffa12d304"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
+      "kwinrc"."Windows"."RollOverDesktops" = true;
+      "kwinrc"."Xwayland"."Scale" = 1.5;
       "kxkbrc"."Layout"."DisplayNames" = ",";
       "kxkbrc"."Layout"."LayoutList" = "us,de";
       "kxkbrc"."Layout"."Options" = "terminate:ctrl_alt_bksp";
@@ -985,8 +828,10 @@
       "kxkbrc"."Layout"."Use" = true;
       "kxkbrc"."Layout"."VariantList" = ",";
       "plasma-localerc"."Formats"."LANG" = "en_US.UTF-8";
-      "plasmarc"."Wallpapers"."usersWallpapers" =
-        "/home/nils/Pictures/wallpapers/vt/juniper/__juniper_actias_indie_virtual_youtuber_and_1_more_drawn_by_juniper_artist__78e9ccbab0a1fc9101c77d3f58758a9b.jpg,/home/nils/Pictures/wallpapers/vt/juniper/__juniper_actias_indie_virtual_youtuber_drawn_by_grape_grape05843924__c9ee1b2a246d7c4a2fde8e003e2be04d.jpg,/home/nils/Pictures/wallpapers/vt/juniper/__juniper_actias_indie_virtual_youtuber_drawn_by_grape_grape05843924__a575a936ae9050c1addae42490ca6997.jpg,/home/nils/Pictures/wallpapers/vt/juniper/FwQFfTyaAAEJGKg.jpg,/home/nils/Pictures/wallpapers/vt/selen/FmaakzsaUAAIrcR.jpg";
+      "plasmarc"."Wallpapers"."usersWallpapers" = "/home/nils/Pictures/wallpapers/vt/juniper/__juniper_actias_indie_virtual_youtuber_and_1_more_drawn_by_juniper_artist__78e9ccbab0a1fc9101c77d3f58758a9b.jpg,/home/nils/Pictures/wallpapers/vt/juniper/__juniper_actias_indie_virtual_youtuber_drawn_by_grape_grape05843924__c9ee1b2a246d7c4a2fde8e003e2be04d.jpg,/home/nils/Pictures/wallpapers/vt/juniper/__juniper_actias_indie_virtual_youtuber_drawn_by_grape_grape05843924__a575a936ae9050c1addae42490ca6997.jpg,/home/nils/Pictures/wallpapers/vt/juniper/FwQFfTyaAAEJGKg.jpg,/home/nils/Pictures/wallpapers/vt/selen/FmaakzsaUAAIrcR.jpg";
+    };
+    dataFile = {
+
     };
   };
 }

@@ -175,7 +175,7 @@ in
   elira.terminal = {
     enable = true;
     alacritty = true;
-    ghostty = true;
+    ghostty = false;
     tmux = true;
   };
 

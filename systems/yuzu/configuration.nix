@@ -34,6 +34,10 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   networking.hostName = "yuzu";
 
   environment.systemPackages = with pkgs; [
@@ -79,7 +83,7 @@
 
   programs.dconf.enable = true;
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -104,16 +108,13 @@
     pulse.enable = true;
   };
 
-  elira.dwm = {
-    enable = true;
-    dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
-    wallpaper = ./wallpaper.png;
-  };
-
   elira.displayManager = {
     enable = true;
     name = "gdm";
+  };
+
+  elira.kde = {
+    enable = true;
   };
 
   users.users.sterz_n = {
@@ -124,7 +125,13 @@
       "wheel"
       "video"
       "users"
+      "storage"
     ];
     uid = 1000;
   };
+
+  systemd.tmpfiles.rules = [
+    "d /media/data 0755 sterz_n users -"
+  ];
+
 }
