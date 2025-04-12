@@ -147,7 +147,7 @@
       "kwin"."Window Shade" = [ ];
       "kwin"."Window Shrink Horizontal" = [ ];
       "kwin"."Window Shrink Vertical" = [ ];
-      "kwin"."Window to Desktop 1" = [ ];
+      "kwin"."Window to Desktop 1" = [ "Alt+1" ];
       "kwin"."Window to Desktop 10" = [ ];
       "kwin"."Window to Desktop 11" = [ ];
       "kwin"."Window to Desktop 12" = [ ];
@@ -158,10 +158,10 @@
       "kwin"."Window to Desktop 17" = [ ];
       "kwin"."Window to Desktop 18" = [ ];
       "kwin"."Window to Desktop 19" = [ ];
-      "kwin"."Window to Desktop 2" = [ ];
+      "kwin"."Window to Desktop 2" = [ "Alt+2" ];
       "kwin"."Window to Desktop 20" = [ ];
-      "kwin"."Window to Desktop 3" = [ ];
-      "kwin"."Window to Desktop 4" = [ ];
+      "kwin"."Window to Desktop 3" = [ "Alt+3" ];
+      "kwin"."Window to Desktop 4" = [ "Alt+4" ];
       "kwin"."Window to Desktop 5" = [ ];
       "kwin"."Window to Desktop 6" = [ ];
       "kwin"."Window to Desktop 7" = [ ];

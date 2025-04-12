@@ -450,7 +450,8 @@
   (evil-define-key 'motion 'global (kbd "C-p") 'project-find-file)
   (evil-define-key 'normal 'global (kbd "<leader> p p") 'projectile-switch-project)
   (evil-define-key 'normal 'global (kbd "<leader> p d") 'project-dired)
-  (evil-define-key 'normal 'global (kbd "<leader> p s") 'project-shell)
+  (evil-define-key 'normal 'global (kbd "<leader> p s") 'project-eshell)
+  (evil-define-key 'motion 'global (kbd "<leader> p s") 'project-eshell)
   (evil-define-key 'normal 'global (kbd "<leader> p b") 'project-switch-to-buffer)
   (evil-define-key 'motion 'global (kbd "<leader> p p") 'projectile-switch-project)
   (evil-define-key 'normal 'global (kbd "<leader> p f") 'project-find-file)
@@ -589,7 +590,6 @@
 
   (setq evil-emacs-state-modes '())
   (evil-set-initial-state 'term-mode 'insert)
-  (evil-set-initial-state 'vterm-mode 'insert)
   (evil-set-initial-state 'image-mode 'motion)
   (evil-set-initial-state 'special-mode 'motion)
   (evil-set-initial-state 'eww-mode 'motion)
@@ -671,12 +671,6 @@
     ("0" text-scale-set "reset")
     ("-" text-scale-decrease "out")))
 
-(use-package vterm
-  :ensure t
-  :config
-  (evil-define-key 'normal vterm-mode-map (kbd "p") 'vterm-yank)
-  (evil-define-key 'normal 'global (kbd "<leader> v t") 'vterm))
-
 (use-package pdf-tools
   :ensure t
   :mode ("\\.pdf" . pdf-view-mode)
@@ -686,7 +680,11 @@
   (pdf-view-themed-minor-mode . (lambda () (internal-show-cursor nil nil)))
   :config
   (define-key pdf-view-mode-map (kbd "q") nil)
-
+  (add-to-list 'display-buffer-alist
+			   '((derived-mode . pdf-view-mode)
+				 (display-buffer-in-side-window)
+				 (side . right)
+				 (window-width . 80)))
   (evil-define-key 'normal pdf-view-mode-map
     "h" 'scroll-left
     "l" 'scroll-right
@@ -703,6 +701,28 @@
     "[" 'pdf-view-previous-page-command
     "-" 'pdf-view-shrink
     "+" 'pdf-view-enlarge))
+
+(use-package tex
+  :ensure auctex
+  :mode ("\\.tex\\'" . latex-mode)
+  :config (progn
+			(setq TeX-source-correlate-mode t)
+			(setq TeX-source-correlate-method 'synctex)
+			(require 'reftex)
+			(setq reftex-plug-into-AUCTeX t)
+			(require 'auctex-latexmk)
+			(auctex-latexmk-setup)
+			(pdf-tools-install)
+			(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+				  TeX-source-correlate-start-server t)
+			;; Update PDF buffers after successful LaTeX runs
+			(add-hook 'TeX-after-compilation-finished-functions
+					  #'TeX-revert-document-buffer)
+			(add-hook 'LaTeX-mode-hook
+					  (lambda ()
+						(reftex-mode t)
+						(flyspell-mode t)))
+			))
 
 (provide 'init)
 ;;; init.el ends here
