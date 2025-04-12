@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -21,5 +22,10 @@
         style = "adwaita-dark";
       };
       services.displayManager.defaultSession = "plasma";
+      environment.systemPackages = with pkgs; [
+        maliit-keyboard
+        libsForQt5.qt5.qtvirtualkeyboard
+        maliit-framework
+      ];
     };
 }
