@@ -45,7 +45,7 @@ in
 {
   programs.home-manager.enable = true;
   imports = [
-    ./gnome.nix
+    # ./gnome.nix
     ./kde.nix
   ];
   nixpkgs.config.allowUnfree = true;
@@ -207,14 +207,6 @@ in
 
   home.file.".background-image" = {
     source = ./wallpaper.png;
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
   };
 
   elira.hyprland = {

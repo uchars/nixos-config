@@ -1,4 +1,3 @@
-
 ;;; init.el --- Personal emacs config -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Works on my machine (tm)
@@ -176,6 +175,7 @@
     (kbd "R") 'dired-do-rename
     (kbd "S") 'dired-do-search
     (kbd "%") 'dired-create-empty-file
+    (kbd "^") 'dired-create-directory
     (kbd "C") 'dired-do-copy
     (kbd "Z") 'dired-do-compress-to))
 
@@ -273,6 +273,11 @@
   :defer t
   :after magit
   :config (magit-todos-mode 1))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
 
 (use-package xclip
   :ensure t
@@ -701,4 +706,3 @@
 
 (provide 'init)
 ;;; init.el ends here
-;; init.el ends here

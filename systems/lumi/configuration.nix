@@ -7,27 +7,27 @@
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot = {
     plymouth = {
-      enable = true;
+      enable = false;
       theme = "spinner";
     };
     initrd.systemd.enable = true;
     supportedFilesystems = [ "ntfs" ];
-    consoleLogLevel = 3;
-    initrd.verbose = false;
+    #consoleLogLevel = 3;
+    #initrd.verbose = false;
 
     kernelParams = [
-      "video=3440x1440"
-      "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "udev.log_priority=0"
-      "rd.systemd.show_status=auto"
+     "video=3440x1440"
+    #  "quiet"
+    #  "splash"
+    #  "boot.shell_on_fail"
+    #  "udev.log_priority=0"
+    #  "rd.systemd.show_status=auto"
     ];
 
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      timeout = 0;
+      #timeout = 0;
     };
   };
 
@@ -127,12 +127,16 @@
     user = "sterz_n";
   };
 
-  elira.dwm = {
+  elira.kde = {
     enable = true;
-    dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
-    wallpaper = ./wallpaper.png;
   };
+
+  # elira.dwm = {
+  #   enable = true;
+  #   dwmUrl = "https://github.com/uchars/dwm.git";
+  #   rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
+  #   wallpaper = ./wallpaper.png;
+  # };
 
   elira.displayManager = {
     enable = true;
