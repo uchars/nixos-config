@@ -95,7 +95,6 @@
   (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 140)
   (setq scroll-margin 8)
   (setq scroll-conservatively 100)
-  (setq compilation-window-height 10)
   (setq use-short-answers t)
   (setq global-hl-line-mode nil)
   (add-to-list 'load-path "~/.emacs.d/custom")
@@ -112,6 +111,10 @@
   (setq auto-save-file-name-transforms
 		`((".*" "~/.emacs-saves/" t)))
   (setq backup-directory-alist `(("." . "~/.saves")))
+  (add-to-list
+   'display-buffer-alist
+   '("\\*compilation\\*"
+     (display-buffer-no-window)))
   (when (eq window-system 'w32)
 	(setq tramp-default-method "plink")
 	(when (and (not (string-match putty-directory (getenv "PATH")))
@@ -323,6 +326,8 @@
 
 (use-package lsp-mode
   :ensure t
+  :hook
+  (java-ts-mode . lsp)
   :custom
   (lsp-idle-delay 0.5)
   (lsp-log-io nil)
@@ -338,6 +343,7 @@
 	(evil-define-key 'normal prog-mode-map
 	  (kbd "<leader> c a") 'lsp-execute-code-action
 	  (kbd "g d") 'lsp-find-definition
+	  (kbd "<leader> g r") 'lsp-find-references
 	  (kbd "<leader> f m") 'lsp-format-buffer
 	  (kbd "<leader> f r") 'lsp-format-region
 	  (kbd "<leader> r n") 'lsp-rename)
@@ -604,6 +610,7 @@
   (evil-set-initial-state 'magit-stashes-mode 'normal)
   (evil-set-initial-state 'epa-key-list-mode 'motion)
   (evil-set-initial-state 'fuel-debug-mode 'motion)
+  (evil-set-initial-state 'xref--xref-buffer-mode 'motion)
 
   (evil-define-key 'normal 'global (kbd "<leader> s s") 'hydra-search/body)
   (evil-define-key 'normal 'global (kbd "C-u") 'n/evil-scroll-up)
@@ -613,7 +620,9 @@
   (evil-define-key 'normal 'global (kbd "<leader> r c") 'recompile)
   (evil-define-key 'normal 'global (kbd "<leader> !") 'shell-command)
   (evil-define-key 'motion 'global (kbd "<leader> !") 'shell-command)
-  (evil-define-key 'normal xref--xref-buffer-mode-map (kbd "CR") 'xref-goto-xref)
+  (evil-define-key 'normal xref--xref-buffer-mode-map (kbd "<return>") 'xref-goto-xref)
+  (evil-define-key 'motion xref--xref-buffer-mode-map (kbd "<return>") 'xref-goto-xref)
+  (evil-define-key 'motion xref--xref-buffer-mode-map (kbd "C-<return>") 'xref-goto-xref)
   (evil-define-key 'motion eww-mode-map (kbd "C-o") 'eww-back-url)
   (evil-define-key 'motion eww-mode-map (kbd "C-i") 'eww-forward-url)
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "<leader> i") 'eval-buffer)

@@ -70,6 +70,7 @@ in
     spotify
     gimp
     vlc
+    krita
     mpv
     unzip
     ethtool
