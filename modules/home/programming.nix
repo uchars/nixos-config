@@ -40,23 +40,41 @@
         (
           if cfg.rust then
             [
-              clang
-              rustup
-              cargo-generate
-              trunk
-              sass
-              openssl
-              pkg-config
+            rustup
+            cargo-generate
             ]
           else
             [ ]
         )
+        ++ ( [
+            clang
+            zls
+            lua-language-server
+            jdt-language-server
+            clang-tools
+            trunk
+            sass
+            marksman
+            nixfmt-rfc-style
+            stylua
+            prettierd
+            google-java-format
+            openssl
+            pkg-config
+            openssl
+            cacert
+            cargo-make
+            pkg-config
+            asm-lsp
+            python312Packages.python-lsp-server
+        ] )
         ++ (if cfg.android then [ android-studio ] else [ ])
         ++ (
           if cfg.latex then
             [
               pandoc
               texinfo
+              texlab
               texliveFull
               texlivePackages.moreverb
             ]

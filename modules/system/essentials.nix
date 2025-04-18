@@ -16,6 +16,7 @@
     ripgrep
     pciutils
     neofetch
+    libwacom
   ];
 
   nix.settings.experimental-features = [
