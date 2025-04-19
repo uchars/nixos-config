@@ -126,9 +126,7 @@
     user = "sterz_n";
   };
 
-  elira.kde = {
-    enable = true;
-  };
+  elira.gnome.enable = true;
 
   # elira.dwm = {
   #   enable = true;
@@ -136,11 +134,6 @@
   #   rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
   #   wallpaper = ./wallpaper.png;
   # };
-
-  elira.displayManager = {
-    enable = true;
-    name = "gdm";
-  };
 
   elira.syncthing = {
     enable = true;

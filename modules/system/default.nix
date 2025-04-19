@@ -2,6 +2,7 @@ inputs: {
   imports = [
     ./vfio.nix
     ./kde.nix
+    ./gnome.nix
     ./displaymanager.nix
     ./windowmaker.nix
     ./wol.nix

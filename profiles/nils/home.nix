@@ -45,8 +45,8 @@ in
 {
   programs.home-manager.enable = true;
   imports = [
-    # ./gnome.nix
-    ./kde.nix
+    ./gnome.nix
+    #./kde.nix
   ];
   nixpkgs.config.allowUnfree = true;
   home.username = "${username}";
