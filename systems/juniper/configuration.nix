@@ -68,7 +68,7 @@ in
     };
   };
 
-  elira.wol = {
+  settings.wol = {
     enable = true;
     interface = "eno1";
   };

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.programming = with lib; {
+  options.settings.programming = with lib; {
     enable = mkEnableOption "Programming";
     rust = mkOption {
       description = "Rust development";
@@ -32,7 +32,7 @@
 
   config =
     let
-      cfg = config.elira.programming;
+      cfg = config.settings.programming;
     in
     lib.mkIf cfg.enable {
       home.packages =

@@ -5,13 +5,13 @@
   ...
 }:
 {
-  options.elira.bluetooth = with lib; {
+  options.settings.bluetooth = with lib; {
     enable = mkEnableOption "Enable bluetooth and useful options";
   };
 
   config =
     let
-      cfg = config.elira.bluetooth;
+      cfg = config.settings.bluetooth;
     in
     lib.mkIf cfg.enable {
       hardware.bluetooth.settings = {

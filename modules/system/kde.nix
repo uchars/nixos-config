@@ -5,13 +5,13 @@
   ...
 }:
 {
-  options.elira.kde = with lib; {
+  options.settings.kde = with lib; {
     enable = mkEnableOption "Use KDE";
   };
 
   config =
     let
-      cfg = config.elira.kde;
+      cfg = config.settings.kde;
     in
     lib.mkIf cfg.enable {
       services.xserver.enable = true;

@@ -55,13 +55,13 @@
   };
 
   programs.steam.enable = true;
-  elira.dwm = {
+  settings.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
     rev = "b26ed0c94ee4ebed9d0f1f3185e555d74cb7f187";
   };
 
-  elira.displayManager = {
+  settings.displayManager = {
     enable = true;
     name = "gdm";
   };
@@ -72,7 +72,7 @@
     openconnect
   ];
 
-  elira.syncthing = {
+  settings.syncthing = {
     enable = true;
     user = "nils";
     dir = "/home/nils/Documents";

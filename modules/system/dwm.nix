@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.dwm = with lib; {
+  options.settings.dwm = with lib; {
     enable = mkEnableOption "Use DWM";
     dwmUrl = mkOption {
       type = types.str;
@@ -22,7 +22,7 @@
 
   config =
     let
-      cfg = config.elira.dwm;
+      cfg = config.settings.dwm;
     in
     lib.mkIf cfg.enable {
 

@@ -5,13 +5,13 @@
   ...
 }:
 {
-  options.elira.windowmaker = with lib; {
+  options.settings.windowmaker = with lib; {
     enable = mkEnableOption "Use WindowMaker";
   };
 
   config =
     let
-      cfg = config.elira.dwm;
+      cfg = config.settings.dwm;
     in
     lib.mkIf cfg.enable {
       environment.etc."scripts/kbdswitch.sh" = {

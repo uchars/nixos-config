@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.elira.displayManager = with lib; {
+  options.settings.displayManager = with lib; {
     enable = mkEnableOption "Using display manager";
     name = mkOption {
       type = types.str;
@@ -14,7 +14,7 @@
 
   config =
     let
-      cfg = config.elira.displayManager;
+      cfg = config.settings.displayManager;
     in
     lib.mkIf cfg.enable {
       services.xserver.enable = true;

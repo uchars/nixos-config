@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.editors = with lib; {
+  options.settings.editors = with lib; {
     enable = mkEnableOption "Install Visual Studio Code";
 
     emacs = {
@@ -27,7 +27,7 @@
 
   config =
     let
-      cfg = config.elira.editors;
+      cfg = config.settings.editors;
     in
     lib.mkIf cfg.enable {
       home.packages =

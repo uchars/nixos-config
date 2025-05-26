@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.browser = with lib; {
+  options.settings.browser = with lib; {
     enable = mkEnableOption "Install Browsers";
     brave = mkOption {
       description = "Install Brave browser";
@@ -36,7 +36,7 @@
 
   config =
     let
-      cfg = config.elira.browser;
+      cfg = config.settings.browser;
     in
     lib.mkIf cfg.enable {
       programs.firefox = {

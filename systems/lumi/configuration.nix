@@ -35,7 +35,7 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
-  elira.networking = {
+  settings.networking = {
     enable = true;
     hostName = "lumi";
     wol = true;
@@ -77,7 +77,7 @@
 
   system.stateVersion = "24.11";
 
-  elira.vfio = {
+  settings.vfio = {
     enable = false;
     iommu = "amd_iommu";
     pci-ids = [
@@ -86,13 +86,13 @@
     ];
   };
 
-  elira.bluetooth.enable = true;
-  elira.audio.enable = true;
-  elira.nvidia = {
+  settings.bluetooth.enable = true;
+  settings.audio.enable = true;
+  settings.nvidia = {
     enable = true;
   };
 
-  elira.vm = {
+  settings.vm = {
     enable = true;
     user = "sterz_n";
   };
@@ -104,7 +104,7 @@
   '';
 
   programs.hyprland.enable = false;
-  elira.dwm = {
+  settings.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
     rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";

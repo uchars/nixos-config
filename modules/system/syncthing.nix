@@ -1,6 +1,6 @@
 { lib, config, ... }:
 {
-  options.elira.syncthing = with lib; {
+  options.settings.syncthing = with lib; {
     enable = mkEnableOption "Enable Syncthing";
     user = mkOption {
       type = types.str;
@@ -24,7 +24,7 @@
 
   config =
     let
-      cfg = config.elira.syncthing;
+      cfg = config.settings.syncthing;
     in
     lib.mkIf cfg.enable {
       services.syncthing = {

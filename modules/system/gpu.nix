@@ -1,12 +1,12 @@
 { lib, config, ... }:
 {
-  options.elira.nvidia = with lib; {
+  options.settings.nvidia = with lib; {
     enable = mkEnableOption "Configure a NVIDIA GPU";
   };
 
   config =
     let
-      cfg = config.elira.nvidia;
+      cfg = config.settings.nvidia;
     in
     lib.mkIf cfg.enable {
       services.xserver.videoDrivers = [ "nvidia" ];

@@ -1,6 +1,6 @@
 { lib, config, ... }:
 {
-  options.elira.vfio = with lib; {
+  options.settings.vfio = with lib; {
     enable = mkEnableOption "Enable VFIO";
     iommu = mkOption {
       type =
@@ -22,7 +22,7 @@
 
   config =
     let
-      cfg = config.elira.vfio;
+      cfg = config.settings.vfio;
     in
     lib.mkIf cfg.enable {
       hardware.opengl.enable = true;

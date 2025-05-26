@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.waybar = with lib; {
+  options.settings.waybar = with lib; {
     enable = mkEnableOption "Configure waybar";
     monitors = mkOption {
       type = types.nullOr (types.either types.str (types.listOf types.str));
@@ -22,7 +22,7 @@
 
   config =
     let
-      cfg = config.elira.waybar;
+      cfg = config.settings.waybar;
     in
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [

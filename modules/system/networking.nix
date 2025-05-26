@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.networking = with lib; {
+  options.settings.networking = with lib; {
     enable = mkEnableOption "Configuring network settings.";
     interface = mkOption {
       type = types.str;
@@ -49,7 +49,7 @@
   };
   config =
     let
-      cfg = config.elira.networking;
+      cfg = config.settings.networking;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; (if cfg.openconnectVpn then [ openconnect ] else [ ]);

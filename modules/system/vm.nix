@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.vm = with lib; {
+  options.settings.vm = with lib; {
     enable = mkEnableOption "Enable Type 1 Hypervisor";
     # TODO: Support adding multiple users to libvirtd group
     user = mkOption {
@@ -16,7 +16,7 @@
 
   config =
     let
-      cfg = config.elira.vm;
+      cfg = config.settings.vm;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [

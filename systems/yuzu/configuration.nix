@@ -107,12 +107,12 @@
     pulse.enable = true;
   };
 
-  elira.displayManager = {
+  settings.displayManager = {
     enable = true;
     name = "gdm";
   };
 
-  elira.kde = {
+  settings.kde = {
     enable = true;
   };
 

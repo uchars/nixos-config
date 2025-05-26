@@ -6,7 +6,7 @@
     ...
 }:
 {
-  options.elira.terminal = with lib; {
+  options.settings.terminal = with lib; {
     enable = mkEnableOption "Terminal Things";
     alacritty = mkOption {
       default = false;
@@ -24,7 +24,7 @@
 
   config =
     let
-    cfg = config.elira.terminal;
+    cfg = config.settings.terminal;
   in
     lib.mkIf cfg.enable {
       home.packages =

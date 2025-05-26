@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.gaming = with lib; {
+  options.settings.gaming = with lib; {
     enable = mkEnableOption "General Software for Gaming";
     emulation = mkOption {
       description = "Emulation";
@@ -16,7 +16,7 @@
 
   config =
     let
-      cfg = config.elira.gaming;
+      cfg = config.settings.gaming;
     in
     lib.mkIf cfg.enable {
       home.packages =

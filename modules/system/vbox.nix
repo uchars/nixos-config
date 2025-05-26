@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.elira.vbox = with lib; {
+  options.settings.vbox = with lib; {
     enable = mkEnableOption "Enable VirtualBox";
     users = mkOption {
       type = types.listOf string;
@@ -14,7 +14,7 @@
 
   config =
     let
-      cfg = config.elira.vbox;
+      cfg = config.settings.vbox;
     in
     lib.mkIf cfg.enable {
       virtualisation.virtualbox.host.enable = true;

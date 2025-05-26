@@ -164,7 +164,7 @@ in
     EDITOR = "vim";
   };
 
-  elira.editors = {
+  settings.editors = {
     enable = true;
     vscode = true;
     emacs = {
@@ -173,7 +173,7 @@ in
     };
   };
 
-  elira.programming = {
+  settings.programming = {
     enable = true;
     rust = true;
     latex = true;
@@ -182,34 +182,34 @@ in
     jdkVersions = [ pkgs.jdk21 ];
   };
 
-  elira.keyboard = {
+  settings.keyboard = {
     enable = true;
   };
 
-  elira.terminal = {
+  settings.terminal = {
     enable = true;
     alacritty = true;
     ghostty = false;
     tmux = true;
   };
 
-  elira.gaming = {
+  settings.gaming = {
     enable = true;
     emulation = true;
   };
 
-  elira.fonts = {
+  settings.fonts = {
     enable = true;
   };
 
-  elira.browser = {
+  settings.browser = {
     enable = true;
     brave = false;
     firefox = true;
     tor = true;
   };
 
-  elira.waybar = {
+  settings.waybar = {
     enable = false;
     systemd = true;
     monitors = [

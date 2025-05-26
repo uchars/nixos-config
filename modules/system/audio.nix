@@ -4,13 +4,13 @@
   ...
 }:
 {
-  options.elira.audio = with lib; {
+  options.settings.audio = with lib; {
     enable = mkEnableOption "Enable audio and useful options";
   };
 
   config =
     let
-      cfg = config.elira.audio;
+      cfg = config.settings.audio;
     in
     lib.mkIf cfg.enable {
       # Enable sound with pipewire.

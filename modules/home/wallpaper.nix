@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.elira.wallpaper = with lib; {
+  options.settings.wallpaper = with lib; {
     swww = mkOption {
       type = types.bool;
       default = false;
@@ -22,7 +22,7 @@
 
   config =
     let
-      cfg = config.elira.wallpaper;
+      cfg = config.settings.wallpaper;
     in
     {
       home.packages = with pkgs; (if cfg.swww then [ swww ] else [ ]);
