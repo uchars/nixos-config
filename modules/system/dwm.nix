@@ -18,9 +18,6 @@
     conf = mkOption {
       type = types.path;
     };
-    wallpaper = mkOption {
-      type = types.path;
-    };
   };
 
   config =
@@ -28,28 +25,10 @@
       cfg = config.elira.dwm;
     in
     lib.mkIf cfg.enable {
-      # services.dunst = {
-      #   enable = true;
-      #   settings = {
-      #     global = {
-      #       width = 300;
-      #       height = 300;
-      #       offset = "30x50";
-      #       origin = "top-right";
-      #       transparency = 10;
-      #       font = "Droid Sans 9";
-      #     };
-      #
-      #     urgency_normal = {
-      #       background = "#37474f";
-      #       foreground = "#eceff1";
-      #       timeout = 4;
-      #     };
-      #   };
-      # };
 
       environment.etc."scripts/dwmstatus.sh" = {
         text = ''
+          #!/bin/sh
           get_ram_usage() {
               total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
               available=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
@@ -92,7 +71,7 @@
                   SPOTIFY_TITLE=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | sed -n '/title/{n;p}' | cut -d \" -f 2)
                   SPOTIFY_STR="($SPOTIFY_STATE) $SPOTIFY_TITLE |"
               fi
-              xsetroot -name "$SPOTIFY_STR $(volume) $(layout) $(get_ram_usage) $(battery) | $(date)"
+              xsetroot -name "$SPOTIFY_STR $(volume) $(layout) $(get_ram_usage) | $(date) $(battery)"
               sleep 1
           done
         '';
@@ -132,11 +111,6 @@
         alsa-utils
         st
       ];
-
-      services.xserver.desktopManager.wallpaper = {
-        mode = "scale";
-        combineScreens = false;
-      };
 
       services.xserver.windowManager.dwm = {
         enable = true;

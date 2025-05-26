@@ -7,34 +7,43 @@
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot = {
     plymouth = {
-      enable = false;
+      enable = true;
       theme = "spinner";
     };
     initrd.systemd.enable = true;
     supportedFilesystems = [ "ntfs" ];
-    #consoleLogLevel = 3;
-    #initrd.verbose = false;
-
-    kernelParams = [
-     "video=3440x1440"
-    #  "quiet"
-    #  "splash"
-    #  "boot.shell_on_fail"
-    #  "udev.log_priority=0"
-    #  "rd.systemd.show_status=auto"
-    ];
+    # consoleLogLevel = 3;
+    initrd.verbose = false;
 
     loader = {
       systemd-boot.enable = true;
+      systemd-boot.consoleMode = "max";
       efi.canTouchEfiVariables = true;
       #timeout = 0;
     };
+
+    kernelParams = [
+      "video=3440x1440"
+      "quiet"
+      "splash"
+      #  "boot.shell_on_fail"
+      "udev.log_priority=0"
+      "rd.systemd.show_status=auto"
+    ];
   };
 
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
-  networking.hostName = "lumi";
+  elira.networking = {
+    enable = true;
+    hostName = "lumi";
+    wol = true;
+    interface = "enp42s0";
+    openconnectVpn = true;
+    ssh = false;
+    timeZone = "Europe/Berlin";
+  };
 
   environment.systemPackages = with pkgs; [
     mangohud
@@ -42,18 +51,6 @@
   ];
 
   programs.gamemode.enable = true;
-
-  #virtualisation.virtualbox.host.enable = true;
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
-  #virtualisation.virtualbox.guest.enable = true;
-  #virtualisation.virtualbox.guest.dragAndDrop = true;
-  #users.extraGroups.vboxusers.members = [ "sterz_n" ];
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -78,30 +75,7 @@
 
   programs.dconf.enable = true;
 
-  system.stateVersion = "24.05";
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  security.rtkit.enable = true;
-  hardware.bluetooth.settings = {
-    General = {
-      Enable = "Source,Sink,Media,Socket";
-    };
-  };
-  systemd.user.services.mpris-proxy = {
-    description = "Mpris proxy";
-    after = [ "network.target" "sound.target" ];
-    wantedBy = [ "default.target" ];
-    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
-  };
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+  system.stateVersion = "24.11";
 
   elira.vfio = {
     enable = false;
@@ -112,13 +86,10 @@
     ];
   };
 
+  elira.bluetooth.enable = true;
+  elira.audio.enable = true;
   elira.nvidia = {
     enable = true;
-  };
-
-  elira.wol = {
-    enable = true;
-    interface = "enp42s0";
   };
 
   elira.vm = {
@@ -126,30 +97,22 @@
     user = "sterz_n";
   };
 
-  elira.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.bash}/bin/bash /etc/scripts/dwmstatus.sh &
+    blueman-applet&
+  '';
 
-  # elira.dwm = {
-  #   enable = true;
-  #   dwmUrl = "https://github.com/uchars/dwm.git";
-  #   rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
-  #   wallpaper = ./wallpaper.png;
-  # };
-
-  elira.syncthing = {
+  programs.hyprland.enable = false;
+  elira.dwm = {
     enable = true;
-    user = "sterz_n";
-    dir = "/home/sterz_n/Documents";
-    sharedFolders = {
-      "Uni_Documents" = {
-        path = "/home/sterz_n/Nextcloud/Documents/Uni";
-        devices = [ "boox" ];
-      };
-    };
-    deviceConfig = {
-      boox = {
-        id = "VHC5QDC-IDELDHV-OZ4I5LO-LPX7JVY-D554HCL-NUAFXAU-NKVCPDO-533ZEAV";
-      };
-    };
+    dwmUrl = "https://github.com/uchars/dwm.git";
+    rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
+  };
+
+  security.pam.services.kwallet = {
+    name = "kwallet";
+    enableKwallet = true;
   };
 
   users.users.sterz_n = {

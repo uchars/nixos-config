@@ -42,7 +42,7 @@
 				};
 			};
 			game = {
-				device = "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_250GB_S3YJNB0K409151L";
+				device = "/dev/disk/by-id/ata-SanDisk_SDSSDH3_500G_214514460814";
 				type = "disk";
 				content = {
 					type = "gpt";

@@ -56,6 +56,9 @@ in
 
   home.packages = with pkgs; [
     fzf
+    waybar
+    swww
+    wofi
     lxde.lxrandr
     htop
     stack
@@ -92,6 +95,7 @@ in
     audacity
     anki
     thunderbird
+    rofi-bluetooth
   ];
 
   services.flameshot = {
@@ -110,9 +114,34 @@ in
     startInBackground = true;
   };
 
+  services.dunst = {
+    enable = true;
+    settings = {
+      global = {
+        width = 300;
+        height = 300;
+        offset = "30x50";
+        origin = "top-right";
+        transparency = 10;
+        font = "Droid Sans 9";
+      };
+
+      urgency_normal = {
+        background = "#37474f";
+        foreground = "#eceff1";
+        timeout = 4;
+      };
+    };
+  };
+
   programs.rofi = {
     enable = true;
     theme = "solarized";
+    plugins = with pkgs; [
+      # rofi-network-manager
+      rofi-emoji
+      rofi-bluetooth
+    ];
   };
 
   dconf.settings = {
@@ -175,7 +204,7 @@ in
 
   elira.browser = {
     enable = true;
-    brave = true;
+    brave = false;
     firefox = true;
     tor = true;
   };
@@ -194,14 +223,37 @@ in
     source = ./wallpaper.png;
   };
 
-  elira.hyprland = {
-    enable = false;
-    terminal = "kitty";
-    filebrowser = "dolphin";
-    wallpaper = {
-      daemon = "swww-daemon";
-      cmd = "swww --no-resize";
-      path = "~/Pictures/c4a05f73-fafd-4ad5-8d6a-d59667b19dc6_rw_1200.gif";
+  home.file."./.local/bin/rofi-kbdswitch" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env sh
+      #
+      # Rofi powered menu to change X keyboard layout
+
+      LAYOUTS=("us" "de" "fr" "es" "it" "ru")
+
+      # Get current layout
+      CURRENT_LAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+      # Display menu and get selection
+      SELECTION=$(
+          printf "%s\n" "''${LAYOUTS[@]}"\
+          | rofi -dmenu -p "Keyboard Layout (Current: $CURRENT_LAYOUT)"\
+          -selected-row "''${LAYOUTS[@]/$CURRENT_LAYOUT/}.indexOf($CURRENT_LAYOUT)"\
+      )
+
+      # Change layout if selection was made
+      if [ -n "$SELECTION" ]; then
+          setxkbmap "$SELECTION"
+      fi
+    '';
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
   };
 }
