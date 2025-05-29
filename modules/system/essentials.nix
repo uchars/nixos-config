@@ -8,6 +8,8 @@
     sct
     vim
     neovim
+    lm_sensors
+    libnotify
     tmux
     git
     age
@@ -18,6 +20,8 @@
     libwacom
   ];
 
+  services.upower.enable = true;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -27,33 +31,6 @@
     enable = true;
   };
 
-  hardware.bluetooth.settings = {
-    General = {
-      Enable = "Source,Sink,Media,Socket";
-    };
-  };
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  systemd.user.services.mpris-proxy = {
-    description = "Mpris proxy";
-    after = [
-      "network.target"
-      "sound.target"
-    ];
-    wantedBy = [ "default.target" ];
-    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
-  };
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  services.blueman.enable = true;
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 }

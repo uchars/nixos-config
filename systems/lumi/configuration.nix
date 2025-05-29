@@ -1,6 +1,12 @@
-{ lib, pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   services.fstrim.enable = lib.mkDefault true;
 
@@ -17,18 +23,17 @@
 
     loader = {
       systemd-boot.enable = true;
-      systemd-boot.consoleMode = "max";
+      systemd-boot.consoleMode = "auto";
       efi.canTouchEfiVariables = true;
       #timeout = 0;
     };
 
     kernelParams = [
-      "video=3440x1440"
       "quiet"
-      "splash"
+      # "splash"
       #  "boot.shell_on_fail"
-      "udev.log_priority=0"
-      "rd.systemd.show_status=auto"
+      # "udev.log_priority=0"
+      # "rd.systemd.show_status=auto"
     ];
   };
 
@@ -70,9 +75,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   programs.dconf.enable = true;
 
   system.stateVersion = "24.11";
@@ -97,22 +99,42 @@
     user = "sterz_n";
   };
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.bash}/bin/bash /etc/scripts/dwmstatus.sh &
-    blueman-applet&
-  '';
+  services.xserver.displayManager.lightdm = {
+    enable = true;
+    background = ../../profiles/nils/wallpaper.png;
+    greeters = {
+      mini = {
+        enable = true;
+        user = "sterz_n";
+      };
+      enso = {
+        enable = false;
+        blur = true;
+        iconTheme = {
+          package = pkgs.pop-icon-theme;
+          name = "Pop";
+        };
+        theme = {
+          package = pkgs.pop-gtk-theme;
+          name = "Poppy-dark-solid";
+        };
+        extraConfig = ''
+          hide-user-image=true
+        '';
+      };
+    };
+  };
+  services.displayManager.defaultSession = "none+dwm";
 
-  programs.hyprland.enable = false;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+  programs.ssh.startAgent = true;
+
   settings.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "91b078f9a3d3c7eca9f67929577f12cb8cef3b73";
-  };
-
-  security.pam.services.kwallet = {
-    name = "kwallet";
-    enableKwallet = true;
+    rev = "1ac6195beb49d51bb084fa7185b0a143f1cafd9d";
+    nvidia = true;
   };
 
   users.users.sterz_n = {

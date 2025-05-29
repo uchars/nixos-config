@@ -18,7 +18,9 @@ let
     gwip = "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m '[WIP]: $(date)'";
     gundo = "git reset HEAD~";
     gcm = "git-credential-manager";
-    gl = "git log";
+    gl = "git log --pretty=format:'%C(yellow)%h%Cred%d - %Creset%s%Cblue - [%cn]' --decorate";
+    gll = "git log --pretty=format:'%C(yellow)%h%Cred%d - %Creset%s%Cblue - [%cn]' --decorate --numstat";
+    diskspace = "du -S | sort -nr | more";
     stitle = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | sed -n '/title/{n;p}' | cut -d '\"' -f 2";
     snext = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null && stitle";
     sstate = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | grep -oE '(Playing|Paused)'";
@@ -155,7 +157,7 @@ in
     enable = true;
     shellAliases = shAliases;
     bashrcExtra = ''
-      export PATH="$PATH:~/.local/bin";
+      export PATH="$PATH:/home/sterz_n/.local/bin";
       export PS1='\[\e[38;5;209;1m\][\[\e[22m\]\u@\H:\w\[\e[1m\]]> \[\e[0m\]'
     '';
   };

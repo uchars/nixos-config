@@ -1,6 +1,7 @@
 inputs: {
   imports = [
     ./fonts.nix
+    ./dwmblocks.nix
     ./wallpaper.nix
     ./waybar.nix
     ./editors.nix

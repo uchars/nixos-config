@@ -19,6 +19,7 @@
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     ghostty.url = "github:ghostty-org/ghostty";
+    hardware.url = "github:nixos/nixos-hardware";
   };
   outputs =
     {
@@ -126,21 +127,6 @@
           extraSpecialArgs = {
             inherit emacs_dots inputs;
             username = "sterz_n";
-          };
-        };
-        nils = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            (./. + "/profiles/nils/home.nix")
-            ./modules/home
-            {
-              nixpkgs.overlays = [ emacs-overlay.overlays.default ];
-            }
-            plasma-manager.homeManagerModules.plasma-manager
-          ];
-          extraSpecialArgs = {
-            inherit emacs_dots;
-            username = "nils";
           };
         };
       };
