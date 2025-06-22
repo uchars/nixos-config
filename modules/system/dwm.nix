@@ -152,6 +152,10 @@
         radeontop
       ];
 
+      programs.thunar.enable = true;
+
+      services.tumbler.enable = true;
+
       services.xserver.windowManager.dwm = {
         enable = true;
         package = pkgs.dwm.overrideAttrs (oldAttrs: {
@@ -164,6 +168,7 @@
 
       services.xserver.displayManager.sessionCommands = ''
         ${pkgs.bash}/bin/bash /etc/scripts/dwmstatus.sh &
+        flameshot&
         blueman-applet&
         nm-applet&
       '';

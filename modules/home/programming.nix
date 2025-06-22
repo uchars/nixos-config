@@ -48,6 +48,7 @@
         )
         ++ ( [
             clang
+            sqlitebrowser
             zls
             lua-language-server
             jdt-language-server
@@ -81,6 +82,6 @@
           else
             [ ]
         )
-        ++ (if cfg.java then [ jetbrains.idea-community jdt-language-server ] ++ cfg.jdkVersions else [ ]);
+        ++ (if cfg.java then [ jetbrains.idea-community jdt-language-server maven ] ++ cfg.jdkVersions else [ ]);
     };
 }

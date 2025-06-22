@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  services.udev.enable = true;
   services.udev.packages = with pkgs; [ via
     vial
   ];
@@ -13,14 +14,22 @@
     tmux
     git
     age
+    libheif
     wget
     ripgrep
     pciutils
+    go-mtpfs
     neofetch
     libwacom
+    xournalpp
+    xclip
   ];
 
   services.upower.enable = true;
+
+  programs = {
+    fuse.userAllowOther = true;
+  };
 
   nix.settings.experimental-features = [
     "nix-command"

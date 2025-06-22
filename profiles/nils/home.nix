@@ -1,7 +1,6 @@
 {
   pkgs,
   emacs_dots,
-  inputs,
   username,
   ...
 }:
@@ -19,7 +18,7 @@ let
     gundo = "git reset HEAD~";
     gcm = "git-credential-manager";
     gl = "git log --pretty=format:'%C(yellow)%h%Cred%d - %Creset%s%Cblue - [%cn]' --decorate";
-    gll = "git log --pretty=format:'%C(yellow)%h%Cred%d - %Creset%s%Cblue - [%cn]' --decorate --numstat";
+    gll = "git log --pretty=format:'%C(yellow)%H%Cred%d - %Creset%s%Cblue - [%cn]' --decorate --numstat";
     diskspace = "du -S | sort -nr | more";
     stitle = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | sed -n '/title/{n;p}' | cut -d '\"' -f 2";
     snext = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null && stitle";
@@ -98,6 +97,7 @@ in
     anki
     thunderbird
     rofi-bluetooth
+    paperview
   ];
 
   services.flameshot = {
@@ -105,6 +105,9 @@ in
     settings = {
       General = {
         showHelp = false;
+        savePathFixed = false;
+        disabledTrayIcon = true;
+        startupLaunch = true;
       };
     };
   };
@@ -206,7 +209,7 @@ in
 
   settings.browser = {
     enable = true;
-    brave = false;
+    brave = true;
     firefox = true;
     tor = true;
   };

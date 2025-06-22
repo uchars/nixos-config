@@ -133,7 +133,7 @@
   settings.dwm = {
     enable = true;
     dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "1ac6195beb49d51bb084fa7185b0a143f1cafd9d";
+    rev = "3d1e52c1b2f0a2e6dabe31381ea3e271e2704c7c";
     nvidia = true;
   };
 
@@ -145,6 +145,8 @@
       "wheel"
       "video"
       "users"
+      "fuse"
+      "udev"
     ];
     uid = 1000;
   };
