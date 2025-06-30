@@ -88,6 +88,18 @@
             inherit system;
           };
         };
+        fold = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./systems/lumi/configuration.nix
+            ./modules/system/essentials.nix
+            ./modules/system
+            sops-nix.nixosModules.sops
+          ];
+          specialArgs = {
+            inherit system;
+          };
+        };
         juniper = lib.nixosSystem {
           inherit system;
           modules = [
