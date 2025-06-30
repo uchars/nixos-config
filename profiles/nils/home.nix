@@ -53,9 +53,10 @@ in
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
+    ookla-speedtest
     fzf
     waybar
     swww
@@ -258,7 +259,7 @@ in
     enable = true;
     theme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome-themes-extra;
     };
   };
 }

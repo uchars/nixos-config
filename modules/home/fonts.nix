@@ -15,7 +15,7 @@
     in
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [
-        nerdfonts
+        nerd-fonts.hack
       ];
     };
 }

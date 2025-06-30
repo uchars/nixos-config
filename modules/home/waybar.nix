@@ -27,7 +27,7 @@
     lib.mkIf cfg.enable {
       home.packages = with pkgs; [
         light
-        nerdfonts
+        nerd-fonts.hack
         pavucontrol
       ];
       programs.waybar = {

@@ -29,21 +29,21 @@
           wineWowPackages.staging
           winetricks
           protontricks
-        ]
-        ++ (
-          if cfg.emulation then
-            [
-              (retroarch.override {
-                cores = with libretro; [
-                  genesis-plus-gx
-                  snes9x
-                  beetle-psx-hw
-                  parallel-n64
-                ];
-              })
-            ]
-          else
-            [ ]
-        );
+        ];
+        # ++ (
+        #   if cfg.emulation then
+        #     [
+        #       (retroarch.override {
+        #         cores = with libretro; [
+        #           genesis-plus-gx
+        #           snes9x
+        #           beetle-psx-hw
+        #           parallel-n64
+        #         ];
+        #       })
+        #     ]
+        #   else
+        #     [ ]
+        # );
     };
 }
