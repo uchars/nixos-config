@@ -52,6 +52,9 @@
 
   environment.systemPackages = with pkgs; [
     mangohud
+    maliit-keyboard
+    libsForQt5.qt5.qtvirtualkeyboard
+    maliit-framework
     pandoc
   ];
 
@@ -100,11 +103,11 @@
   };
 
   services.xserver.displayManager.lightdm = {
-    enable = true;
+    enable = false;
     background = ../../profiles/nils/wallpaper.png;
     greeters = {
       mini = {
-        enable = true;
+        enable = false;
         user = "sterz_n";
       };
       enso = {
@@ -124,18 +127,14 @@
       };
     };
   };
-  services.displayManager.defaultSession = "none+dwm";
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
   programs.ssh.startAgent = true;
 
-  settings.dwm = {
-    enable = true;
-    dwmUrl = "https://github.com/uchars/dwm.git";
-    rev = "3d1e52c1b2f0a2e6dabe31381ea3e271e2704c7c";
-    nvidia = true;
-  };
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   users.users.sterz_n = {
     isNormalUser = true;

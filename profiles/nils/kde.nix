@@ -1,6 +1,6 @@
 { ... }: {
   programs.plasma = {
-    enable = true;
+    enable = false;
     shortcuts = {
     };
     configFile = {
