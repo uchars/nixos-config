@@ -37,9 +37,6 @@
     ];
   };
 
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
-
   settings.networking = {
     enable = true;
     hostName = "x200";
