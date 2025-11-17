@@ -18,7 +18,7 @@
 							};
 						};
 						luks = {
-							end = "-32G";
+							end = "-8G";
 							content = {
 								type = "luks";
 								name = "crypted";
