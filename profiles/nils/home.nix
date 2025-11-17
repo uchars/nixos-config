@@ -161,7 +161,7 @@ in
     enable = true;
     shellAliases = shAliases;
     bashrcExtra = ''
-      export PATH="$PATH:/home/sterz_n/.local/bin";
+      export PATH="$PATH:/home/sterzn/.local/bin";
       export PS1='\[\e[38;5;209;1m\][\[\e[22m\]\u@\H:\w\[\e[1m\]]> \[\e[0m\]'
     '';
   };

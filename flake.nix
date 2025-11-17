@@ -133,12 +133,12 @@
             dashboardPort = "TODO";
             acmeMail = "TODO@TODO";
             sopsFile = ./vault/vault.yaml;
-            sopsKeyFile = "/home/sterz_n/.config/sops/age/keys.txt";
+            sopsKeyFile = "/home/sterzn/.config/sops/age/keys.txt";
           };
         };
       };
       homeConfigurations = {
-        sterz_n = home-manager.lib.homeManagerConfiguration {
+        sterzn = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             (./. + "/profiles/nils/home.nix")
@@ -150,7 +150,7 @@
           ];
           extraSpecialArgs = {
             inherit emacs_dots inputs;
-            username = "sterz_n";
+            username = "sterzn";
           };
         };
       };

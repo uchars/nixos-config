@@ -78,7 +78,7 @@
     greeters = {
       mini = {
         enable = true;
-        user = "sterz_n";
+        user = "sterzn";
       };
       enso = {
         enable = false;
@@ -110,7 +110,7 @@
     nvidia = true;
   };
 
-  users.users.sterz_n = {
+  users.users.sterzn = {
     isNormalUser = true;
     description = "Nils Sterz";
     extraGroups = [
