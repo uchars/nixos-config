@@ -100,6 +100,18 @@
             inherit system;
           };
         };
+        x200 = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./systems/x200/configuration.nix
+            ./modules/system/essentials.nix
+            ./modules/system
+            sops-nix.nixosModules.sops
+          ];
+          specialArgs = {
+            inherit system;
+          };
+        };
         juniper = lib.nixosSystem {
           inherit system;
           modules = [
